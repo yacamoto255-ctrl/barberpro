@@ -1,0 +1,18 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Redireciona /api/* para a Netlify Function
+[[redirects]]
+  from   = "/api/*"
+  to     = "/.netlify/functions/api/:splat"
+  status = 200
+
+# SPA fallback — todas as outras rotas servem o index.html
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

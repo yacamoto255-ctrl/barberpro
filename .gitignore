@@ -1,0 +1,33 @@
+# Dependências
+node_modules/
+
+# Banco de dados (NÃO ignorar o .db principal — Railway precisa)
+*.db-shm
+*.db-wal
+backups/
+
+# Variáveis de ambiente
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Cobertura de testes
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Claude
+.claude/

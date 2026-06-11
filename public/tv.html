@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BarberPro — Painel TV</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  /* ── TEMA ESCURO (padrão) ─────────────────────────────── */
+  :root{
+    --tv-bg:        #0d0d0d;
+    --tv-surface:   #111111;
+    --tv-card:      rgba(255,255,255,.03);
+    --tv-card-next: rgba(249,115,22,.13);
+    --tv-border:    rgba(255,255,255,.06);
+    --tv-border-next:rgba(249,115,22,.45);
+    --tv-divider:   #1a1a1a;
+    --tv-text:      #ffffff;
+    --tv-text-sub:  #888888;
+    --tv-text-empty:#444444;
+    --tv-time:      #ffffff;
+    --tv-barber-bg: rgba(255,255,255,.04);
+    --tv-btn-fs:    rgba(0,0,0,.5);
+  }
+
+  /* ── TEMA CLARO ───────────────────────────────────────── */
+  html.light{
+    --tv-bg:        #f3f4f6;
+    --tv-surface:   #ffffff;
+    --tv-card:      rgba(0,0,0,.03);
+    --tv-card-next: rgba(249,115,22,.10);
+    --tv-border:    rgba(0,0,0,.08);
+    --tv-border-next:rgba(249,115,22,.50);
+    --tv-divider:   #e5e7eb;
+    --tv-text:      #111827;
+    --tv-text-sub:  #6b7280;
+    --tv-text-empty:#9ca3af;
+    --tv-time:      #111827;
+    --tv-barber-bg: rgba(0,0,0,.04);
+    --tv-btn-fs:    rgba(0,0,0,.15);
+  }
+
+  html,body{
+    width:100%;height:100%;
+    background:var(--tv-bg);
+    color:var(--tv-text);
+    font-family:'Segoe UI',system-ui,sans-serif;
+    overflow:hidden;
+    transition:background .3s,color .3s;
+  }
+  #tv{display:flex;flex-direction:column;height:100vh}
+
+  /* ── Header (sempre laranja) ─────────────────────────── */
+  #tv-header{
+    background:linear-gradient(135deg,#f97316,#ea580c);
+    padding:20px 40px;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-shrink:0;
+    color:#fff;
+  }
+  .tv-logo{display:flex;align-items:center;gap:16px}
+  .tv-logo-icon{
+    width:52px;height:52px;background:rgba(255,255,255,.2);
+    border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px
+  }
+  .tv-logo-name{font-size:26px;font-weight:800;letter-spacing:-.5px;color:#fff}
+  .tv-logo-unit{font-size:13px;opacity:.85;margin-top:2px;color:#fff}
+  #tv-clock{font-size:52px;font-weight:800;letter-spacing:-2px;line-height:1;text-align:right;color:#fff}
+  #tv-date{font-size:13px;opacity:.8;margin-top:3px;text-align:right;color:#fff}
+
+  /* ── Body ────────────────────────────────────────────── */
+  #tv-body{
+    display:grid;grid-template-columns:1fr 320px;
+    flex:1;min-height:0;
+    background:var(--tv-bg);
+  }
+
+  /* Agenda */
+  #tv-appts{
+    padding:28px 36px;
+    border-right:1px solid var(--tv-divider);
+    overflow:hidden;display:flex;flex-direction:column;
+    background:var(--tv-bg);
+  }
+  .tv-section-title{
+    font-size:12px;font-weight:700;color:#f97316;
+    letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px
+  }
+
+  .appt-row{
+    display:flex;align-items:center;gap:18px;
+    padding:14px 18px;border-radius:12px;margin-bottom:8px;
+    border:1px solid var(--tv-border);
+    background:var(--tv-card);
+    transition:.3s;
+  }
+  .appt-row.next{
+    background:var(--tv-card-next);
+    border-color:var(--tv-border-next);
+  }
+  .appt-time{font-size:22px;font-weight:800;min-width:70px;color:var(--tv-time)}
+  .appt-row.next .appt-time{color:#f97316}
+  .appt-info{flex:1;min-width:0}
+  .appt-client{font-size:17px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tv-text)}
+  .appt-sub{font-size:12px;color:var(--tv-text-sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+  .appt-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+  .badge-next{background:#f97316;color:#fff}
+  .badge-confirmed{background:#22c55e;color:#fff}
+  .badge-pending{background:#f59e0b;color:#fff}
+
+  /* Lateral */
+  #tv-side{
+    padding:24px 20px;display:flex;flex-direction:column;gap:20px;
+    overflow:hidden;background:var(--tv-surface);
+  }
+
+  .barber-row{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 12px;border-radius:10px;
+    background:var(--tv-barber-bg);
+    margin-bottom:7px;
+    border:1px solid var(--tv-border);
+  }
+  .barber-avatar{
+    width:40px;height:40px;border-radius:50%;background:#7c3aed;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:15px;flex-shrink:0;color:#fff
+  }
+  .barber-name{font-weight:600;font-size:14px;color:var(--tv-text)}
+  .barber-status{font-size:11px;margin-top:2px}
+  .barber-status.busy{color:#f97316}
+  .barber-status.free{color:#22c55e}
+
+  #tv-promo{
+    background:linear-gradient(135deg,#f97316,#ea580c);
+    border-radius:14px;padding:20px;text-align:center;
+    margin-top:auto;flex-shrink:0;color:#fff;
+  }
+  .promo-label{font-size:10px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.8);margin-bottom:6px}
+  .promo-name{font-size:22px;font-weight:800;line-height:1.1;margin-bottom:4px;color:#fff}
+  .promo-desc{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:12px}
+  .promo-prices{display:flex;align-items:baseline;justify-content:center;gap:10px}
+  .promo-old{font-size:14px;text-decoration:line-through;color:rgba(255,255,255,.6)}
+  .promo-new{font-size:34px;font-weight:800;color:#fff}
+  .promo-cta{font-size:11px;color:rgba(255,255,255,.75);margin-top:8px}
+
+  /* Fullscreen btn */
+  #btn-fs{
+    position:fixed;top:10px;right:10px;
+    background:var(--tv-btn-fs);border:none;color:#fff;
+    font-size:11px;padding:5px 10px;border-radius:6px;
+    cursor:pointer;z-index:99;opacity:.4;transition:opacity .2s
+  }
+  #btn-fs:hover{opacity:1}
+
+  @keyframes scrollUp{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+  .scroll-list{animation:scrollUp 20s linear infinite}
+  .scroll-list:hover{animation-play-state:paused}
+</style>
+</head>
+<body>
+<button id="btn-fs" onclick="toggleFs()">⛶ Tela cheia</button>
+<div id="tv">
+  <div id="tv-header">
+    <div class="tv-logo">
+      <div class="tv-logo-icon">✂️</div>
+      <div>
+        <div class="tv-logo-name" id="tv-bs-name">BarberPro</div>
+        <div class="tv-logo-unit" id="tv-bs-unit"></div>
+      </div>
+    </div>
+    <div>
+      <div id="tv-clock">--:--</div>
+      <div id="tv-date"></div>
+    </div>
+  </div>
+
+  <div id="tv-body">
+    <div id="tv-appts">
+      <div class="tv-section-title">📋 Próximos Atendimentos</div>
+      <div id="appt-list"><div style="color:var(--tv-text-empty);font-size:13px;padding:20px 0">Carregando...</div></div>
+    </div>
+    <div id="tv-side">
+      <div>
+        <div class="tv-section-title">✂️ Barbeiros Disponíveis</div>
+        <div id="barber-list"></div>
+      </div>
+      <div id="tv-promo">
+        <div class="promo-label">PROMOÇÃO DA SEMANA</div>
+        <div class="promo-name" id="p-name">Combo Completo</div>
+        <div class="promo-desc" id="p-desc">Corte + Barba Desenhada</div>
+        <div class="promo-prices">
+          <span class="promo-old" id="p-old">R$ 95</span>
+          <span class="promo-new" id="p-new">R$ 75</span>
+        </div>
+        <div class="promo-cta">Agende pelo WhatsApp!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Parâmetros da URL
+const params = new URLSearchParams(location.search);
+const TOKEN  = params.get('token') || '';
+
+// Aplicar tema
+const theme = params.get('theme') || 'dark';
+if (theme === 'light') document.documentElement.classList.add('light');
+
+function decode(k){ try{ return decodeURIComponent(params.get(k)||''); }catch(e){return '';} }
+
+// Nome da barbearia passado diretamente pelo app (fonte primária)
+const bsName = decode('bn');
+const bsAddr = decode('ba');
+if (bsName) document.getElementById('tv-bs-name').textContent = bsName;
+if (bsAddr) document.getElementById('tv-bs-unit').textContent = bsAddr;
+
+document.getElementById('p-name').textContent = decode('pn') || 'Combo Completo';
+document.getElementById('p-desc').textContent = decode('pd') || 'Corte + Barba Desenhada';
+document.getElementById('p-old').textContent  = 'R$ ' + (decode('po') || '95');
+document.getElementById('p-new').textContent  = 'R$ ' + (decode('pp') || '75');
+
+// API helper
+async function api(path){
+  const r = await fetch('/api'+path,{headers:{Authorization:'Bearer '+TOKEN}});
+  if(!r.ok) return null;
+  return r.json();
+}
+
+// Clock
+function tickClock(){
+  const now = new Date();
+  document.getElementById('tv-clock').textContent = now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const ds = now.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('tv-date').textContent = ds.charAt(0).toUpperCase()+ds.slice(1);
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+// Fullscreen
+function toggleFs(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen().catch(()=>{});
+}
+document.addEventListener('fullscreenchange',()=>{
+  document.getElementById('btn-fs').textContent = document.fullscreenElement ? '✕ Sair' : '⛶ Tela cheia';
+});
+
+// Carregar dados
+async function loadData(){
+  const today = new Date().toISOString().split('T')[0];
+  const now   = new Date();
+  const nowMin = now.getHours()*60+now.getMinutes();
+
+  // Atualiza nome apenas se não veio via URL (fallback para API)
+  if (!bsName) {
+    const cfg = await api('/settings') || {};
+    if(cfg.barbearia_nome) document.getElementById('tv-bs-name').textContent = cfg.barbearia_nome;
+    if(cfg.barbearia_endereco) document.getElementById('tv-bs-unit').textContent = cfg.barbearia_endereco;
+  }
+
+  const appts  = await api('/appointments?date='+today) || [];
+  const upcoming = appts
+    .filter(a=>['confirmed','pending'].includes(a.status))
+    .sort((a,b)=>a.time.localeCompare(b.time))
+    .slice(0,10);
+
+  const busyIds = new Set(appts.filter(a=>{
+    if(!['confirmed','pending'].includes(a.status)) return false;
+    const [sh,sm]=(a.time||'00:00').split(':').map(Number);
+    const [eh,em]=(a.end_time||a.time||'00:00').split(':').map(Number);
+    const s=sh*60+sm, e=(eh*60+em)||s+30;
+    return nowMin>=s && nowMin<e;
+  }).map(a=>a.barber_id));
+
+  const al = document.getElementById('appt-list');
+  if(upcoming.length===0){
+    al.innerHTML=`<div style="color:var(--tv-text-empty);font-size:14px;padding:30px 0;text-align:center">Nenhum agendamento pendente para hoje</div>`;
+  } else {
+    al.innerHTML = upcoming.map((a,i)=>`
+      <div class="appt-row ${i===0?'next':''}">
+        <span class="appt-time">${(a.time||'').slice(0,5)}</span>
+        <div class="appt-info">
+          <div class="appt-client">${a.client_name||'—'}</div>
+          <div class="appt-sub">${a.service_name||'—'} · ${a.barber_name||'—'}</div>
+        </div>
+        ${i===0
+          ? '<span class="appt-badge badge-next">PRÓXIMO</span>'
+          : a.status==='confirmed'
+            ? '<span class="appt-badge badge-confirmed">Confirmado</span>'
+            : '<span class="appt-badge badge-pending">Aguardando</span>'
+        }
+      </div>`).join('');
+  }
+
+  const barbers = await api('/barbers') || [];
+  document.getElementById('barber-list').innerHTML = barbers
+    .filter(b=>b.status==='active').slice(0,5)
+    .map(b=>`
+      <div class="barber-row">
+        <div class="barber-avatar">${(b.name||'?')[0]}</div>
+        <div>
+          <div class="barber-name">${b.name||'—'}</div>
+          <div class="barber-status ${busyIds.has(b.id)?'busy':'free'}">${busyIds.has(b.id)?'⏳ Em atendimento':'● Disponível'}</div>
+        </div>
+      </div>`).join('');
+}
+
+loadData();
+setInterval(loadData, 60000);
+</script>
+</body>
+</html>
