@@ -86,7 +86,15 @@ app.get('/api/backup/download', (req, res) => {
 
 /* ── HEALTH CHECK ───────────────────────────────────────────── */
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', ts: new Date().toISOString(), version: '1.0.0' });
+  try {
+    const { getDb } = require('./db');
+    const db = getDb();
+    const userCount = db.prepare('SELECT COUNT(*) as n FROM users').get().n;
+    const dbPath = process.env.DB_PATH || 'default';
+    res.json({ status: 'ok', ts: new Date().toISOString(), version: '1.0.0', users: userCount, db: dbPath });
+  } catch(e) {
+    res.json({ status: 'ok', ts: new Date().toISOString(), version: '1.0.0', db_error: e.message });
+  }
 });
 
 /* ── API 404 — must come before SPA fallback ─────────────────── */
