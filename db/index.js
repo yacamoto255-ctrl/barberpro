@@ -2,11 +2,32 @@
 'use strict';
 
 const path         = require('path');
+const fs           = require('fs');
 const { DatabaseSync } = require('node:sqlite');
 const createSchema = require('./schema');
 const runMigrations = require('./migrate');
 
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, '..', 'barberpro.db');
+function resolveDbPath() {
+  const envPath = process.env.DB_PATH;
+  if (envPath) {
+    // Ensure parent directory exists
+    const dir = path.dirname(envPath);
+    if (!fs.existsSync(dir)) {
+      try { fs.mkdirSync(dir, { recursive: true }); } catch(_) {}
+    }
+    // Test if the path is writable
+    try {
+      fs.accessSync(dir, fs.constants.W_OK);
+      return envPath;
+    } catch(_) {
+      console.warn(`[DB] Cannot write to ${dir}, falling back to app directory`);
+    }
+  }
+  return path.join(__dirname, '..', 'barberpro.db');
+}
+
+const DB_PATH = resolveDbPath();
+console.log(`[DB] Using database at: ${DB_PATH}`);
 
 let _db;
 
@@ -24,4 +45,4 @@ function getDb() {
 
 function resetDb() { _db = null; }
 
-module.exports = { getDb, resetDb };
+module.exports = { getDb, resetDb, DB_PATH };
