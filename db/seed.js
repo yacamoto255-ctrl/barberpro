@@ -188,13 +188,13 @@ function seedBarbearia(db, bsId, HASH, { ownerName, ownerEmail, barbers, clients
       .run(bsId, k, v));
 
   // Bloqueios de agenda de exemplo
-  const today = new Date().toISOString().split('T')[0];
-  const jun12 = today.slice(0,5) + '06-12';
-  const jun07 = today.slice(0,5) + '06-07';
-  const jun10 = today.slice(0,5) + '06-10';
-  const jun12e = today.slice(0,5) + '06-12';
+  const todayBlocks = new Date().toISOString().split('T')[0];
+  const jun12 = todayBlocks.slice(0,5) + '06-12';
+  const jun07 = todayBlocks.slice(0,5) + '06-07';
+  const jun10 = todayBlocks.slice(0,5) + '06-10';
+  const jun12e = todayBlocks.slice(0,5) + '06-12';
   try {
-    db.prepare(`INSERT INTO schedule_blocks (barbershop_id,barber_id,title,start_date,end_date,start_time,end_time,repeat_type,color) VALUES (?,NULL,?,?,?,?,?,?,?)`).run(bsId,'Almoço (todos)',today,today,'12:00','13:00','daily','#f97316');
+    db.prepare(`INSERT INTO schedule_blocks (barbershop_id,barber_id,title,start_date,end_date,start_time,end_time,repeat_type,color) VALUES (?,NULL,?,?,?,?,?,?,?)`).run(bsId,'Almoço (todos)',todayBlocks,todayBlocks,'12:00','13:00','daily','#f97316');
     db.prepare(`INSERT INTO schedule_blocks (barbershop_id,barber_id,title,start_date,end_date,start_time,end_time,repeat_type,color) VALUES (?,NULL,?,?,?,NULL,NULL,?,?)`).run(bsId,'Corpus Christi',jun12,jun12e,'none','#22c55e');
     // Bloqueios individuais (barbeiro 1 e 2 da barbearia)
     const bar1 = db.prepare('SELECT b.id FROM barbers b JOIN users u ON u.id=b.user_id WHERE u.barbershop_id=? LIMIT 1').get(bsId);
