@@ -76,15 +76,34 @@ router.post('/connect', requireAuth, requireRole('owner'), async (req, res) => {
   if (!cfg.evolution_url || !cfg.evolution_apikey || !cfg.evolution_instance)
     return res.status(400).json({ error: 'Configure a Evolution API primeiro.' });
   try {
-    // Garante que a instância existe
-    await evFetch(cfg.evolution_url, cfg.evolution_apikey, '/instance/create', 'POST', {
-      instanceName: cfg.evolution_instance,
-      qrcode: true,
-      integration: 'WHATSAPP-BAILEYS',
+    const base = cfg.evolution_url.replace(/\/$/, '');
+    const headers = { 'Content-Type': 'application/json', 'apikey': cfg.evolution_apikey };
+
+    // 1. Tenta criar a instância (ignora erro 409 = já existe)
+    await fetch(`${base}/instance/create`, {
+      method: 'POST', headers,
+      body: JSON.stringify({ instanceName: cfg.evolution_instance, qrcode: true, integration: 'WHATSAPP-BAILEYS' }),
     }).catch(() => {});
-    // Obtém QR code
-    const data = await evFetch(cfg.evolution_url, cfg.evolution_apikey,
-      `/instance/connect/${cfg.evolution_instance}`);
+
+    // 2. Pequeno delay para a instância inicializar
+    await new Promise(r => setTimeout(r, 1500));
+
+    // 3. Obtém QR code
+    const connRes = await fetch(`${base}/instance/connect/${cfg.evolution_instance}`, { headers });
+    const data = await connRes.json();
+
+    // 4. Se ainda "not found", tenta fetch sem versão (algumas instâncias Evolution v1)
+    if (data?.code === 404 || data?.message === 'Application not found') {
+      // Tenta endpoint alternativo do Evolution API v1
+      const alt = await fetch(`${base}/instance/qrcode/${cfg.evolution_instance}`, { headers })
+        .then(r => r.json()).catch(() => null);
+      if (alt && !alt.error) return res.json(alt);
+      return res.status(404).json({
+        error: `Instância "${cfg.evolution_instance}" não encontrada. Verifique se a Evolution API está acessível e a API Key está correta.`,
+        detail: data,
+      });
+    }
+
     res.json(data);
   } catch (e) {
     res.status(500).json({ error: `Erro ao conectar: ${e.message}` });
