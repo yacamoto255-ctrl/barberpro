@@ -1,0 +1,7 @@
+node_modules/
+data/
+backups/
+coverage/
+e2e/screenshots/
+.env
+*.log
