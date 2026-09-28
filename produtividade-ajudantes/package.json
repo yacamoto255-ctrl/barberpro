@@ -1,0 +1,42 @@
+{
+  "name": "logiponto-produtividade-ajudantes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LogiPonto — Apontamento operacional e produtividade individual de ajudantes (transportadora)",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning server.js",
+    "dev": "node --no-warnings=ExperimentalWarning --watch server.js",
+    "seed": "node --no-warnings=ExperimentalWarning scripts/seed.js",
+    "backup": "node --no-warnings=ExperimentalWarning scripts/backup.js",
+    "restore": "node --no-warnings=ExperimentalWarning scripts/restore.js",
+    "test": "node --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --runInBand",
+    "e2e": "node --no-warnings=ExperimentalWarning e2e/run-e2e.js",
+    "loadtest": "node --no-warnings=ExperimentalWarning scripts/loadtest.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "testTimeout": 20000
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "exceljs": "^4.4.0",
+    "express": "^4.22.3",
+    "jsbarcode": "^3.12.3",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "playwright-core": "^1.63.0",
+    "supertest": "^7.3.0"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}
