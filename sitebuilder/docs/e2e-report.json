@@ -1,0 +1,171 @@
+{
+  "data": "2026-10-06T23:41:41.686Z",
+  "ok": true,
+  "passos": [
+    {
+      "step": "1. Criar conta (primeiro acesso cria o administrador)",
+      "ok": true,
+      "ms": 422
+    },
+    {
+      "step": "2. Logout e login",
+      "ok": true,
+      "ms": 238
+    },
+    {
+      "step": "3. Criar site",
+      "ok": true,
+      "ms": 222
+    },
+    {
+      "step": "4. Dados do negócio: máscaras, CNPJ inválido e válido",
+      "ok": true,
+      "ms": 303
+    },
+    {
+      "step": "5. Serviços: criar, editar e excluir",
+      "ok": true,
+      "ms": 3761
+    },
+    {
+      "step": "6. Equipe: cadastrar profissional e foto",
+      "ok": true,
+      "ms": 332
+    },
+    {
+      "step": "7. Horários: abrir domingo e salvar",
+      "ok": true,
+      "ms": 210
+    },
+    {
+      "step": "8. Aparência: modelo pronto + prévia",
+      "ok": true,
+      "ms": 277
+    },
+    {
+      "step": "9. Imagens: logo e galeria (inclui recusa de arquivo inválido)",
+      "ok": true,
+      "ms": 257
+    },
+    {
+      "step": "10. Regras da agenda e publicação",
+      "ok": true,
+      "ms": 343
+    },
+    {
+      "step": "11. Cliente agenda pelo site no celular (iPhone)",
+      "ok": true,
+      "ms": 1454
+    },
+    {
+      "step": "12. Painel recebe o alerta do novo agendamento",
+      "ok": true,
+      "ms": 106
+    },
+    {
+      "step": "13. Agenda: alterar status e lançar agendamento manual",
+      "ok": true,
+      "ms": 232
+    },
+    {
+      "step": "14. Dashboard mostra os números reais",
+      "ok": true,
+      "ms": 45,
+      "info": {
+        "realizado_no_mes": "R$ 55,00"
+      }
+    },
+    {
+      "step": "15. Relatórios: CSV, Excel e PDF baixados e conferidos",
+      "ok": true,
+      "ms": 283,
+      "info": {
+        "csv": 513,
+        "xlsx": 8103,
+        "pdf": 2204
+      }
+    },
+    {
+      "step": "16. Criar operador; operador não acessa áreas de admin",
+      "ok": true,
+      "ms": 3913
+    },
+    {
+      "step": "17. Entrar de novo e validar persistência dos dados",
+      "ok": true,
+      "ms": 256
+    },
+    {
+      "step": "18. Cliente cancela pelo link e a vaga volta",
+      "ok": true,
+      "ms": 209,
+      "info": {
+        "cancelUrl_inicial_valido": true
+      }
+    },
+    {
+      "step": "19. Trocar senha, sair e entrar com a nova",
+      "ok": true,
+      "ms": 411
+    },
+    {
+      "step": "20. Backup manual pelo painel",
+      "ok": true,
+      "ms": 107
+    },
+    {
+      "step": "21. Excluir site (com confirmação digitada)",
+      "ok": true,
+      "ms": 308
+    },
+    {
+      "step": "22. Navegação: nenhum link interno quebrado",
+      "ok": true,
+      "ms": 4304,
+      "info": {
+        "links_painel": 9,
+        "ancoras_site": 8,
+        "imagens": 2
+      }
+    },
+    {
+      "step": "23. Modo offline (PWA): painel abre sem internet e volta sozinho",
+      "ok": true,
+      "ms": 357
+    },
+    {
+      "step": "24. Responsividade: painel e site em 9 telas, sem rolagem lateral",
+      "ok": true,
+      "ms": 33551,
+      "info": {
+        "telas": 9,
+        "paginas_por_tela": 8
+      }
+    },
+    {
+      "step": "25. Nenhum erro de JavaScript nem erro 5xx do servidor",
+      "ok": true,
+      "ms": 0,
+      "info": {
+        "respostas_4xx_esperadas": [
+          "400 POST /api/auth/setup",
+          "400 POST /api/auth/setup",
+          "401 POST /api/auth/login",
+          "400 PATCH /api/sites/1",
+          "415 POST /api/sites/1/images"
+        ],
+        "servicos_externos_indisponiveis": [
+          "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
+          "fonts.googleapis.com net::ERR_ABORTED",
+          "fonts.gstatic.com net::ERR_ABORTED"
+        ]
+      }
+    }
+  ],
+  "erros": [],
+  "servicos_externos_indisponiveis": [
+    "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
+    "fonts.googleapis.com net::ERR_ABORTED",
+    "fonts.gstatic.com net::ERR_ABORTED"
+  ]
+}
