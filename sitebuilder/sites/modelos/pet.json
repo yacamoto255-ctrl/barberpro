@@ -1,0 +1,517 @@
+{
+  "_leia": "Catálogo de MODELOS da Versal Estúdio. Cada modelo é um tema (cores, fontes, layout e textos) com um negócio fictício para a prévia em /modelos/<id>. Nomes, pessoas, contatos e registros são fictícios (registros terminam em 00000; \"{REGISTRO}\" na equipe vira o registro do responsável de cada modelo). No painel, \"Aplicar modelo\" copia só o visual, os textos e a capa para um site real. Capas em img/<id>.png (scripts/build-model-art.js, a partir do bloco \"arte\") e miniaturas em img/thumbs/<id>.jpg (scripts/build-posts.js).",
+  "categoria": "pet",
+  "rotulo": "Pet shop",
+  "site": {
+    "hide_prices": false,
+    "slot_interval_min": 30,
+    "min_notice_min": 60,
+    "max_days_ahead": 21
+  },
+  "servicos": [
+    {
+      "name": "Banho — porte pequeno",
+      "duration_min": 60,
+      "price": "60",
+      "description": "Banho com produtos para o tipo de pelagem, secagem e perfume."
+    },
+    {
+      "name": "Banho — porte médio",
+      "duration_min": 75,
+      "price": "80",
+      "description": "Banho, secagem, limpeza de ouvidos e perfume."
+    },
+    {
+      "name": "Banho e tosa — pequeno",
+      "duration_min": 90,
+      "price": "95",
+      "description": "Banho completo e tosa na máquina ou tesoura."
+    },
+    {
+      "name": "Banho e tosa — médio",
+      "duration_min": 120,
+      "price": "130",
+      "description": "Banho completo e tosa no estilo que você escolher."
+    },
+    {
+      "name": "Tosa higiênica",
+      "duration_min": 40,
+      "price": "45",
+      "description": "Patas, barriga e região íntima."
+    },
+    {
+      "name": "Hidratação de pelagem",
+      "duration_min": 30,
+      "price": "40",
+      "description": "Para pelos macios e sem nós."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Duda Lima",
+      "title": "Banho e tosa",
+      "bio": "Paciência de sobra com pets ansiosos."
+    },
+    {
+      "name": "Nico Prado",
+      "title": "Tosador",
+      "bio": "Tosa na tesoura e tosa da raça."
+    },
+    {
+      "name": "Bia Souza",
+      "title": "Groomer",
+      "bio": "Hidratação e cuidados com a pelagem."
+    }
+  ],
+  "horarios": {
+    "seg": "09:00-18:00",
+    "ter": "09:00-18:00",
+    "qua": "09:00-18:00",
+    "qui": "09:00-18:00",
+    "sex": "09:00-18:00",
+    "sab": "09:00-14:00",
+    "dom": null
+  },
+  "modelos": [
+    {
+      "id": "pet-01",
+      "nome": "Laranja Feliz",
+      "estilo": "Laranja vibrante, creme e verde, com letra divertida",
+      "negocio": {
+        "name": "Pet Laranjinha",
+        "tagline": "Banho e tosa com carinho",
+        "city": "Sorocaba",
+        "state": "SP",
+        "address": "Campolim",
+        "whatsapp": "(15) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff6ea",
+          "surface": "#fffdf8",
+          "text": "#2a1a0c",
+          "muted": "#6b5543",
+          "primary": "#c4501a",
+          "on_primary": "#ffffff",
+          "accent": "#2f7d4f"
+        },
+        "fonts": {
+          "heading": "Shrikhand",
+          "body": "Rubik"
+        },
+        "hero_layout": "split",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Banho, tosa e muito carinho",
+          "subheadline": "Seu pet limpinho e feliz, com hora marcada e atendimento atencioso. Agende pelo site.",
+          "about": "Aqui cada pet é atendido com calma, no seu tempo, por quem gosta de bicho de verdade.\n\nVocê agenda pelo site, escolhe o serviço e o horário, e a gente avisa quando ele estiver pronto.",
+          "cta": "Agendar banho",
+          "services_title": "Serviços e valores",
+          "team_title": "Quem cuida",
+          "booking_title": "Agende o banho"
+        }
+      },
+      "arte": {
+        "composicao": "blobs",
+        "icone": "paw"
+      }
+    },
+    {
+      "id": "pet-02",
+      "nome": "Bolha Azul",
+      "estilo": "Azul de banho, branco e amarelo",
+      "negocio": {
+        "name": "Bolha Azul Banho & Tosa",
+        "tagline": "Pet cheiroso, tutor tranquilo",
+        "city": "Joinville",
+        "state": "SC",
+        "address": "América",
+        "whatsapp": "(47) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#eaf4fb",
+          "surface": "#fbfdff",
+          "text": "#10283d",
+          "muted": "#4a6178",
+          "primary": "#1b64a8",
+          "on_primary": "#ffffff",
+          "accent": "#e0a21b"
+        },
+        "fonts": {
+          "heading": "Unbounded",
+          "body": "Nunito Sans"
+        },
+        "hero_layout": "stacked",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Pet cheiroso, tutor tranquilo",
+          "subheadline": "Banho, tosa e hidratação com produtos próprios para cada pelagem. Marque online.",
+          "about": "Usamos produtos próprios para pets e secagem com cuidado, sem estresse.\n\nEscolha o serviço e o horário pelo site. Sem ligação, sem espera.",
+          "cta": "Marcar horário",
+          "services_title": "Serviços",
+          "team_title": "Equipe",
+          "booking_title": "Marque o banho"
+        }
+      },
+      "arte": {
+        "composicao": "halftone",
+        "icone": "bone"
+      }
+    },
+    {
+      "id": "pet-03",
+      "nome": "Lua Pet Spa",
+      "estilo": "Noite violeta com amarelo e menta",
+      "negocio": {
+        "name": "Lua Pet Spa",
+        "tagline": "Spa para pets, de dia e à noite",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Moema",
+        "whatsapp": "(11) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#1a1426",
+          "surface": "#251d36",
+          "text": "#f6f1ff",
+          "muted": "#b9aed0",
+          "primary": "#ffb84d",
+          "on_primary": "#1a1426",
+          "accent": "#6ee7b7"
+        },
+        "fonts": {
+          "heading": "Archivo Black",
+          "body": "Outfit"
+        },
+        "hero_layout": "banner",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Cuidado completo para o seu pet",
+          "subheadline": "Banho, tosa, unhas e hidratação com horário marcado e atendimento sem estresse.",
+          "about": "Um spa de verdade para cães e gatos: ambiente calmo, banho morno e muito carinho.\n\nAgende pelo celular em menos de um minuto e acompanhe a confirmação na hora.",
+          "cta": "Agendar agora",
+          "services_title": "Serviços e valores",
+          "team_title": "Equipe",
+          "booking_title": "Escolha o horário"
+        }
+      },
+      "arte": {
+        "composicao": "sun",
+        "icone": "dog"
+      }
+    },
+    {
+      "id": "pet-04",
+      "nome": "Verde Parque",
+      "estilo": "Verde de grama, creme e laranja",
+      "negocio": {
+        "name": "Pet Parque",
+        "tagline": "Pet bem cuidado, dia mais feliz",
+        "city": "Curitiba",
+        "state": "PR",
+        "address": "Bacacheri",
+        "whatsapp": "(41) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#edf5e6",
+          "surface": "#fafdf6",
+          "text": "#1b2b14",
+          "muted": "#52664a",
+          "primary": "#3a7420",
+          "on_primary": "#ffffff",
+          "accent": "#d96a2c"
+        },
+        "fonts": {
+          "heading": "Sora",
+          "body": "Figtree"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "grain",
+        "copy": {
+          "headline": "Pet bem cuidado, dia mais feliz",
+          "subheadline": "Banho e tosa com horário marcado, para o seu pet voltar limpinho e tranquilo.",
+          "about": "Somos um pet shop de bairro com cara de parque: espaço arejado e atendimento sem pressa.\n\nMarque pelo site e escolha o profissional de sua confiança.",
+          "cta": "Marcar banho",
+          "services_title": "Serviços e valores",
+          "team_title": "Quem cuida",
+          "booking_title": "Marque o horário"
+        }
+      },
+      "arte": {
+        "composicao": "waves",
+        "icone": "ball"
+      }
+    },
+    {
+      "id": "pet-05",
+      "nome": "Chiclete",
+      "estilo": "Rosa chiclete com verde-água, bem pop",
+      "negocio": {
+        "name": "Chiclete Pet",
+        "tagline": "Um dia de spa para o seu pet",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "address": "Santa Tereza",
+        "whatsapp": "(31) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff0f4",
+          "surface": "#fffafb",
+          "text": "#3a1222",
+          "muted": "#7a4a5c",
+          "primary": "#b8174f",
+          "on_primary": "#ffffff",
+          "accent": "#1d8a8a"
+        },
+        "fonts": {
+          "heading": "Abril Fatface",
+          "body": "Karla"
+        },
+        "hero_layout": "centered",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Um dia de spa para o seu pet",
+          "subheadline": "Banho, tosa e hidratação para cães e gatos. Escolha o horário e pronto.",
+          "about": "Banho com cheirinho, tosa caprichada e laço de presente. Seu pet sai daqui pronto para as fotos.\n\nAgendamento online, sem fila e sem ligação.",
+          "cta": "Quero agendar",
+          "services_title": "Serviços e valores",
+          "team_title": "Equipe",
+          "booking_title": "Agende o spa"
+        }
+      },
+      "arte": {
+        "composicao": "checker",
+        "icone": "cat"
+      }
+    },
+    {
+      "id": "pet-06",
+      "nome": "Boutique",
+      "estilo": "Bege, caramelo e verde-escuro, sofisticado",
+      "negocio": {
+        "name": "Maison Pet",
+        "tagline": "Tosa com estilo e cuidado",
+        "city": "Rio de Janeiro",
+        "state": "RJ",
+        "address": "Leblon",
+        "whatsapp": "(21) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f5f0ea",
+          "surface": "#fdfaf6",
+          "text": "#2b2622",
+          "muted": "#6b625a",
+          "primary": "#85522f",
+          "on_primary": "#ffffff",
+          "accent": "#3e6b63"
+        },
+        "fonts": {
+          "heading": "Cormorant Garamond",
+          "body": "Work Sans"
+        },
+        "hero_layout": "editorial",
+        "radius": "soft",
+        "background": "plain",
+        "copy": {
+          "headline": "Tosa com estilo e cuidado",
+          "subheadline": "Boutique de banho e tosa com atendimento individual e horário reservado.",
+          "about": "Atendemos um pet por vez, com produtos selecionados e tosa feita com tesoura e paciência.\n\nReserve o horário pelo site e receba a confirmação na hora.",
+          "cta": "Reservar horário",
+          "services_title": "Serviços",
+          "team_title": "Groomers",
+          "booking_title": "Reserve o horário"
+        }
+      },
+      "arte": {
+        "composicao": "frame",
+        "icone": "bone"
+      }
+    },
+    {
+      "id": "pet-07",
+      "nome": "Amarelo Sol",
+      "estilo": "Amarelo forte, preto e vermelho, estilo pôster",
+      "negocio": {
+        "name": "Sol Pet Shop",
+        "tagline": "Banho e tosa sem fila",
+        "city": "Natal",
+        "state": "RN",
+        "address": "Ponta Negra",
+        "whatsapp": "(84) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff6cc",
+          "surface": "#fffbe6",
+          "text": "#221d0a",
+          "muted": "#5f5634",
+          "primary": "#1f1f1f",
+          "on_primary": "#fff6cc",
+          "accent": "#d8431f"
+        },
+        "fonts": {
+          "heading": "Anton",
+          "body": "Public Sans"
+        },
+        "hero_layout": "split",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Banho e tosa sem fila",
+          "subheadline": "Escolha o serviço, o porte do pet e o horário. A gente confirma na hora.",
+          "about": "Chega de esperar na porta: aqui o horário é marcado e respeitado.\n\nBanho, tosa e hidratação com profissionais que tratam seu pet como da família.",
+          "cta": "Agendar",
+          "services_title": "Serviços e valores",
+          "team_title": "Equipe",
+          "booking_title": "Marque o horário"
+        }
+      },
+      "arte": {
+        "composicao": "collage",
+        "icone": "paw"
+      }
+    },
+    {
+      "id": "pet-08",
+      "nome": "Pelagem Care",
+      "estilo": "Branco-azulado, verde-petróleo e coral",
+      "negocio": {
+        "name": "Pelagem Pet Care",
+        "tagline": "Higiene e bem-estar para o seu pet",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "address": "Petrópolis",
+        "whatsapp": "(51) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f2f7f7",
+          "surface": "#ffffff",
+          "text": "#12302f",
+          "muted": "#4c6766",
+          "primary": "#0f766e",
+          "on_primary": "#ffffff",
+          "accent": "#e5704a"
+        },
+        "fonts": {
+          "heading": "Zilla Slab",
+          "body": "Lexend"
+        },
+        "hero_layout": "stacked",
+        "radius": "soft",
+        "background": "dots",
+        "copy": {
+          "headline": "Higiene e bem-estar para o seu pet",
+          "subheadline": "Banho, tosa e cuidados com a pelagem, com horário marcado pelo site.",
+          "about": "Cuidamos da higiene do seu pet com produtos adequados a cada pelagem e muita atenção ao bem-estar.\n\nAgende online e escolha o profissional.",
+          "cta": "Agendar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Equipe",
+          "booking_title": "Agende o horário"
+        }
+      },
+      "arte": {
+        "composicao": "grid",
+        "icone": "paw"
+      }
+    },
+    {
+      "id": "pet-09",
+      "nome": "Turquesa Pop",
+      "estilo": "Turquesa escuro com amarelo e coral",
+      "negocio": {
+        "name": "Turquesa Pet",
+        "tagline": "Diversão, banho e tosa",
+        "city": "Maceió",
+        "state": "AL",
+        "address": "Pajuçara",
+        "whatsapp": "(82) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0e3236",
+          "surface": "#134247",
+          "text": "#eefaf8",
+          "muted": "#a5c9c5",
+          "primary": "#ffd166",
+          "on_primary": "#0e3236",
+          "accent": "#ff7b7b"
+        },
+        "fonts": {
+          "heading": "Syne",
+          "body": "DM Sans"
+        },
+        "hero_layout": "banner",
+        "radius": "round",
+        "background": "gradient",
+        "copy": {
+          "headline": "Diversão, banho e tosa",
+          "subheadline": "Pet shop com atendimento alegre e agenda online. Seu pet volta limpinho e feliz.",
+          "about": "Banho, tosa e muito carinho em um espaço colorido e cheio de energia.\n\nMarque pelo site em poucos toques e receba a confirmação na hora.",
+          "cta": "Marcar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "A turma",
+          "booking_title": "Marque o horário"
+        }
+      },
+      "arte": {
+        "composicao": "stripes",
+        "icone": "dog"
+      }
+    },
+    {
+      "id": "pet-10",
+      "nome": "Bicho de Bairro",
+      "estilo": "Retrô: creme, vermelho-tijolo e azul",
+      "negocio": {
+        "name": "Bicho de Bairro",
+        "tagline": "Pet shop de bairro, carinho de família",
+        "city": "Niterói",
+        "state": "RJ",
+        "address": "Icaraí",
+        "whatsapp": "(21) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f6e9d7",
+          "surface": "#fcf5ea",
+          "text": "#2d1f14",
+          "muted": "#6a5644",
+          "primary": "#a23e2a",
+          "on_primary": "#ffffff",
+          "accent": "#2f6d8f"
+        },
+        "fonts": {
+          "heading": "Gloock",
+          "body": "Albert Sans"
+        },
+        "hero_layout": "split_left",
+        "radius": "sharp",
+        "background": "grain",
+        "copy": {
+          "headline": "Pet shop de bairro, carinho de família",
+          "subheadline": "Banho e tosa com quem conhece o seu pet pelo nome. Agende pelo site.",
+          "about": "Somos o pet shop da esquina, com atendimento de família e clientes de quatro patas que viraram amigos.\n\nAgora com agenda online: escolha o serviço e o horário sem precisar ligar.",
+          "cta": "Agendar banho",
+          "services_title": "Serviços e valores",
+          "team_title": "Quem cuida",
+          "booking_title": "Agende o banho"
+        }
+      },
+      "arte": {
+        "composicao": "arch",
+        "icone": "cat"
+      }
+    }
+  ]
+}

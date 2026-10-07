@@ -1,0 +1,517 @@
+{
+  "_leia": "Catálogo de MODELOS da Versal Estúdio. Cada modelo é um tema (cores, fontes, layout e textos) com um negócio fictício para a prévia em /modelos/<id>. Nomes, pessoas, contatos e registros são fictícios (registros terminam em 00000; \"{REGISTRO}\" na equipe vira o registro do responsável de cada modelo). No painel, \"Aplicar modelo\" copia só o visual, os textos e a capa para um site real. Capas em img/<id>.png (scripts/build-model-art.js, a partir do bloco \"arte\") e miniaturas em img/thumbs/<id>.jpg (scripts/build-posts.js).",
+  "categoria": "barbearia",
+  "rotulo": "Barbearia",
+  "site": {
+    "hide_prices": false,
+    "slot_interval_min": 30,
+    "min_notice_min": 30,
+    "max_days_ahead": 21
+  },
+  "servicos": [
+    {
+      "name": "Corte",
+      "duration_min": 40,
+      "price": "60",
+      "description": "Tesoura ou máquina, com lavagem e finalização."
+    },
+    {
+      "name": "Barba",
+      "duration_min": 30,
+      "price": "45",
+      "description": "Toalha quente, navalha e balm."
+    },
+    {
+      "name": "Corte + barba",
+      "duration_min": 70,
+      "price": "95",
+      "description": "O combo completo, com toalha quente."
+    },
+    {
+      "name": "Degradê",
+      "duration_min": 45,
+      "price": "65",
+      "description": "Fade na máquina com acabamento na navalha."
+    },
+    {
+      "name": "Pezinho",
+      "duration_min": 15,
+      "price": "20",
+      "description": "Acabamento entre um corte e outro."
+    },
+    {
+      "name": "Sobrancelha",
+      "duration_min": 15,
+      "price": "20",
+      "description": "Limpeza e alinhamento na navalha."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Caio Mendes",
+      "title": "Barbeiro",
+      "bio": "Cortes clássicos e degradê."
+    },
+    {
+      "name": "Rui Nogueira",
+      "title": "Barbeiro",
+      "bio": "Barba, navalha e toalha quente."
+    },
+    {
+      "name": "Lara Prado",
+      "title": "Barbeira",
+      "bio": "Cortes texturizados e visagismo."
+    }
+  ],
+  "horarios": {
+    "seg": null,
+    "ter": "10:00-20:00",
+    "qua": "10:00-20:00",
+    "qui": "10:00-21:00",
+    "sex": "10:00-21:00",
+    "sab": "09:00-18:00",
+    "dom": null
+  },
+  "modelos": [
+    {
+      "id": "barbearia-01",
+      "nome": "Clássica de Bairro",
+      "estilo": "Escuro com dourado, letras condensadas e textura de papel",
+      "negocio": {
+        "name": "Barbearia do Largo",
+        "tagline": "Corte, barba e conversa boa",
+        "city": "Curitiba",
+        "state": "PR",
+        "address": "São Francisco",
+        "whatsapp": "(41) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#17120e",
+          "surface": "#231b15",
+          "text": "#f3e9da",
+          "muted": "#bfae97",
+          "primary": "#c99a2e",
+          "on_primary": "#17120e",
+          "accent": "#c4573a"
+        },
+        "fonts": {
+          "heading": "Oswald",
+          "body": "Libre Franklin"
+        },
+        "hero_layout": "banner",
+        "radius": "sharp",
+        "background": "grain",
+        "copy": {
+          "headline": "Corte bem feito, sem pressa",
+          "subheadline": "Hora marcada, toalha quente e navalha. Escolha o barbeiro e o horário em menos de um minuto.",
+          "about": "Barbearia de bairro do jeito que tem que ser: cadeira confortável, conversa boa e atenção a cada detalhe do corte e da barba.\n\nTrabalhamos com hora marcada para você não perder tempo esperando. Agende pelo site e chegue só na hora.",
+          "cta": "Marcar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Os barbeiros",
+          "booking_title": "Marque seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "stripes",
+        "icone": "razor"
+      }
+    },
+    {
+      "id": "barbearia-02",
+      "nome": "Poste Tricolor",
+      "estilo": "Creme, vermelho e azul de barbearia antiga, com serifa de bloco",
+      "negocio": {
+        "name": "Tricolor Barber Shop",
+        "tagline": "Tradição de barbearia com hora marcada",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "address": "Cidade Baixa",
+        "whatsapp": "(51) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f4efe4",
+          "surface": "#fffaf0",
+          "text": "#1b1d2a",
+          "muted": "#565868",
+          "primary": "#b3262e",
+          "on_primary": "#ffffff",
+          "accent": "#1f3f8a"
+        },
+        "fonts": {
+          "heading": "Alfa Slab One",
+          "body": "Rubik"
+        },
+        "hero_layout": "split",
+        "radius": "soft",
+        "background": "plain",
+        "copy": {
+          "headline": "Tradição de barbearia, agenda de hoje",
+          "subheadline": "Corte, barba e acabamento com o cuidado de sempre. Agende online, sem fila e sem ligação.",
+          "about": "Inspirada nas barbearias de antigamente, com poste listrado na porta e atendimento caprichado.\n\nAqui cada cliente tem o seu horário. Você escolhe o serviço, o barbeiro e o momento, e a gente cuida do resto.",
+          "cta": "Agendar agora",
+          "services_title": "Cardápio da casa",
+          "team_title": "Quem atende",
+          "booking_title": "Escolha seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "checker",
+        "icone": "pole"
+      }
+    },
+    {
+      "id": "barbearia-03",
+      "nome": "Noir Minimal",
+      "estilo": "Preto e branco, grade fina e um toque de laranja",
+      "negocio": {
+        "name": "Corte Noir",
+        "tagline": "Barbearia de linhas limpas",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Pinheiros",
+        "whatsapp": "(11) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0b0b0b",
+          "surface": "#171717",
+          "text": "#f5f5f2",
+          "muted": "#a6a6a0",
+          "primary": "#f5f5f2",
+          "on_primary": "#0b0b0b",
+          "accent": "#e4572e"
+        },
+        "fonts": {
+          "heading": "Syne",
+          "body": "Manrope"
+        },
+        "hero_layout": "editorial",
+        "radius": "sharp",
+        "background": "grid",
+        "copy": {
+          "headline": "Preto, branco e um corte preciso",
+          "subheadline": "Barbearia de linhas limpas para quem gosta de detalhe. Agenda online aberta em todos os dias de atendimento.",
+          "about": "Menos enfeite, mais técnica. Cada corte começa com uma conversa sobre o que você quer e termina no espelho com o resultado combinado.\n\nAmbiente tranquilo, música baixa e horário respeitado.",
+          "cta": "Reservar cadeira",
+          "services_title": "Serviços",
+          "team_title": "Barbeiros",
+          "booking_title": "Reserve sua cadeira"
+        }
+      },
+      "arte": {
+        "composicao": "grid",
+        "icone": "scissors"
+      }
+    },
+    {
+      "id": "barbearia-04",
+      "nome": "Couro & Whisky",
+      "estilo": "Marrom couro, âmbar e serifa clássica",
+      "negocio": {
+        "name": "Couro & Navalha",
+        "tagline": "Barba com toalha quente e navalha",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "address": "Savassi",
+        "whatsapp": "(31) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#24170f",
+          "surface": "#33231a",
+          "text": "#f6e7d0",
+          "muted": "#cdb497",
+          "primary": "#d98b3a",
+          "on_primary": "#1c120b",
+          "accent": "#8fb39a"
+        },
+        "fonts": {
+          "heading": "DM Serif Display",
+          "body": "Karla"
+        },
+        "hero_layout": "split_left",
+        "radius": "soft",
+        "background": "grain",
+        "copy": {
+          "headline": "Barba feita como ritual",
+          "subheadline": "Toalha quente, navalha e um bom papo em poltronas de couro. Reserve o seu momento.",
+          "about": "Um espaço pensado para desacelerar: luz baixa, poltronas de couro e atendimento sem correria.\n\nDo corte clássico à barba completa com toalha quente, cada serviço tem o tempo que precisa. Agende e venha sem pressa.",
+          "cta": "Reservar meu horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Mestres da navalha",
+          "booking_title": "Reserve seu momento"
+        }
+      },
+      "arte": {
+        "composicao": "arch",
+        "icone": "mustache"
+      }
+    },
+    {
+      "id": "barbearia-05",
+      "nome": "Âncora",
+      "estilo": "Azul-marinho, amarelo e espírito old school",
+      "negocio": {
+        "name": "Âncora Barbearia",
+        "tagline": "Cortes clássicos e degradê",
+        "city": "Santos",
+        "state": "SP",
+        "address": "Gonzaga",
+        "whatsapp": "(13) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0f1c2e",
+          "surface": "#172a42",
+          "text": "#eef2f7",
+          "muted": "#a9b6c8",
+          "primary": "#e8b04a",
+          "on_primary": "#0f1c2e",
+          "accent": "#e05a4f"
+        },
+        "fonts": {
+          "heading": "Bebas Neue",
+          "body": "Source Sans 3"
+        },
+        "hero_layout": "banner",
+        "radius": "sharp",
+        "background": "dots",
+        "copy": {
+          "headline": "Old school no estilo, pontual na agenda",
+          "subheadline": "Cortes clássicos, degradê e barba alinhada. Marque online e seja atendido no horário.",
+          "about": "Barbearia com alma old school: navalha, pente fino e atenção ao acabamento.\n\nA agenda é online e o horário é seu. Escolha o barbeiro, o serviço e chegue na hora marcada.",
+          "cta": "Marcar corte",
+          "services_title": "Tabela de serviços",
+          "team_title": "Equipe",
+          "booking_title": "Garanta seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "waves",
+        "icone": "comb"
+      }
+    },
+    {
+      "id": "barbearia-06",
+      "nome": "Concreto Urbano",
+      "estilo": "Cinza concreto, preto e laranja de sinalização",
+      "negocio": {
+        "name": "Esquina Barber",
+        "tagline": "Degradê, freestyle e barba",
+        "city": "Rio de Janeiro",
+        "state": "RJ",
+        "address": "Botafogo",
+        "whatsapp": "(21) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#e7e5e0",
+          "surface": "#f6f5f2",
+          "text": "#121212",
+          "muted": "#525252",
+          "primary": "#121212",
+          "on_primary": "#f6f5f2",
+          "accent": "#e8531d"
+        },
+        "fonts": {
+          "heading": "Anton",
+          "body": "IBM Plex Sans"
+        },
+        "hero_layout": "stacked",
+        "radius": "sharp",
+        "background": "grain",
+        "copy": {
+          "headline": "Corte de rua, acabamento de estúdio",
+          "subheadline": "Degradê, freestyle e barba no ponto. Escolha seu barbeiro e marque em segundos.",
+          "about": "Nascemos na rua e levamos o corte a sério: degradê limpo, desenho na máquina e barba bem desenhada.\n\nSem fila e sem espera. Marque pelo site, chegue na hora e saia no estilo.",
+          "cta": "Agendar",
+          "services_title": "O que a gente faz",
+          "team_title": "A equipe",
+          "booking_title": "Agende seu corte"
+        }
+      },
+      "arte": {
+        "composicao": "collage",
+        "icone": "razor"
+      }
+    },
+    {
+      "id": "barbearia-07",
+      "nome": "Verde Garrafa",
+      "estilo": "Verde-garrafa, dourado e serifa expressiva",
+      "negocio": {
+        "name": "Barbearia Garrafa Verde",
+        "tagline": "Um clássico com café na chegada",
+        "city": "Goiânia",
+        "state": "GO",
+        "address": "Setor Bueno",
+        "whatsapp": "(62) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0f2a22",
+          "surface": "#163a2f",
+          "text": "#eef3ea",
+          "muted": "#a8bcae",
+          "primary": "#e3c16f",
+          "on_primary": "#0f2a22",
+          "accent": "#d97a4a"
+        },
+        "fonts": {
+          "heading": "Fraunces",
+          "body": "DM Sans"
+        },
+        "hero_layout": "split",
+        "radius": "round",
+        "background": "gradient",
+        "copy": {
+          "headline": "Um clássico que nunca sai de moda",
+          "subheadline": "Barbearia com atendimento cuidadoso, café na chegada e hora marcada pelo site.",
+          "about": "O corte clássico tem lugar garantido aqui, ao lado do degradê e da barba desenhada.\n\nChegue, tome um café e relaxe: o seu horário fica reservado e o atendimento começa na hora.",
+          "cta": "Agendar horário",
+          "services_title": "Serviços",
+          "team_title": "Barbeiros da casa",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "blobs",
+        "icone": "scissors"
+      }
+    },
+    {
+      "id": "barbearia-08",
+      "nome": "Neon Fade",
+      "estilo": "Noite roxa com neon verde-água e rosa",
+      "negocio": {
+        "name": "Neon Fade Studio",
+        "tagline": "Degradês e desenhos até tarde",
+        "city": "Fortaleza",
+        "state": "CE",
+        "address": "Aldeota",
+        "whatsapp": "(85) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0d0b1a",
+          "surface": "#17142b",
+          "text": "#f2f0ff",
+          "muted": "#aaa4c8",
+          "primary": "#3ce0c0",
+          "on_primary": "#0d0b1a",
+          "accent": "#ff4f9a"
+        },
+        "fonts": {
+          "heading": "Unbounded",
+          "body": "Outfit"
+        },
+        "hero_layout": "centered",
+        "radius": "round",
+        "background": "gradient",
+        "copy": {
+          "headline": "O fade que você quer, na hora que você pode",
+          "subheadline": "Degradês, desenhos e cortes com textura. Agenda online aberta até tarde da noite.",
+          "about": "Estúdio de barbearia com luz neon, playlist boa e barbeiros que vivem o degradê.\n\nAgende pelo celular em menos de um minuto e chegue direto para a cadeira.",
+          "cta": "Quero agendar",
+          "services_title": "Serviços",
+          "team_title": "Barbeiros",
+          "booking_title": "Escolha dia e hora"
+        }
+      },
+      "arte": {
+        "composicao": "halftone",
+        "icone": "scissors"
+      }
+    },
+    {
+      "id": "barbearia-09",
+      "nome": "Barbearia de Praia",
+      "estilo": "Areia, verde-mar e laranja de pôr do sol",
+      "negocio": {
+        "name": "Maré Barbearia",
+        "tagline": "Corte leve, cabeça fresca",
+        "city": "Florianópolis",
+        "state": "SC",
+        "address": "Campeche",
+        "whatsapp": "(48) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f3ead8",
+          "surface": "#fbf6ea",
+          "text": "#1e2b2c",
+          "muted": "#566465",
+          "primary": "#0f6e6e",
+          "on_primary": "#ffffff",
+          "accent": "#d9692e"
+        },
+        "fonts": {
+          "heading": "Bricolage Grotesque",
+          "body": "Figtree"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Corte leve, cabeça fresca",
+          "subheadline": "Barbearia descontraída, com atendimento sem pressa e agenda online para encaixar o corte no seu dia.",
+          "about": "Clima de praia, chinelo liberado e corte caprichado. Aqui ninguém tem pressa, mas todo mundo é atendido no horário.\n\nMarque pelo site e aproveite o resto do dia.",
+          "cta": "Marcar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Quem corta",
+          "booking_title": "Marque seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "sun",
+        "icone": "comb"
+      }
+    },
+    {
+      "id": "barbearia-10",
+      "nome": "Belle Époque",
+      "estilo": "Creme, preto e dourado art déco",
+      "negocio": {
+        "name": "Barbearia Belle Époque",
+        "tagline": "Elegância de outros tempos",
+        "city": "Recife",
+        "state": "PE",
+        "address": "Boa Viagem",
+        "whatsapp": "(81) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f2ead9",
+          "surface": "#fbf6ec",
+          "text": "#1c1915",
+          "muted": "#5f574b",
+          "primary": "#1c1915",
+          "on_primary": "#f2ead9",
+          "accent": "#9c7226"
+        },
+        "fonts": {
+          "heading": "Josefin Sans",
+          "body": "Crimson Pro"
+        },
+        "hero_layout": "stacked",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Elegância de outros tempos",
+          "subheadline": "Cortes clássicos, barba na navalha e acabamento caprichado, com hora marcada pelo site.",
+          "about": "Inspirada nos salões dos anos 1920, com espelhos de moldura dourada e atendimento cerimonioso.\n\nCada cliente tem o seu horário reservado. Escolha o serviço e o barbeiro, e deixe o resto com a gente.",
+          "cta": "Reservar horário",
+          "services_title": "Serviços da casa",
+          "team_title": "Barbeiros",
+          "booking_title": "Reserve seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "frame",
+        "icone": "mustache"
+      }
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "data": "2026-10-06T23:33:17.730Z",
+  "observacao": "Cada nível rodado separadamente (npm run loadtest -- <conexões>). Servidor e gerador de carga na mesma máquina de 4 CPUs; o servidor usa 1 núcleo (Node.js single-thread). Duração por cenário: 5–10 s.",
+  "maquina": {
+    "cpus": 4,
+    "mem_gb": 17,
+    "node": "v22.22.0"
+  },
+  "results": [
+    {
+      "conexoes": 10,
+      "cenario": "Página pública do site (HTML)",
+      "req_s": 1053,
+      "total": 5266,
+      "lat_media_ms": 9,
+      "lat_p50_ms": 8,
+      "lat_p99_ms": 20,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 107,
+      "rss_pico_mb": 160
+    },
+    {
+      "conexoes": 10,
+      "cenario": "API de horários livres",
+      "req_s": 989,
+      "total": 4947,
+      "lat_media_ms": 10,
+      "lat_p50_ms": 9,
+      "lat_p99_ms": 20,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 103,
+      "rss_pico_mb": 193
+    },
+    {
+      "conexoes": 10,
+      "cenario": "Painel: dashboard (autenticado)",
+      "req_s": 828,
+      "total": 4140,
+      "lat_media_ms": 12,
+      "lat_p50_ms": 10,
+      "lat_p99_ms": 24,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 102,
+      "rss_pico_mb": 219
+    },
+    {
+      "conexoes": 100,
+      "cenario": "Página pública do site (HTML)",
+      "req_s": 1139,
+      "total": 5697,
+      "lat_media_ms": 87,
+      "lat_p50_ms": 85,
+      "lat_p99_ms": 127,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 101,
+      "rss_pico_mb": 218
+    },
+    {
+      "conexoes": 100,
+      "cenario": "API de horários livres",
+      "req_s": 930,
+      "total": 4649,
+      "lat_media_ms": 102,
+      "lat_p50_ms": 70,
+      "lat_p99_ms": 1447,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 101,
+      "rss_pico_mb": 221
+    },
+    {
+      "conexoes": 100,
+      "cenario": "Painel: dashboard (autenticado)",
+      "req_s": 874,
+      "total": 4368,
+      "lat_media_ms": 105,
+      "lat_p50_ms": 68,
+      "lat_p99_ms": 1489,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 101,
+      "rss_pico_mb": 224
+    },
+    {
+      "conexoes": 1000,
+      "cenario": "Página pública do site (HTML)",
+      "req_s": 971,
+      "total": 5823,
+      "lat_media_ms": 495,
+      "lat_p50_ms": 483,
+      "lat_p99_ms": 988,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 104,
+      "rss_pico_mb": 168
+    },
+    {
+      "conexoes": 1000,
+      "cenario": "API de horários livres",
+      "req_s": 762,
+      "total": 4571,
+      "lat_media_ms": 260,
+      "lat_p50_ms": 211,
+      "lat_p99_ms": 1318,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 105,
+      "rss_pico_mb": 176
+    },
+    {
+      "conexoes": 1000,
+      "cenario": "Painel: dashboard (autenticado)",
+      "req_s": 717,
+      "total": 4299,
+      "lat_media_ms": 124,
+      "lat_p50_ms": 76,
+      "lat_p99_ms": 2318,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 102,
+      "rss_pico_mb": 183
+    },
+    {
+      "conexoes": 10000,
+      "cenario": "Página pública do site (HTML)",
+      "req_s": 1019,
+      "total": 10189,
+      "lat_media_ms": 3688,
+      "lat_p50_ms": 4081,
+      "lat_p99_ms": 5894,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 98,
+      "rss_pico_mb": 222
+    },
+    {
+      "conexoes": 10000,
+      "cenario": "API de horários livres",
+      "req_s": 537,
+      "total": 5371,
+      "lat_media_ms": 190,
+      "lat_p50_ms": 80,
+      "lat_p99_ms": 5358,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 103,
+      "rss_pico_mb": 272
+    },
+    {
+      "conexoes": 10000,
+      "cenario": "Painel: dashboard (autenticado)",
+      "req_s": 769,
+      "total": 7688,
+      "lat_media_ms": 163,
+      "lat_p50_ms": 109,
+      "lat_p99_ms": 2332,
+      "erros": 0,
+      "nao_2xx": 0,
+      "cpu_pct": 101,
+      "rss_pico_mb": 272
+    }
+  ],
+  "escrita_concorrente": {
+    "pedidos": 200,
+    "criados": 60,
+    "esperado": 60
+  }
+}

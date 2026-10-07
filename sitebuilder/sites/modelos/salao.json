@@ -1,0 +1,517 @@
+{
+  "_leia": "Catálogo de MODELOS da Versal Estúdio. Cada modelo é um tema (cores, fontes, layout e textos) com um negócio fictício para a prévia em /modelos/<id>. Nomes, pessoas, contatos e registros são fictícios (registros terminam em 00000; \"{REGISTRO}\" na equipe vira o registro do responsável de cada modelo). No painel, \"Aplicar modelo\" copia só o visual, os textos e a capa para um site real. Capas em img/<id>.png (scripts/build-model-art.js, a partir do bloco \"arte\") e miniaturas em img/thumbs/<id>.jpg (scripts/build-posts.js).",
+  "categoria": "salao",
+  "rotulo": "Salão de beleza",
+  "site": {
+    "hide_prices": false,
+    "slot_interval_min": 30,
+    "min_notice_min": 60,
+    "max_days_ahead": 30
+  },
+  "servicos": [
+    {
+      "name": "Corte feminino",
+      "duration_min": 60,
+      "price": "120",
+      "description": "Com lavagem e finalização."
+    },
+    {
+      "name": "Escova modelada",
+      "duration_min": 50,
+      "price": "75",
+      "description": "Lisa, ondulada ou com volume."
+    },
+    {
+      "name": "Coloração",
+      "duration_min": 120,
+      "price": "190",
+      "description": "Cor global ou retoque de raiz."
+    },
+    {
+      "name": "Mechas",
+      "duration_min": 180,
+      "price": "350",
+      "description": "Luzes, morena iluminada ou balayage."
+    },
+    {
+      "name": "Manicure e pedicure",
+      "duration_min": 90,
+      "price": "90",
+      "description": "Cutilagem, esmaltação e hidratação."
+    },
+    {
+      "name": "Design de sobrancelha",
+      "duration_min": 30,
+      "price": "55",
+      "description": "Com pinça e linha."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Joana Freire",
+      "title": "Cabeleireira",
+      "bio": "Cortes e escovas."
+    },
+    {
+      "name": "Paula Reis",
+      "title": "Colorista",
+      "bio": "Mechas, loiros e coloração."
+    },
+    {
+      "name": "Nanda Alves",
+      "title": "Manicure e designer de sobrancelhas",
+      "bio": "Unhas e sobrancelhas."
+    }
+  ],
+  "horarios": {
+    "seg": null,
+    "ter": "09:00-19:00",
+    "qua": "09:00-19:00",
+    "qui": "09:00-19:00",
+    "sex": "09:00-20:00",
+    "sab": "08:00-17:00",
+    "dom": null
+  },
+  "modelos": [
+    {
+      "id": "salao-01",
+      "nome": "Rosé Elegante",
+      "estilo": "Rosé, vinho e dourado, com serifa de moda",
+      "negocio": {
+        "name": "Atelier Rosé",
+        "tagline": "Cabelo, unhas e beleza com hora marcada",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Jardins",
+        "whatsapp": "(11) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fbf1ef",
+          "surface": "#ffffff",
+          "text": "#3a1f24",
+          "muted": "#7a5a60",
+          "primary": "#a32f47",
+          "on_primary": "#ffffff",
+          "accent": "#a8741f"
+        },
+        "fonts": {
+          "heading": "Bodoni Moda",
+          "body": "Karla"
+        },
+        "hero_layout": "split",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Beleza feita com calma e técnica",
+          "subheadline": "Corte, cor, escova e unhas com hora marcada. Agende em poucos cliques.",
+          "about": "Um atelier de beleza com atendimento individual, café passado e profissionais atentas ao que você quer.\n\nEscolha o serviço, a profissional e o horário pelo site e receba a confirmação na hora.",
+          "cta": "Agendar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "arch",
+        "icone": "flower"
+      }
+    },
+    {
+      "id": "salao-02",
+      "nome": "Glam Noturno",
+      "estilo": "Preto rosado com rosa e dourado",
+      "negocio": {
+        "name": "Glam Studio",
+        "tagline": "Cabelo e beleza para o dia a dia e para eventos",
+        "city": "Rio de Janeiro",
+        "state": "RJ",
+        "address": "Barra da Tijuca",
+        "whatsapp": "(21) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#120d10",
+          "surface": "#1e161b",
+          "text": "#f8eef2",
+          "muted": "#c4adb7",
+          "primary": "#e9a6bd",
+          "on_primary": "#120d10",
+          "accent": "#d8b04a"
+        },
+        "fonts": {
+          "heading": "Abril Fatface",
+          "body": "DM Sans"
+        },
+        "hero_layout": "banner",
+        "radius": "sharp",
+        "background": "grain",
+        "copy": {
+          "headline": "Seu momento de brilhar",
+          "subheadline": "Cabelo, unhas e sobrancelhas para o dia a dia e para eventos. Agende online.",
+          "about": "Studio de beleza com clima de camarim: luz boa, espelho grande e profissionais que adoram um evento.\n\nMarque pelo site e chegue pronta para se cuidar.",
+          "cta": "Reservar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "O time",
+          "booking_title": "Reserve seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "halftone",
+        "icone": "lips"
+      }
+    },
+    {
+      "id": "salao-03",
+      "nome": "Nude Minimal",
+      "estilo": "Nude, café e terracota, minimalista",
+      "negocio": {
+        "name": "Nude Beauty Bar",
+        "tagline": "Cabelo, pele e unhas em harmonia",
+        "city": "Curitiba",
+        "state": "PR",
+        "address": "Batel",
+        "whatsapp": "(41) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#efe6dc",
+          "surface": "#f8f2ea",
+          "text": "#2b221c",
+          "muted": "#6b5d52",
+          "primary": "#2b221c",
+          "on_primary": "#efe6dc",
+          "accent": "#a8653f"
+        },
+        "fonts": {
+          "heading": "Italiana",
+          "body": "Manrope"
+        },
+        "hero_layout": "editorial",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Cabelo e unhas em harmonia",
+          "subheadline": "Um beauty bar minimalista, com atendimento pontual e agenda online.",
+          "about": "Menos é mais: tons naturais, acabamento impecável e atendimento sem pressa.\n\nAgende pelo site, escolha a profissional e venha só no horário marcado.",
+          "cta": "Agendar",
+          "services_title": "Serviços",
+          "team_title": "Profissionais",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "frame",
+        "icone": "mirror"
+      }
+    },
+    {
+      "id": "salao-04",
+      "nome": "Coral Vibrante",
+      "estilo": "Coral, creme e verde-água",
+      "negocio": {
+        "name": "Coral Salão",
+        "tagline": "Cor, corte e alto astral",
+        "city": "Recife",
+        "state": "PE",
+        "address": "Casa Forte",
+        "whatsapp": "(81) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff1ea",
+          "surface": "#fffaf6",
+          "text": "#2c1610",
+          "muted": "#6c4a3d",
+          "primary": "#bd3b22",
+          "on_primary": "#ffffff",
+          "accent": "#17716a"
+        },
+        "fonts": {
+          "heading": "Unbounded",
+          "body": "Outfit"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Cor, corte e alto astral",
+          "subheadline": "Salão alegre, com profissionais apaixonadas por cor. Marque online em segundos.",
+          "about": "Aqui a gente ama cor: do loiro iluminado às unhas coloridas, tudo com muito capricho.\n\nEscolha o serviço e o horário pelo site e receba a confirmação na hora.",
+          "cta": "Quero agendar",
+          "services_title": "Serviços e valores",
+          "team_title": "Quem atende",
+          "booking_title": "Escolha seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "sun",
+        "icone": "polish"
+      }
+    },
+    {
+      "id": "salao-05",
+      "nome": "Botânico",
+      "estilo": "Verde-musgo, creme e rosa-terra",
+      "negocio": {
+        "name": "Botânica Beleza",
+        "tagline": "Beleza natural com cuidado",
+        "city": "Florianópolis",
+        "state": "SC",
+        "address": "Santo Antônio de Lisboa",
+        "whatsapp": "(48) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#e8efe6",
+          "surface": "#f7faf5",
+          "text": "#1c2a1f",
+          "muted": "#536455",
+          "primary": "#2f5d3a",
+          "on_primary": "#ffffff",
+          "accent": "#b45f4e"
+        },
+        "fonts": {
+          "heading": "Fraunces",
+          "body": "Work Sans"
+        },
+        "hero_layout": "stacked",
+        "radius": "round",
+        "background": "grain",
+        "copy": {
+          "headline": "Beleza natural, cuidado de verdade",
+          "subheadline": "Cabelo, unhas e sobrancelhas em um espaço cheio de plantas, com hora marcada.",
+          "about": "Um salão com luz natural, plantas e produtos escolhidos com cuidado.\n\nAgende pelo site, escolha a profissional e aproveite o seu momento.",
+          "cta": "Agendar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "blobs",
+        "icone": "drop"
+      }
+    },
+    {
+      "id": "salao-06",
+      "nome": "Preto & Ouro",
+      "estilo": "Preto profundo e ouro, luxo discreto",
+      "negocio": {
+        "name": "Studio Ouro Negro",
+        "tagline": "Studio de beleza com hora marcada",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "address": "Lourdes",
+        "whatsapp": "(31) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0e0e0e",
+          "surface": "#191919",
+          "text": "#f4f1ea",
+          "muted": "#b0aa9c",
+          "primary": "#d4af37",
+          "on_primary": "#0e0e0e",
+          "accent": "#d06a4c"
+        },
+        "fonts": {
+          "heading": "Gloock",
+          "body": "Libre Franklin"
+        },
+        "hero_layout": "split",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Sofisticação em cada detalhe",
+          "subheadline": "Corte, cor e unhas em um studio reservado. Horário marcado e atendimento exclusivo.",
+          "about": "Um studio intimista, com atendimento individual e profissionais experientes em corte e coloração.\n\nReserve pelo site e tenha o espaço preparado para você.",
+          "cta": "Reservar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Reserve seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "stripes",
+        "icone": "scissors"
+      }
+    },
+    {
+      "id": "salao-07",
+      "nome": "Cereja",
+      "estilo": "Branco, cereja e verde, fresco",
+      "negocio": {
+        "name": "Cereja Beauty",
+        "tagline": "Unhas, sobrancelhas e cabelo",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "address": "Moinhos de Vento",
+        "whatsapp": "(51) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff5f5",
+          "surface": "#ffffff",
+          "text": "#2e0f14",
+          "muted": "#73464d",
+          "primary": "#9e1b32",
+          "on_primary": "#ffffff",
+          "accent": "#2e6f57"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Lexend"
+        },
+        "hero_layout": "centered",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Unhas e sobrancelhas no capricho",
+          "subheadline": "Manicure, pedicure, design de sobrancelha e cabelo. Agende online em segundos.",
+          "about": "Esmaltes da estação, cutilagem cuidadosa e design de sobrancelha feito com calma.\n\nMarque pelo site e escolha a profissional de sua preferência.",
+          "cta": "Agendar agora",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "checker",
+        "icone": "polish"
+      }
+    },
+    {
+      "id": "salao-08",
+      "nome": "Azul Pastel",
+      "estilo": "Azul pastel, azul-marinho e salmão",
+      "negocio": {
+        "name": "Azul Bem-Estar Salão",
+        "tagline": "Um salão leve e sem correria",
+        "city": "Vitória",
+        "state": "ES",
+        "address": "Jardim da Penha",
+        "whatsapp": "(27) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#edf3fb",
+          "surface": "#fbfdff",
+          "text": "#1a2438",
+          "muted": "#536079",
+          "primary": "#2d4f8c",
+          "on_primary": "#ffffff",
+          "accent": "#c96f55"
+        },
+        "fonts": {
+          "heading": "Josefin Sans",
+          "body": "Nunito Sans"
+        },
+        "hero_layout": "split_left",
+        "radius": "soft",
+        "background": "dots",
+        "copy": {
+          "headline": "Um salão leve como o seu dia deveria ser",
+          "subheadline": "Corte, escova, cor e unhas com hora marcada e atendimento sem correria.",
+          "about": "Ambiente calmo, música baixa e profissionais que escutam antes de começar.\n\nAgende online, escolha a profissional e receba a confirmação na hora.",
+          "cta": "Marcar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Marque seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "waves",
+        "icone": "comb"
+      }
+    },
+    {
+      "id": "salao-09",
+      "nome": "Pôster Ousado",
+      "estilo": "Amarelo, preto e magenta, com impacto de pôster",
+      "negocio": {
+        "name": "Atitude Hair",
+        "tagline": "Corte, cor e atitude",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Vila Madalena",
+        "whatsapp": "(11) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f6e04b",
+          "surface": "#fbec8a",
+          "text": "#1a1a1a",
+          "muted": "#4a4320",
+          "primary": "#1a1a1a",
+          "on_primary": "#f6e04b",
+          "accent": "#c2185b"
+        },
+        "fonts": {
+          "heading": "Anton",
+          "body": "Rubik"
+        },
+        "hero_layout": "stacked",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Corte. Cor. Atitude.",
+          "subheadline": "Cortes modernos, cores fortes e transformação de visual. Marque online.",
+          "about": "Salão para quem gosta de ousar: cortes assimétricos, cores fantasia e loiros de impacto.\n\nAgende pelo site e venha conversar sobre o seu próximo visual.",
+          "cta": "Agendar",
+          "services_title": "Serviços e valores",
+          "team_title": "O time",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "collage",
+        "icone": "scissors"
+      }
+    },
+    {
+      "id": "salao-10",
+      "nome": "Terra & Cachos",
+      "estilo": "Terra, caramelo e verde-oliva",
+      "negocio": {
+        "name": "Cachos & Terra",
+        "tagline": "Cachos, cor e cuidado",
+        "city": "Salvador",
+        "state": "BA",
+        "address": "Pituba",
+        "whatsapp": "(71) 90000-0000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f1e7dc",
+          "surface": "#faf4ec",
+          "text": "#2a1d14",
+          "muted": "#6b5646",
+          "primary": "#8c4a2f",
+          "on_primary": "#ffffff",
+          "accent": "#4f6b4a"
+        },
+        "fonts": {
+          "heading": "Instrument Serif",
+          "body": "Plus Jakarta Sans"
+        },
+        "hero_layout": "banner",
+        "radius": "soft",
+        "background": "grain",
+        "copy": {
+          "headline": "Cachos, cor e cuidado",
+          "subheadline": "Corte para cacheadas, coloração e tratamentos com horário marcado pelo site.",
+          "about": "Cabelo cacheado e crespo tratado com respeito à textura de cada fio.\n\nAgende online, escolha a profissional e venha sem pressa.",
+          "cta": "Agendar horário",
+          "services_title": "Serviços e valores",
+          "team_title": "Profissionais",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "grid",
+        "icone": "flower"
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "_leia": "Site de DEMONSTRAÇÃO para o portfólio da agência: negócio, pessoas e contatos fictícios.",
+  "site": {
+    "name": "Clínica Aurora Odontologia",
+    "slug": "demo-clinica-aurora-odontologia",
+    "category": "odontologia",
+    "tagline": "Odontologia clínica, estética e especialidades",
+    "description": "A Clínica Aurora nasceu da ideia de um consultório em que cada pessoa entende o próprio tratamento antes de começar. A primeira consulta é uma conversa: exame clínico, explicação das opções e um plano por escrito.\n\nNossa equipe reúne clínica geral, endodontia e ortodontia no mesmo endereço, com horários pensados para quem trabalha.",
+    "whatsapp": "(41) 90000-0000",
+    "phone": "(41) 3000-0000",
+    "cep": "80240-000",
+    "address": "Rua das Acácias, 120, sala 4, Batel",
+    "city": "Curitiba",
+    "state": "PR",
+    "hide_prices": true,
+    "responsible_name": "Dra. Helena Duarte",
+    "responsible_registration": "CRO-PR 00000",
+    "is_demo": true,
+    "booking_enabled": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 120,
+    "max_days_ahead": 45,
+    "notify_whatsapp": false,
+    "notify_client_whatsapp": false,
+    "published": true
+  },
+  "servicos": [
+    {
+      "name": "Avaliação odontológica",
+      "duration_min": 40,
+      "price": "180",
+      "description": "Exame clínico completo e plano de tratamento explicado por escrito."
+    },
+    {
+      "name": "Limpeza e profilaxia",
+      "duration_min": 50,
+      "price": "220",
+      "description": "Remoção de tártaro, polimento e orientação de higiene."
+    },
+    {
+      "name": "Clareamento dental",
+      "duration_min": 60,
+      "price": "900",
+      "description": "Clareamento de consultório, indicado após avaliação."
+    },
+    {
+      "name": "Restaurações",
+      "duration_min": 50,
+      "price": "250",
+      "description": "Restaurações em resina na cor do dente."
+    },
+    {
+      "name": "Tratamento de canal",
+      "duration_min": 90,
+      "price": "900",
+      "description": "Endodontia com especialista."
+    },
+    {
+      "name": "Consulta de ortodontia",
+      "duration_min": 40,
+      "price": "200",
+      "description": "Avaliação para aparelho fixo ou alinhadores."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Dra. Helena Duarte",
+      "title": "Clínica geral e estética",
+      "registration": "CRO-PR 00000",
+      "bio": "Responsável técnica da clínica. Atende avaliações, limpezas, restaurações e clareamento.",
+      "servicos": [
+        "Avaliação odontológica",
+        "Limpeza e profilaxia",
+        "Clareamento dental",
+        "Restaurações"
+      ]
+    },
+    {
+      "name": "Dr. Rafael Moreira",
+      "title": "Endodontia",
+      "registration": "CRO-PR 00000",
+      "bio": "Especialista em tratamento de canal.",
+      "servicos": [
+        "Avaliação odontológica",
+        "Tratamento de canal"
+      ]
+    },
+    {
+      "name": "Dra. Lívia Campos",
+      "title": "Ortodontia",
+      "registration": "CRO-PR 00000",
+      "bio": "Aparelhos fixos e alinhadores para adolescentes e adultos.",
+      "servicos": [
+        "Consulta de ortodontia"
+      ]
+    }
+  ],
+  "horarios": {
+    "seg": "08:00-12:00, 13:30-19:00",
+    "ter": "08:00-12:00, 13:30-19:00",
+    "qua": "08:00-12:00, 13:30-19:00",
+    "qui": "08:00-12:00, 13:30-19:00",
+    "sex": "08:00-12:00, 13:30-18:00",
+    "sab": "08:00-12:00",
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": {
+      "bg": "#f6f2ea",
+      "surface": "#fffdf8",
+      "text": "#0f2b28",
+      "muted": "#4a605c",
+      "primary": "#0e6657",
+      "on_primary": "#ffffff",
+      "accent": "#b6532c"
+    },
+    "fonts": {
+      "heading": "Instrument Serif",
+      "body": "Figtree"
+    },
+    "hero_layout": "split",
+    "radius": "round",
+    "background": "gradient",
+    "copy": {
+      "headline": "Cuidado com o sorriso, explicado sem pressa",
+      "subheadline": "Clínica geral, estética, endodontia e ortodontia no Batel, em Curitiba. Agende sua avaliação online.",
+      "about": "",
+      "cta": "Agendar avaliação",
+      "services_title": "Tratamentos",
+      "team_title": "Quem cuida do seu sorriso",
+      "booking_title": "Agende sua consulta"
+    }
+  },
+  "imagens": {
+    "capa": "img/odonto-aurora.png"
+  }
+}

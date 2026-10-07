@@ -1,0 +1,540 @@
+{
+  "_leia": "Catálogo de MODELOS da Versal Estúdio. Cada modelo é um tema (cores, fontes, layout e textos) com um negócio fictício para a prévia em /modelos/<id>. Nomes, pessoas, contatos e registros são fictícios (registros terminam em 00000; \"{REGISTRO}\" na equipe vira o registro do responsável de cada modelo). No painel, \"Aplicar modelo\" copia só o visual, os textos e a capa para um site real. Capas em img/<id>.png (scripts/build-model-art.js, a partir do bloco \"arte\") e miniaturas em img/thumbs/<id>.jpg (scripts/build-posts.js).",
+  "categoria": "odontologia",
+  "rotulo": "Dentista",
+  "site": {
+    "hide_prices": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 120,
+    "max_days_ahead": 30
+  },
+  "servicos": [
+    {
+      "name": "Avaliação odontológica",
+      "duration_min": 40,
+      "price": "150",
+      "description": "Exame clínico, conversa sobre suas necessidades e plano de tratamento."
+    },
+    {
+      "name": "Limpeza e profilaxia",
+      "duration_min": 50,
+      "price": "200",
+      "description": "Remoção de placa e tártaro, com orientação de higiene."
+    },
+    {
+      "name": "Restauração",
+      "duration_min": 60,
+      "price": "250",
+      "description": "Tratamento de cáries e troca de restaurações antigas."
+    },
+    {
+      "name": "Clareamento dental",
+      "duration_min": 60,
+      "price": "800",
+      "description": "Avaliação e acompanhamento do clareamento indicado para o seu caso."
+    },
+    {
+      "name": "Tratamento de canal",
+      "duration_min": 90,
+      "price": "900",
+      "description": "Endodontia, com avaliação prévia."
+    },
+    {
+      "name": "Consulta infantil",
+      "duration_min": 40,
+      "price": "160",
+      "description": "Atendimento para crianças, com abordagem adaptada à idade."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Dra. Clara Viana",
+      "title": "Cirurgiã-dentista",
+      "registration": "{REGISTRO}",
+      "bio": "Responsável técnica. Atendimento de adultos e prevenção."
+    },
+    {
+      "name": "Dr. Otávio Lins",
+      "title": "Cirurgião-dentista",
+      "registration": "{REGISTRO}",
+      "bio": "Restaurações e tratamento de canal."
+    },
+    {
+      "name": "Dra. Bianca Rocha",
+      "title": "Cirurgiã-dentista",
+      "registration": "{REGISTRO}",
+      "bio": "Atendimento infantil."
+    }
+  ],
+  "horarios": {
+    "seg": "08:00-12:00, 13:30-19:00",
+    "ter": "08:00-12:00, 13:30-19:00",
+    "qua": "08:00-12:00, 13:30-19:00",
+    "qui": "08:00-12:00, 13:30-19:00",
+    "sex": "08:00-12:00, 13:30-18:00",
+    "sab": "08:00-12:00",
+    "dom": null
+  },
+  "modelos": [
+    {
+      "id": "odontologia-01",
+      "nome": "Clínico Claro",
+      "estilo": "Branco, azul e verde-água, limpo e direto",
+      "negocio": {
+        "name": "Clínica Odontológica Prisma",
+        "tagline": "Odontologia com hora marcada",
+        "city": "Campinas",
+        "state": "SP",
+        "address": "Cambuí",
+        "whatsapp": "(19) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-SP 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f6f9fc",
+          "surface": "#ffffff",
+          "text": "#0f2236",
+          "muted": "#4f6275",
+          "primary": "#1f5fa8",
+          "on_primary": "#ffffff",
+          "accent": "#1f9e88"
+        },
+        "fonts": {
+          "heading": "Sora",
+          "body": "Public Sans"
+        },
+        "hero_layout": "split",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Cuidado odontológico com hora marcada",
+          "subheadline": "Consultas de avaliação, prevenção e tratamento. Escolha o profissional e o horário pelo site.",
+          "about": "Atendimento odontológico para adultos e crianças, com explicação clara de cada etapa do tratamento.\n\nA primeira consulta é uma avaliação: conversamos sobre suas necessidades e apresentamos as opções indicadas para o seu caso.",
+          "cta": "Agendar consulta",
+          "services_title": "Tratamentos",
+          "team_title": "Corpo clínico",
+          "booking_title": "Agende sua consulta"
+        }
+      },
+      "arte": {
+        "composicao": "blobs",
+        "icone": "tooth"
+      }
+    },
+    {
+      "id": "odontologia-02",
+      "nome": "Menta",
+      "estilo": "Verde-menta suave com detalhe laranja",
+      "negocio": {
+        "name": "Menta Odontologia",
+        "tagline": "Prevenção para toda a família",
+        "city": "Curitiba",
+        "state": "PR",
+        "address": "Água Verde",
+        "whatsapp": "(41) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-PR 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#eef7f3",
+          "surface": "#fbfefc",
+          "text": "#10302a",
+          "muted": "#476a61",
+          "primary": "#11745f",
+          "on_primary": "#ffffff",
+          "accent": "#d9753a"
+        },
+        "fonts": {
+          "heading": "Bricolage Grotesque",
+          "body": "Nunito Sans"
+        },
+        "hero_layout": "stacked",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Prevenção começa com uma boa consulta",
+          "subheadline": "Limpeza, avaliação e acompanhamento para toda a família, com agenda online.",
+          "about": "Acreditamos em consultas regulares e em informação clara: você entende o que está sendo feito e por quê.\n\nAgende pelo site, receba a confirmação na hora e venha no horário marcado.",
+          "cta": "Marcar avaliação",
+          "services_title": "Atendimentos",
+          "team_title": "Nossa equipe",
+          "booking_title": "Marque sua avaliação"
+        }
+      },
+      "arte": {
+        "composicao": "waves",
+        "icone": "toothbrush"
+      }
+    },
+    {
+      "id": "odontologia-03",
+      "nome": "Família",
+      "estilo": "Creme quente, laranja e verde, amigável para crianças",
+      "negocio": {
+        "name": "Odonto Família Ipê",
+        "tagline": "Consultório para todas as idades",
+        "city": "Londrina",
+        "state": "PR",
+        "address": "Gleba Palhano",
+        "whatsapp": "(43) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-PR 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff7ee",
+          "surface": "#ffffff",
+          "text": "#2b1d14",
+          "muted": "#6c5a4c",
+          "primary": "#c4501f",
+          "on_primary": "#ffffff",
+          "accent": "#2f8f83"
+        },
+        "fonts": {
+          "heading": "Young Serif",
+          "body": "Outfit"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Consultório para todas as idades",
+          "subheadline": "Da primeira consulta das crianças ao acompanhamento dos adultos, com horário marcado pelo site.",
+          "about": "Um consultório pensado para a família inteira, com atendimento adaptado a cada idade.\n\nPara as crianças, consultas com calma e linguagem simples. Para os adultos, prevenção e tratamento com explicação de cada etapa.",
+          "cta": "Agendar consulta",
+          "services_title": "Atendimentos",
+          "team_title": "Dentistas",
+          "booking_title": "Escolha seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "sun",
+        "icone": "smile"
+      }
+    },
+    {
+      "id": "odontologia-04",
+      "nome": "Azul Profundo",
+      "estilo": "Azul-noite com verde-água e serifa delicada",
+      "negocio": {
+        "name": "Atlântico Odontologia",
+        "tagline": "Atendimento odontológico com calma",
+        "city": "Vitória",
+        "state": "ES",
+        "address": "Praia do Canto",
+        "whatsapp": "(27) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-ES 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#0c1a2b",
+          "surface": "#13263d",
+          "text": "#eaf1f8",
+          "muted": "#9fb2c6",
+          "primary": "#7fd1c7",
+          "on_primary": "#0c1a2b",
+          "accent": "#f0b35a"
+        },
+        "fonts": {
+          "heading": "Instrument Serif",
+          "body": "Manrope"
+        },
+        "hero_layout": "banner",
+        "radius": "soft",
+        "background": "gradient",
+        "copy": {
+          "headline": "Odontologia com atenção a cada detalhe",
+          "subheadline": "Avaliação, tratamentos e acompanhamento em um consultório tranquilo. Agende pelo site.",
+          "about": "Atendimento odontológico com hora marcada, para que cada consulta tenha o tempo necessário.\n\nNa avaliação, o dentista examina, tira dúvidas e explica as alternativas de tratamento indicadas para o seu caso.",
+          "cta": "Agendar avaliação",
+          "services_title": "Tratamentos",
+          "team_title": "Equipe clínica",
+          "booking_title": "Agende sua avaliação"
+        }
+      },
+      "arte": {
+        "composicao": "halftone",
+        "icone": "tooth"
+      }
+    },
+    {
+      "id": "odontologia-05",
+      "nome": "Editorial Branco",
+      "estilo": "Branco, preto e azul, como uma revista",
+      "negocio": {
+        "name": "Linha Odontologia",
+        "tagline": "Consultas com tempo para explicar",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Vila Mariana",
+        "whatsapp": "(11) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-SP 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fbfaf7",
+          "surface": "#ffffff",
+          "text": "#161616",
+          "muted": "#5c5c5c",
+          "primary": "#161616",
+          "on_primary": "#fbfaf7",
+          "accent": "#2f6fd0"
+        },
+        "fonts": {
+          "heading": "Newsreader",
+          "body": "Hanken Grotesk"
+        },
+        "hero_layout": "editorial",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Saúde bucal com informação clara",
+          "subheadline": "Consultas com tempo para ouvir, explicar e planejar o tratamento junto com você.",
+          "about": "Cada consulta começa com uma conversa. Explicamos o diagnóstico, as alternativas e o planejamento antes de qualquer procedimento.\n\nA agenda é online: escolha o profissional e o horário e receba a confirmação na hora.",
+          "cta": "Marcar consulta",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Marque sua consulta"
+        }
+      },
+      "arte": {
+        "composicao": "grid",
+        "icone": "mirror"
+      }
+    },
+    {
+      "id": "odontologia-06",
+      "nome": "Pêssego",
+      "estilo": "Pêssego e terracota com azul-petróleo",
+      "negocio": {
+        "name": "Odontologia Jardim",
+        "tagline": "Atendimento acolhedor do início ao fim",
+        "city": "Ribeirão Preto",
+        "state": "SP",
+        "address": "Jardim Sumaré",
+        "whatsapp": "(16) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-SP 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff3ec",
+          "surface": "#fffaf6",
+          "text": "#2d1a12",
+          "muted": "#6e5345",
+          "primary": "#b04a2a",
+          "on_primary": "#ffffff",
+          "accent": "#2c6e7f"
+        },
+        "fonts": {
+          "heading": "DM Serif Display",
+          "body": "DM Sans"
+        },
+        "hero_layout": "centered",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Atendimento acolhedor do início ao fim",
+          "subheadline": "Avaliação, limpeza e tratamentos com agendamento online e confirmação na hora.",
+          "about": "Sabemos que ir ao dentista nem sempre é fácil. Por isso o atendimento é sem pressa, com espaço para perguntas.\n\nNa primeira consulta fazemos uma avaliação completa e apresentamos as opções de tratamento.",
+          "cta": "Agendar",
+          "services_title": "Atendimentos",
+          "team_title": "Dentistas",
+          "booking_title": "Agende seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "collage",
+        "icone": "toothbrush"
+      }
+    },
+    {
+      "id": "odontologia-07",
+      "nome": "Verde Sálvia",
+      "estilo": "Sálvia, creme e caramelo, sereno",
+      "negocio": {
+        "name": "Sálvia Odontologia",
+        "tagline": "Saúde bucal com calma",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "address": "Moinhos de Vento",
+        "whatsapp": "(51) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-RS 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#eef0e8",
+          "surface": "#f9faf5",
+          "text": "#1f2a1e",
+          "muted": "#586453",
+          "primary": "#4b6b47",
+          "on_primary": "#ffffff",
+          "accent": "#b56f33"
+        },
+        "fonts": {
+          "heading": "Fraunces",
+          "body": "Karla"
+        },
+        "hero_layout": "split",
+        "radius": "soft",
+        "background": "grain",
+        "copy": {
+          "headline": "Saúde bucal com calma e cuidado",
+          "subheadline": "Um consultório tranquilo, com atendimento sem pressa e agenda online.",
+          "about": "Atendimento odontológico com hora marcada, para que cada consulta tenha o tempo necessário.\n\nNa avaliação, o dentista examina, tira dúvidas e explica as alternativas de tratamento indicadas para o seu caso.",
+          "cta": "Agendar consulta",
+          "services_title": "Tratamentos",
+          "team_title": "Equipe",
+          "booking_title": "Agende sua consulta"
+        }
+      },
+      "arte": {
+        "composicao": "arch",
+        "icone": "tooth"
+      }
+    },
+    {
+      "id": "odontologia-08",
+      "nome": "Grafite & Lima",
+      "estilo": "Grafite escuro com verde-lima e azul elétrico",
+      "negocio": {
+        "name": "Grafite Odonto",
+        "tagline": "Odontologia com agenda online",
+        "city": "Brasília",
+        "state": "DF",
+        "address": "Asa Sul",
+        "whatsapp": "(61) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-DF 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#161a1d",
+          "surface": "#1f2529",
+          "text": "#eef1f2",
+          "muted": "#a3acb1",
+          "primary": "#c6f05a",
+          "on_primary": "#161a1d",
+          "accent": "#5ac8f0"
+        },
+        "fonts": {
+          "heading": "Syne",
+          "body": "Albert Sans"
+        },
+        "hero_layout": "stacked",
+        "radius": "sharp",
+        "background": "grid",
+        "copy": {
+          "headline": "Seu horário no dentista, marcado em minutos",
+          "subheadline": "Escolha o tratamento, o profissional e o horário. Confirmação na hora, direto pelo celular.",
+          "about": "Um consultório com rotina organizada: horários respeitados, lembretes e informação clara em cada etapa.\n\nNa avaliação, o dentista examina, tira dúvidas e explica as alternativas de tratamento.",
+          "cta": "Agendar agora",
+          "services_title": "Tratamentos",
+          "team_title": "Equipe",
+          "booking_title": "Agende online"
+        }
+      },
+      "arte": {
+        "composicao": "stripes",
+        "icone": "smile"
+      }
+    },
+    {
+      "id": "odontologia-09",
+      "nome": "Oceano",
+      "estilo": "Azul-claro, azul-petróleo e amarelo",
+      "negocio": {
+        "name": "Odonto Mar Azul",
+        "tagline": "Avaliação e prevenção com hora marcada",
+        "city": "Salvador",
+        "state": "BA",
+        "address": "Rio Vermelho",
+        "whatsapp": "(71) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-BA 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#e9f3f6",
+          "surface": "#fafdfe",
+          "text": "#0e2a33",
+          "muted": "#46646e",
+          "primary": "#0b6e86",
+          "on_primary": "#ffffff",
+          "accent": "#c98a1e"
+        },
+        "fonts": {
+          "heading": "Josefin Sans",
+          "body": "Source Sans 3"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "gradient",
+        "copy": {
+          "headline": "Consultas que cabem na sua rotina",
+          "subheadline": "Avaliação, prevenção e tratamentos com horários marcados pelo site, de segunda a sábado.",
+          "about": "Atendimento odontológico com hora marcada, para que cada consulta tenha o tempo necessário.\n\nNa avaliação, o dentista examina, tira dúvidas e explica as alternativas de tratamento indicadas para o seu caso.",
+          "cta": "Marcar consulta",
+          "services_title": "Atendimentos",
+          "team_title": "Corpo clínico",
+          "booking_title": "Marque seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "checker",
+        "icone": "tooth"
+      }
+    },
+    {
+      "id": "odontologia-10",
+      "nome": "Clássico Serifado",
+      "estilo": "Marfim, azul-marinho e bronze, com serifa clássica",
+      "negocio": {
+        "name": "Clínica Monteiro Odontologia",
+        "tagline": "Tradição e cuidado em odontologia",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "address": "Funcionários",
+        "whatsapp": "(31) 90000-0000",
+        "responsible_name": "Dra. Clara Viana",
+        "responsible_registration": "CRO-MG 00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f3efe6",
+          "surface": "#fbf8f1",
+          "text": "#1d2230",
+          "muted": "#555b6b",
+          "primary": "#283a6b",
+          "on_primary": "#ffffff",
+          "accent": "#9a6224"
+        },
+        "fonts": {
+          "heading": "Bodoni Moda",
+          "body": "Libre Franklin"
+        },
+        "hero_layout": "banner",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Tradição e cuidado em odontologia",
+          "subheadline": "Consultório com atendimento individual e horário marcado. Agende sua avaliação pelo site.",
+          "about": "Atendimento odontológico com hora marcada, para que cada consulta tenha o tempo necessário.\n\nNa avaliação, o dentista examina, tira dúvidas e explica as alternativas de tratamento indicadas para o seu caso.",
+          "cta": "Agendar avaliação",
+          "services_title": "Tratamentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua avaliação"
+        }
+      },
+      "arte": {
+        "composicao": "frame",
+        "icone": "tooth"
+      }
+    }
+  ]
+}

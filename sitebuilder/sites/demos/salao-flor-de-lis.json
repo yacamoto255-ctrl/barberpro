@@ -1,0 +1,124 @@
+{
+  "_leia": "Site de DEMONSTRAÇÃO para o portfólio da agência: negócio, pessoas e contatos fictícios.",
+  "site": {
+    "name": "Atelier Flor de Lis",
+    "slug": "demo-atelier-flor-de-lis",
+    "category": "salao",
+    "tagline": "Cabelo, unhas e sobrancelhas no Savassi",
+    "description": "Um salão pequeno, de poucas cadeiras, em que cada atendimento começa com uma conversa sobre o que você quer e o que combina com a sua rotina.\n\nTrabalhamos com marcas profissionais e agenda organizada para que ninguém espere. Reserve pelo site e receba a confirmação na hora.",
+    "whatsapp": "(31) 90000-0000",
+    "cep": "30140-000",
+    "address": "Rua Pernambuco, 455, Savassi",
+    "city": "Belo Horizonte",
+    "state": "MG",
+    "hide_prices": false,
+    "is_demo": true,
+    "booking_enabled": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 60,
+    "max_days_ahead": 30,
+    "notify_whatsapp": false,
+    "notify_client_whatsapp": false,
+    "published": true
+  },
+  "servicos": [
+    {
+      "name": "Corte feminino",
+      "duration_min": 60,
+      "price": "120",
+      "description": "Inclui lavagem e escova simples."
+    },
+    {
+      "name": "Escova modelada",
+      "duration_min": 50,
+      "price": "75"
+    },
+    {
+      "name": "Coloração raiz",
+      "duration_min": 120,
+      "price": "180",
+      "description": "Valor para cabelo até os ombros."
+    },
+    {
+      "name": "Hidratação profunda",
+      "duration_min": 60,
+      "price": "95"
+    },
+    {
+      "name": "Manicure",
+      "duration_min": 45,
+      "price": "45"
+    },
+    {
+      "name": "Pedicure",
+      "duration_min": 50,
+      "price": "50"
+    },
+    {
+      "name": "Design de sobrancelha",
+      "duration_min": 30,
+      "price": "55"
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Lis Andrade",
+      "title": "Cabeleireira e colorista",
+      "servicos": [
+        "Corte feminino",
+        "Escova modelada",
+        "Coloração raiz",
+        "Hidratação profunda"
+      ]
+    },
+    {
+      "name": "Bia Fontes",
+      "title": "Manicure e designer de sobrancelhas",
+      "servicos": [
+        "Manicure",
+        "Pedicure",
+        "Design de sobrancelha"
+      ]
+    }
+  ],
+  "horarios": {
+    "ter": "09:00-19:00",
+    "qua": "09:00-19:00",
+    "qui": "09:00-19:00",
+    "sex": "09:00-20:00",
+    "sab": "08:00-17:00",
+    "seg": null,
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": {
+      "bg": "#fbf3ef",
+      "surface": "#fffaf7",
+      "text": "#3b1d1a",
+      "muted": "#7a5a54",
+      "primary": "#8e2f45",
+      "on_primary": "#ffffff",
+      "accent": "#a8741f"
+    },
+    "fonts": {
+      "heading": "Cormorant Garamond",
+      "body": "Karla"
+    },
+    "hero_layout": "centered",
+    "radius": "round",
+    "background": "dots",
+    "copy": {
+      "headline": "Beleza com hora marcada e sem pressa",
+      "subheadline": "Cabelo, unhas e sobrancelhas no Savassi. Escolha o serviço e reserve seu horário online.",
+      "about": "",
+      "cta": "Reservar horário",
+      "services_title": "Serviços",
+      "team_title": "Nossa equipe",
+      "booking_title": "Reserve seu horário"
+    }
+  },
+  "imagens": {
+    "capa": "img/salao-flor-de-lis.png"
+  }
+}

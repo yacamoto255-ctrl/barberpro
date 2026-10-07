@@ -37,6 +37,13 @@
     ],
     "testTimeout": 15000,
     "resetModules": true,
-    "restoreMocks": true
+    "restoreMocks": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/sitebuilder/"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/sitebuilder/"
+    ]
   }
 }
