@@ -67,6 +67,10 @@ CREATE TABLE IF NOT EXISTS sites (
   notify_whatsapp       INTEGER NOT NULL DEFAULT 1,
   notify_client_whatsapp INTEGER NOT NULL DEFAULT 1,
   evolution_instance    TEXT,
+  hide_prices           INTEGER NOT NULL DEFAULT 0,
+  responsible_name      TEXT,
+  responsible_registration TEXT,
+  company_registration  TEXT,
   created_at            TEXT    NOT NULL DEFAULT (datetime('now')),
   updated_at            TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -91,6 +95,7 @@ CREATE TABLE IF NOT EXISTS professionals (
   name           TEXT    NOT NULL,
   title          TEXT,
   bio            TEXT,
+  registration   TEXT,
   photo_image_id INTEGER,
   active         INTEGER NOT NULL DEFAULT 1,
   sort_order     INTEGER NOT NULL DEFAULT 0,
@@ -201,6 +206,22 @@ CREATE TABLE IF NOT EXISTS audit_logs (
 CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_logs(created_at);
 `;
 
+// Colunas adicionadas depois da primeira versão: bancos antigos recebem via ALTER TABLE
+const ADDED_COLUMNS = [
+  ['sites', 'hide_prices', 'INTEGER NOT NULL DEFAULT 0'],
+  ['sites', 'responsible_name', 'TEXT'],
+  ['sites', 'responsible_registration', 'TEXT'],
+  ['sites', 'company_registration', 'TEXT'],
+  ['professionals', 'registration', 'TEXT'],
+];
+
+function migrate(db) {
+  for (const [table, column, type] of ADDED_COLUMNS) {
+    const exists = db.prepare(`PRAGMA table_info(${table})`).all().some((c) => c.name === column);
+    if (!exists) db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`);
+  }
+}
+
 function resolveDbPath() {
   if (process.env.DB_PATH) return process.env.DB_PATH;
   return path.join(__dirname, '..', 'data', 'sitebuilder.db');
@@ -218,6 +239,7 @@ function open(dbPath) {
     db.exec('PRAGMA busy_timeout = 5000;');
   }
   db.exec(SCHEMA);
+  migrate(db);
   return db;
 }
 
@@ -255,4 +277,4 @@ function transaction(fn) {
   }
 }
 
-module.exports = { getDb, getDbPath, closeDb, transaction, SCHEMA };
+module.exports = { getDb, getDbPath, closeDb, transaction, migrate, SCHEMA };

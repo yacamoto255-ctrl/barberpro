@@ -124,6 +124,13 @@ function tabDados(root, data, meta, reload) {
       field({ label: 'Cidade', name: 'city', value: s.city || '', maxlength: 80 }),
       field({ label: 'UF', name: 'state', type: 'select', options: [['', '—'], ...meta.ufs.map((u) => [u, u])], value: s.state || '' }),
       field({ label: 'CNPJ', name: 'cnpj', type: 'cnpj', value: s.cnpj || '', hint: 'Opcional. Aceita o formato alfanumérico novo.' })),
+    h('h2', { text: 'Profissão regulamentada (saúde)' }),
+    h('p', { class: 'muted small', text: 'Dentistas, médicos, psicólogos e nutricionistas: os conselhos exigem nome e registro do responsável técnico na divulgação. No caso do CFO (odontologia), anunciar preços é vedado.' }),
+    h('div', { class: 'row' },
+      field({ label: 'Responsável técnico', name: 'responsible_name', value: s.responsible_name || '', maxlength: 120, placeholder: 'Dra. Ana Souza' }),
+      field({ label: 'Registro do responsável', name: 'responsible_registration', value: s.responsible_registration || '', maxlength: 40, placeholder: 'CRO-PR 12345' }),
+      field({ label: 'Registro da clínica no conselho', name: 'company_registration', value: s.company_registration || '', maxlength: 40, placeholder: 'CRO-PR EPAO 1234', hint: 'Opcional.' })),
+    field({ label: 'Ocultar preços no site (continuam no painel e nos relatórios)', name: 'hide_prices', type: 'checkbox', value: !!s.hide_prices }),
     h('div', { class: 'form-actions' }, h('button', { class: 'btn primary', type: 'submit' }, 'Salvar dados')));
 
   // CEP: busca endereço no ViaCEP quando o campo fica completo (se falhar, segue manual)
@@ -187,6 +194,7 @@ function serviceDialog(siteId, svc, reload) {
 
 function tabServicos(root, data, meta, reload) {
   const id = data.site.id;
+  if (data.site.hide_prices) root.append(h('div', { class: 'alert info', text: 'Preços ocultos no site público (aba Dados). Eles continuam valendo no painel e nos relatórios.' }));
   root.append(h('div', { class: 'page-head' }, h('p', { class: 'muted', text: 'Serviços que o cliente escolhe ao agendar. Preço e duração definem a agenda.' }),
     h('button', { class: 'btn primary', type: 'button', onclick: () => serviceDialog(id, null, reload) }, '+ Novo serviço')),
   table([
@@ -209,7 +217,8 @@ function professionalDialog(siteId, services, p, reload) {
   const form = h('form', { class: 'form', novalidate: true },
     h('div', { class: 'row' },
       field({ label: 'Nome', name: 'name', required: true, value: p?.name || '', maxlength: 120 }),
-      field({ label: 'Função', name: 'title', value: p?.title || '', maxlength: 80, placeholder: 'Ex.: Barbeiro, Dentista' })),
+      field({ label: 'Função', name: 'title', value: p?.title || '', maxlength: 80, placeholder: 'Ex.: Barbeiro, Cirurgiã-dentista' }),
+      field({ label: 'Registro profissional', name: 'registration', value: p?.registration || '', maxlength: 40, placeholder: 'Ex.: CRO-PR 12345', hint: 'Obrigatório na divulgação de profissionais de saúde.' })),
     field({ label: 'Apresentação', name: 'bio', type: 'textarea', rows: 3, value: p?.bio || '', maxlength: 600 }),
     h('div', { class: 'row' },
       field({ label: 'Ordem', name: 'sort_order', type: 'number', min: 0, max: 9999, value: p?.sort_order ?? 0 }),

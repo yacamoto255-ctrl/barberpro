@@ -1,76 +1,76 @@
 {
-  "data": "2026-10-06T23:41:41.686Z",
+  "data": "2026-10-07T13:55:47.326Z",
   "ok": true,
   "passos": [
     {
       "step": "1. Criar conta (primeiro acesso cria o administrador)",
       "ok": true,
-      "ms": 422
+      "ms": 860
     },
     {
       "step": "2. Logout e login",
       "ok": true,
-      "ms": 238
+      "ms": 358
     },
     {
       "step": "3. Criar site",
       "ok": true,
-      "ms": 222
+      "ms": 274
     },
     {
       "step": "4. Dados do negócio: máscaras, CNPJ inválido e válido",
       "ok": true,
-      "ms": 303
+      "ms": 447
     },
     {
       "step": "5. Serviços: criar, editar e excluir",
       "ok": true,
-      "ms": 3761
+      "ms": 3933
     },
     {
       "step": "6. Equipe: cadastrar profissional e foto",
       "ok": true,
-      "ms": 332
+      "ms": 410
     },
     {
       "step": "7. Horários: abrir domingo e salvar",
       "ok": true,
-      "ms": 210
+      "ms": 325
     },
     {
       "step": "8. Aparência: modelo pronto + prévia",
       "ok": true,
-      "ms": 277
+      "ms": 564
     },
     {
       "step": "9. Imagens: logo e galeria (inclui recusa de arquivo inválido)",
       "ok": true,
-      "ms": 257
+      "ms": 261
     },
     {
       "step": "10. Regras da agenda e publicação",
       "ok": true,
-      "ms": 343
+      "ms": 491
     },
     {
       "step": "11. Cliente agenda pelo site no celular (iPhone)",
       "ok": true,
-      "ms": 1454
+      "ms": 2043
     },
     {
       "step": "12. Painel recebe o alerta do novo agendamento",
       "ok": true,
-      "ms": 106
+      "ms": 141
     },
     {
       "step": "13. Agenda: alterar status e lançar agendamento manual",
       "ok": true,
-      "ms": 232
+      "ms": 291
     },
     {
       "step": "14. Dashboard mostra os números reais",
       "ok": true,
-      "ms": 45,
+      "ms": 47,
       "info": {
         "realizado_no_mes": "R$ 55,00"
       }
@@ -78,27 +78,27 @@
     {
       "step": "15. Relatórios: CSV, Excel e PDF baixados e conferidos",
       "ok": true,
-      "ms": 283,
+      "ms": 316,
       "info": {
         "csv": 513,
-        "xlsx": 8103,
-        "pdf": 2204
+        "xlsx": 8101,
+        "pdf": 2195
       }
     },
     {
       "step": "16. Criar operador; operador não acessa áreas de admin",
       "ok": true,
-      "ms": 3913
+      "ms": 3358
     },
     {
       "step": "17. Entrar de novo e validar persistência dos dados",
       "ok": true,
-      "ms": 256
+      "ms": 275
     },
     {
       "step": "18. Cliente cancela pelo link e a vaga volta",
       "ok": true,
-      "ms": 209,
+      "ms": 265,
       "info": {
         "cancelUrl_inicial_valido": true
       }
@@ -106,22 +106,22 @@
     {
       "step": "19. Trocar senha, sair e entrar com a nova",
       "ok": true,
-      "ms": 411
+      "ms": 445
     },
     {
       "step": "20. Backup manual pelo painel",
       "ok": true,
-      "ms": 107
+      "ms": 119
     },
     {
       "step": "21. Excluir site (com confirmação digitada)",
       "ok": true,
-      "ms": 308
+      "ms": 378
     },
     {
       "step": "22. Navegação: nenhum link interno quebrado",
       "ok": true,
-      "ms": 4304,
+      "ms": 4586,
       "info": {
         "links_painel": 9,
         "ancoras_site": 8,
@@ -131,12 +131,12 @@
     {
       "step": "23. Modo offline (PWA): painel abre sem internet e volta sozinho",
       "ok": true,
-      "ms": 357
+      "ms": 458
     },
     {
       "step": "24. Responsividade: painel e site em 9 telas, sem rolagem lateral",
       "ok": true,
-      "ms": 33551,
+      "ms": 43474,
       "info": {
         "telas": 9,
         "paginas_por_tela": 8
@@ -156,8 +156,7 @@
         ],
         "servicos_externos_indisponiveis": [
           "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
-          "fonts.googleapis.com net::ERR_ABORTED",
-          "fonts.gstatic.com net::ERR_ABORTED"
+          "fonts.googleapis.com net::ERR_ABORTED"
         ]
       }
     }
@@ -165,7 +164,6 @@
   "erros": [],
   "servicos_externos_indisponiveis": [
     "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
-    "fonts.googleapis.com net::ERR_ABORTED",
-    "fonts.gstatic.com net::ERR_ABORTED"
+    "fonts.googleapis.com net::ERR_ABORTED"
   ]
 }

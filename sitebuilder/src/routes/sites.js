@@ -57,11 +57,15 @@ function readSiteFields(body, partial) {
     notify_whatsapp: c.bool('notify_whatsapp', 'Avisar o negócio por WhatsApp'),
     notify_client_whatsapp: c.bool('notify_client_whatsapp', 'Confirmar para o cliente por WhatsApp'),
     evolution_instance: c.str('evolution_instance', 'Instância Evolution', { max: 80 }),
+    hide_prices: c.bool('hide_prices', 'Ocultar preços'),
+    responsible_name: c.str('responsible_name', 'Responsável técnico', { max: 120 }),
+    responsible_registration: c.registration('responsible_registration', 'Registro do responsável'),
+    company_registration: c.registration('company_registration', 'Registro da empresa no conselho'),
   });
   c.done();
   // campos opcionais esvaziados viram NULL
   for (const k of ['tagline', 'description', 'phone', 'whatsapp', 'email', 'instagram', 'cnpj', 'cep',
-    'address', 'city', 'state', 'evolution_instance']) {
+    'address', 'city', 'state', 'evolution_instance', 'responsible_name', 'responsible_registration', 'company_registration']) {
     if (data[k] === '') data[k] = null;
   }
   return data;
@@ -119,6 +123,8 @@ module.exports = (limits) => {
       data.slug = uniqueSlug(base);
     }
     data.category = data.category || 'outro';
+    // Odontologia: o Código de Ética do CFO veda anunciar preços; começa oculto (pode ser mudado no painel)
+    if (data.hide_prices === undefined && data.category === 'odontologia') data.hide_prices = 1;
     const id = transaction((tx) => {
       const cols = Object.keys(data);
       const info = tx.prepare(`INSERT INTO sites (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`)
@@ -278,6 +284,7 @@ module.exports = (limits) => {
       name: c.str('name', 'Nome', { required: true, min: 2, max: 120 }),
       title: c.str('title', 'Função', { max: 80 }),
       bio: c.str('bio', 'Apresentação', { max: 600 }),
+      registration: c.registration('registration', 'Registro profissional'),
       active: c.bool('active', 'Ativo'),
       sort_order: c.int('sort_order', 'Ordem', { min: 0, max: 9999 }),
     });
@@ -295,7 +302,7 @@ module.exports = (limits) => {
       }
     }
     c.done();
-    for (const k of ['title', 'bio']) if (data[k] === '') data[k] = null;
+    for (const k of ['title', 'bio', 'registration']) if (data[k] === '') data[k] = null;
     return { data, serviceIds };
   }
 

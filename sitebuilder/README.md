@@ -36,6 +36,23 @@ Também ficam ativos o *fallback* do lado do servidor (`fallbacks: "default"`, b
 | Auditoria | Login, falhas, bloqueios, criação, alteração, exclusão, exportação, backup e restauração, com usuário, IP e data |
 | PWA | Painel instalável; abre sem internet (último estado) e volta sozinho quando a conexão retorna |
 
+## Profissões de saúde (dentistas, clínicas)
+
+- **Responsável técnico e registro** (ex.: `CRO-PR 12345`) no site e no rodapé; **registro de cada profissional** no card da equipe; registro da clínica no conselho (opcional).
+- **Ocultar preços** no site público, na API pública, na confirmação e na página de cancelamento. Os preços continuam no painel e nos relatórios. Em sites de **odontologia** a opção já começa ligada: pelo que sei, o Código de Ética Odontológica (CFO) veda anunciar preços. Confirme as regras atuais com o CRO do seu estado.
+- **Textos da IA** sem preços, promessas de resultado, superlativos ou "antes e depois" para as categorias de saúde.
+
+## Cadastrar um site completo por arquivo
+
+Para montar um site de uma vez (dados, serviços, equipe, horários, tema e imagens), copie `sites/modelo-dentista.json`, preencha e rode:
+
+```bash
+npm run seed-site -- sites/meu-cliente.json            # cria
+npm run seed-site -- sites/meu-cliente.json --update   # atualiza (não apaga nada)
+```
+
+O script usa as mesmas validações do painel e precisa de um administrador já criado. Horários vão no formato `"seg": "08:00-12:00, 13:30-18:00"`; caminhos de imagem são relativos ao arquivo JSON.
+
 ## Rodar localmente
 
 Requer **Node.js 22.13+** (usa o SQLite nativo `node:sqlite`). Recomendado: Node 24.
@@ -76,7 +93,7 @@ Veja `.env.example`. As principais em produção:
 ## Testes
 
 ```bash
-npm test               # 135 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
+npm test               # 144 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
 npm run test:coverage  # cobertura (último resultado: 92% das linhas)
 npm run test:e2e       # simulação completa no Chromium (25 passos, 9 telas)
 npm run loadtest       # carga com 10, 100, 1.000 e 10.000 conexões (ou: npm run loadtest -- 100)

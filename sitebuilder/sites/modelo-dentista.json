@@ -1,0 +1,57 @@
+{
+  "_leia": "MODELO com dados de EXEMPLO. Copie este arquivo, troque pelos dados reais do consultório e rode: npm run seed-site -- sites/seu-arquivo.json",
+  "site": {
+    "name": "Consultório Modelo (EXEMPLO)",
+    "slug": "consultorio-modelo-exemplo",
+    "category": "odontologia",
+    "tagline": "Odontologia clínica e estética",
+    "description": "Texto de apresentação do consultório: história, abordagem e diferenciais.\n\nSegundo parágrafo opcional.",
+    "whatsapp": "(41) 99999-0000",
+    "phone": "(41) 3333-0000",
+    "email": "contato@exemplo.com.br",
+    "instagram": "@exemplo",
+    "cnpj": "11.222.333/0001-81",
+    "cep": "80010-000",
+    "address": "Rua Exemplo, 100, sala 1, Centro",
+    "city": "Curitiba",
+    "state": "PR",
+    "hide_prices": true,
+    "responsible_name": "Dra. Nome Sobrenome",
+    "responsible_registration": "CRO-PR 00000",
+    "company_registration": "",
+    "booking_enabled": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 120,
+    "max_days_ahead": 45,
+    "notify_whatsapp": true,
+    "notify_client_whatsapp": true,
+    "published": false
+  },
+  "servicos": [
+    { "name": "Avaliação odontológica", "duration_min": 40, "price": "0", "description": "Primeira consulta: exame clínico e plano de tratamento." },
+    { "name": "Limpeza (profilaxia)", "duration_min": 50, "price": "0" },
+    { "name": "Clareamento dental", "duration_min": 60, "price": "0" }
+  ],
+  "profissionais": [
+    { "name": "Dra. Nome Sobrenome", "title": "Cirurgiã-dentista", "registration": "CRO-PR 00000", "bio": "Formação e áreas de atuação." }
+  ],
+  "horarios": {
+    "seg": "08:00-12:00, 13:30-18:00",
+    "ter": "08:00-12:00, 13:30-18:00",
+    "qua": "08:00-12:00, 13:30-18:00",
+    "qui": "08:00-12:00, 13:30-18:00",
+    "sex": "08:00-12:00, 13:30-17:00",
+    "sab": null,
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": { "bg": "#f6f2ea", "surface": "#fffdf8", "text": "#0f2b28", "muted": "#4a605c", "primary": "#0e6657", "on_primary": "#ffffff", "accent": "#b6532c" },
+    "fonts": { "heading": "Instrument Serif", "body": "Figtree" },
+    "hero_layout": "split",
+    "radius": "round",
+    "background": "gradient",
+    "copy": { "cta": "Agendar avaliação", "services_title": "Tratamentos", "team_title": "Quem cuida do seu sorriso", "booking_title": "Agende sua consulta" }
+  },
+  "imagens": {}
+}

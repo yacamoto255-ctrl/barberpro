@@ -165,6 +165,10 @@ function renderSite(d) {
   const activeServices = services.filter((s) => s.active);
   const team = professionals.filter((p) => p.active);
   const description = (copy.subheadline || copy.about || site.name).slice(0, 160);
+  // Conselhos de saúde (ex.: CFO) exigem nome e registro do responsável técnico na divulgação
+  const responsible = site.responsible_name
+    ? `Responsável técnico: ${site.responsible_name}${site.responsible_registration ? ' — ' + site.responsible_registration : ''}`
+    : '';
 
   return `<!doctype html>
 <html lang="pt-BR">
@@ -202,12 +206,12 @@ ${copy.about ? `<section id="sobre"><div class="wrap about"><h2>Sobre</h2><div>$
 ${activeServices.length ? `<section id="servicos" class="alt"><div class="wrap">
   <div class="section-head"><h2>${e(copy.services_title)}</h2></div>
   <div class="cards">${activeServices.map((s) => `<article class="card"><h3>${e(s.name)}</h3>${s.description ? `<p>${e(s.description)}</p>` : ''}
-    <div class="meta"><span class="tag">${duration(s.duration_min)}</span><span class="price">${s.price_cents ? formatBRL(s.price_cents) : 'Consulte'}</span></div></article>`).join('')}</div>
+    <div class="meta"><span class="tag">${duration(s.duration_min)}</span>${site.hide_prices ? '' : `<span class="price">${s.price_cents ? formatBRL(s.price_cents) : 'Consulte'}</span>`}</div></article>`).join('')}</div>
 </div></section>` : ''}
 ${team.length ? `<section id="equipe" class="team"><div class="wrap">
   <div class="section-head"><h2>${e(copy.team_title)}</h2></div>
   <div class="cards">${team.map((p) => `<article class="card">${p.photo_image_id ? `<img class="avatar" src="/img/${p.photo_image_id}" alt="Foto de ${e(p.name)}" loading="lazy">` : `<span class="avatar" aria-hidden="true">${e(p.name.trim()[0] || '?')}</span>`}
-    <h3>${e(p.name)}</h3>${p.title ? `<span class="tag">${e(p.title)}</span>` : ''}${p.bio ? `<p>${e(p.bio)}</p>` : ''}</article>`).join('')}</div>
+    <h3>${e(p.name)}</h3>${p.title ? `<span class="tag">${e(p.title)}</span>` : ''}${p.registration ? `<span class="tag">${e(p.registration)}</span>` : ''}${p.bio ? `<p>${e(p.bio)}</p>` : ''}</article>`).join('')}</div>
 </div></section>` : ''}
 ${gallery.length ? `<section id="galeria" class="alt"><div class="wrap"><div class="section-head"><h2>Galeria</h2></div>
   <div class="gallery">${gallery.map((g) => `<img src="/img/${g.id}" alt="Foto ${e(site.name)}" loading="lazy">`).join('')}</div></div></section>` : ''}
@@ -221,6 +225,7 @@ ${site.booking_enabled && activeServices.length ? `<section id="agendar"><div cl
   <div><h2>Horários</h2><ul class="hours">${hourRows.map((h) => `<li class="${h.closed ? 'closed' : ''}"><span>${h.label}</span><span>${h.text}</span></li>`).join('')}</ul></div>
   <div class="contact"><h2>Contato</h2>
     ${addressLine ? `<p class="muted">${e(addressLine)}</p>` : ''}
+    ${responsible ? `<p class="muted">${e(responsible)}</p>` : ''}
     ${mapsUrl ? `<a href="${e(mapsUrl)}" target="_blank" rel="noopener">📍 Ver no mapa</a>` : ''}
     ${site.whatsapp ? `<a href="https://wa.me/${e(site.whatsapp)}" target="_blank" rel="noopener">💬 WhatsApp ${e(formatPhone(site.whatsapp))}</a>` : ''}
     ${site.phone ? `<a href="tel:+${e(site.phone)}">📞 ${e(formatPhone(site.phone))}</a>` : ''}
@@ -230,7 +235,7 @@ ${site.booking_enabled && activeServices.length ? `<section id="agendar"><div cl
 </div></section>
 </main>
 <footer><div class="wrap">
-  <span>© ${new Date().getFullYear()} ${e(site.name)}${site.cnpj ? ' · CNPJ ' + e(site.cnpj) : ''}</span>
+  <span>© ${new Date().getFullYear()} ${e(site.name)}${site.cnpj ? ' · CNPJ ' + e(site.cnpj) : ''}${site.company_registration ? ' · ' + e(site.company_registration) : ''}${responsible ? ' · ' + e(responsible) : ''}</span>
   <span>Site por <a href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">${e(agencyName)}</a></span>
 </div></footer>
 ${site.booking_enabled && activeServices.length ? `<a class="btn fab" href="#agendar">${e(copy.cta)}</a>

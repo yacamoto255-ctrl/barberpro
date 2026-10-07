@@ -92,7 +92,7 @@ module.exports = (limits) => {
     const details = `<dl><dt>Serviço</dt><dd>${e(booking.service_name)}</dd>
       ${booking.professional_name ? `<dt>Com</dt><dd>${e(booking.professional_name)}</dd>` : ''}
       <dt>Quando</dt><dd>${e(formatDateTimeBR(booking.starts_at))}</dd>
-      <dt>Valor</dt><dd>${booking.price_cents ? formatBRL(booking.price_cents) : '—'}</dd></dl>`;
+      ${site.hide_prices ? '' : `<dt>Valor</dt><dd>${booking.price_cents ? formatBRL(booking.price_cents) : '—'}</dd>`}</dl>`;
     const active = ['pending', 'confirmed'].includes(booking.status) && booking.starts_at > nowLocal();
     let title; let body; let actions = '';
     if (error) { title = 'Não foi possível cancelar'; body = `<p>${e(error)}</p>${details}`; }
@@ -140,9 +140,9 @@ module.exports = (limits) => {
     const db = getDb();
     const services = db.prepare(
       'SELECT id, name, description, duration_min, price_cents FROM services WHERE site_id = ? AND active = 1 ORDER BY sort_order, name'
-    ).all(site.id);
+    ).all(site.id).map((sv) => (site.hide_prices ? { ...sv, price_cents: null } : sv));
     const professionals = db.prepare(
-      'SELECT id, name, title, photo_image_id FROM professionals WHERE site_id = ? AND active = 1 ORDER BY sort_order, name'
+      'SELECT id, name, title, registration, photo_image_id FROM professionals WHERE site_id = ? AND active = 1 ORDER BY sort_order, name'
     ).all(site.id).map((p) => ({
       ...p,
       service_ids: db.prepare('SELECT service_id FROM professional_services WHERE professional_id = ?').all(p.id).map((r) => r.service_id),
@@ -211,7 +211,7 @@ module.exports = (limits) => {
     res.status(201).json({
       booking: {
         id: booking.id, service_name: booking.service_name, professional_name: booking.professional_name,
-        starts_at: booking.starts_at, ends_at: booking.ends_at, price_cents: booking.price_cents, status: booking.status,
+        starts_at: booking.starts_at, ends_at: booking.ends_at, price_cents: site.hide_prices ? null : booking.price_cents, status: booking.status,
       },
       cancel_url: cancelUrl,
     });

@@ -36,6 +36,7 @@ const BODY_FONTS = {
   'Lora': 'serif', 'Crimson Pro': 'serif',
 };
 const HERO_LAYOUTS = ['centered', 'split', 'editorial', 'banner'];
+const HEALTH_CATEGORIES = ['odontologia', 'clinica', 'psicologia', 'nutricao'];
 const RADII = ['sharp', 'soft', 'round'];
 const BACKGROUNDS = ['plain', 'gradient', 'grain', 'grid', 'dots'];
 const PALETTE_KEYS = ['bg', 'surface', 'text', 'muted', 'primary', 'on_primary', 'accent'];
@@ -248,7 +249,13 @@ function buildUserPrompt(site, services, hint) {
     services.length ? `Services: ${services.map((s) => `${s.name} (${s.duration_min} min)`).join('; ')}` : null,
     hint ? `Style direction from the agency: ${hint}` : null,
   ].filter(Boolean);
-  return `Design the website theme for this business.\n\n<business>\n${lines.join('\n')}\n</business>`;
+  const rules = [];
+  if (site.hide_prices) rules.push('Do not mention prices, discounts, promotions, free services or payment terms anywhere in the copy.');
+  if (HEALTH_CATEGORIES.includes(site.category)) {
+    rules.push('This is a regulated health profession in Brazil (professional council advertising rules): keep the copy sober and informative; no promises or guarantees of results, no "sem dor" or "o melhor" style superlatives, no before/after claims, no sensationalism.');
+  }
+  return `Design the website theme for this business.\n\n<business>\n${lines.join('\n')}\n</business>`
+    + (rules.length ? `\n\n<copy_constraints>\n${rules.join('\n')}\n</copy_constraints>` : '');
 }
 
 /**
@@ -305,6 +312,6 @@ async function generateTheme(site, services, hint = '') {
 
 module.exports = {
   PRESETS, HEADING_FONTS, BODY_FONTS, HERO_LAYOUTS, RADII, BACKGROUNDS, COPY_LIMITS, THEME_SCHEMA, SYSTEM_PROMPT,
-  presetTheme, defaultThemeFor, validateTheme, googleFontsHref, generateTheme, contrast, apiKey,
+  presetTheme, defaultThemeFor, validateTheme, googleFontsHref, generateTheme, contrast, apiKey, buildUserPrompt,
   _setClientFactory, MODEL,
 };

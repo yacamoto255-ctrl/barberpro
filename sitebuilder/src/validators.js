@@ -190,6 +190,17 @@ class Checker {
     return ig;
   }
 
+  /** Registro em conselho profissional: "CRO-PR 12345", "CRM/SP 123456", "CRP 06/12345" */
+  registration(key, label, opts = {}) {
+    const s = this.str(key, label, { ...opts, max: 40 });
+    if (!s) return s;
+    // começa com a sigla do conselho (letras) e tem o número (ao menos 2 dígitos); aceita "CRO-PR EPAO 1234"
+    if (!/^[A-Za-zÀ-ÿ]{2,}[A-Za-zÀ-ÿ0-9 ./-]*$/.test(s) || (s.match(/\d/g) || []).length < 2) {
+      return this.fail(key, `${label} inválido. Ex.: CRO-PR 12345`);
+    }
+    return s.replace(/\s+/g, ' ').toUpperCase();
+  }
+
   int(key, label, { required = false, min = -Infinity, max = Infinity } = {}) {
     if (this._absent(key, label, required)) return undefined;
     const n = Number(this.src[key]);
