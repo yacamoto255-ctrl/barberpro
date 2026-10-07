@@ -66,6 +66,8 @@ Num site de demonstração:
 
 A página **`/exemplos`** lista todas as demonstrações publicadas, com o botão "Quero um site assim" para o Instagram da agência. É o link para mandar a clientes.
 
+**Publicar o portfólio sem servidor:** `npm run export-demos -- pasta` gera páginas estáticas (portfólio + exemplos), com imagens embutidas e o agendamento simulado no próprio navegador. A pasta pode ir para Netlify, GitHub Pages ou qualquer hospedagem de arquivos.
+
 As capas dos exemplos são ilustrações próprias (`sites/demos/img`). Negócios, pessoas, registros profissionais e contatos são fictícios: os números `CRO-PR 0000x` e `(xx) 90000-0000` são marcadores, não registros reais.
 
 ## Cadastrar um site completo por arquivo
@@ -119,7 +121,7 @@ Veja `.env.example`. As principais em produção:
 ## Testes
 
 ```bash
-npm test               # 148 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
+npm test               # 149 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
 npm run test:coverage  # cobertura (último resultado: 92% das linhas)
 npm run test:e2e       # simulação completa no Chromium (25 passos, 9 telas)
 npm run loadtest       # carga com 10, 100, 1.000 e 10.000 conexões (ou: npm run loadtest -- 100)

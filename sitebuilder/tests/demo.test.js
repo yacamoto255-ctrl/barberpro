@@ -3,6 +3,7 @@ const H = require('./helpers');
 const fs = require('fs');
 const path = require('path');
 const { seed } = require('../scripts/seed-site');
+const { exportDemos } = require('../scripts/export-demos');
 const { request } = H;
 
 const DEMOS = path.join(__dirname, '..', 'sites', 'demos');
@@ -75,4 +76,24 @@ describe('sites de demonstração (portfólio)', () => {
     expect(r.text).not.toContain(hidden.body.site.name);
     expect(r.text).toContain('instagram.com/versal.estudio');
   });
+
+  test('exportação estática: páginas autossuficientes com agenda simulada', async () => {
+    const out = path.join(H.dir, 'export');
+    const files = await exportDemos(out);
+    expect(files[0]).toBe('index.html');
+    expect(files).toHaveLength(6);
+    const index = fs.readFileSync(path.join(out, 'index.html'), 'utf8');
+    expect(index).toContain('href="demo-clinica-aurora-odontologia.html"');
+    for (const f of files) {
+      const html = fs.readFileSync(path.join(out, f), 'utf8');
+      expect(html).not.toMatch(/"\/img\/\d+"|\/assets\/booking\.js|href="\/s\//); // nada depende do servidor
+    }
+    const dent = fs.readFileSync(path.join(out, 'demo-clinica-aurora-odontologia.html'), 'utf8');
+    expect(dent).toContain('window.__DEMO__=');
+    expect(dent).toContain('href="index.html"');
+    expect(dent).toMatch(/src="data:image\/png;base64,/);
+    const data = JSON.parse(dent.match(/window\.__DEMO__=(.*?);<\/script>/)[1]);
+    expect(data.services.every((sv) => sv.price_cents === null)).toBe(true); // preços continuam ocultos
+  });
 });
+

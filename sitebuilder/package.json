@@ -16,7 +16,8 @@
     "loadtest": "node scripts/loadtest.js",
     "reset-password": "node scripts/reset-password.js",
     "seed-site": "node scripts/seed-site.js",
-    "seed-demos": "node scripts/seed-site.js sites/demos --update"
+    "seed-demos": "node scripts/seed-site.js sites/demos --update",
+    "export-demos": "node scripts/export-demos.js"
   },
   "jest": {
     "testEnvironment": "node",
