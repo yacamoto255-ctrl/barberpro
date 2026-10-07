@@ -84,7 +84,7 @@ nav.links{display:flex;gap:22px;font-size:.95rem}nav.links a{text-decoration:non
 .hero.editorial h1{font-size:clamp(2.8rem,9vw,6.5rem);max-width:12ch}.hero.editorial .wrap{border-bottom:1px solid color-mix(in srgb,var(--text) 18%,transparent);padding-bottom:48px}
 .hero.banner{padding:0}.hero.banner .cover{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;background:linear-gradient(160deg,var(--primary),var(--accent));overflow:hidden}
 .hero.banner .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero.banner .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,color-mix(in srgb,var(--bg) 92%,transparent))}
+.hero.banner .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 25%,transparent) 0%,color-mix(in srgb,var(--bg) 80%,transparent) 48%,color-mix(in srgb,var(--bg) 96%,transparent) 100%)}
 .hero.banner .cover .wrap{position:relative;z-index:1;padding-bottom:56px;width:100%}
 section{padding:72px 0}section.alt{background:color-mix(in srgb,var(--surface) 70%,transparent)}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
@@ -109,6 +109,8 @@ section{padding:72px 0}section.alt{background:color-mix(in srgb,var(--surface) 7
 .slot:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}.days .slot{font-size:.85rem;line-height:1.25;padding:6px 4px}
 .slot[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
 .msg{padding:14px 16px;border-radius:calc(var(--radius) * .7);background:color-mix(in srgb,var(--accent) 16%,var(--surface));margin:0}.msg.err{background:color-mix(in srgb,#d32f2f 16%,var(--surface))}
+.demo-bar{background:#16141b;color:#f3efe8;text-align:center;padding:8px 14px;font:500 13px/1.4 system-ui,sans-serif}.demo-bar a{color:#ffb38a}
+.demo-link{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:help}
 .preview-bar{background:#111;color:#fff;text-align:center;padding:6px;font:600 13px system-ui,sans-serif}
 .muted{color:var(--muted)}.hp{position:absolute;left:-5000px;width:1px;height:1px;overflow:hidden}
 footer{padding:36px 0 96px;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);font-size:.9rem;color:var(--muted)}
@@ -125,7 +127,7 @@ function heroHtml(site, theme, copy, heroImg) {
   const eyebrow = [category, site.city].filter(Boolean).join(' · ');
   const actions = `<div class="actions">
       ${site.booking_enabled ? `<a class="btn" href="#agendar">${e(copy.cta)}</a>` : ''}
-      ${site.whatsapp ? `<a class="btn ghost" href="https://wa.me/${e(site.whatsapp)}" rel="noopener" target="_blank">Falar no WhatsApp</a>` : ''}
+      ${site.whatsapp ? (site.is_demo ? '<a class="btn ghost" href="#contato">Falar no WhatsApp</a>' : `<a class="btn ghost" href="https://wa.me/${e(site.whatsapp)}" rel="noopener" target="_blank">Falar no WhatsApp</a>`) : ''}
     </div>`;
   const text = `${eyebrow ? `<span class="eyebrow">${e(eyebrow)}</span>` : ''}
       <h1>${e(copy.headline)}</h1>
@@ -166,6 +168,10 @@ function renderSite(d) {
   const team = professionals.filter((p) => p.active);
   const description = (copy.subheadline || copy.about || site.name).slice(0, 160);
   // Conselhos de saúde (ex.: CFO) exigem nome e registro do responsável técnico na divulgação
+  // Em demonstração os contatos são fictícios: aparecem, mas não levam a ninguém real
+  const link = (href, text) => (site.is_demo
+    ? `<span class="demo-link" title="Contato fictício (site de demonstração)">${e(text)}</span>`
+    : `<a href="${e(href)}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${e(text)}</a>`);
   const responsible = site.responsible_name
     ? `Responsável técnico: ${site.responsible_name}${site.responsible_registration ? ' — ' + site.responsible_registration : ''}`
     : '';
@@ -181,8 +187,8 @@ function renderSite(d) {
 <meta property="og:description" content="${e(description)}">
 ${site.hero_image_id ? `<meta property="og:image" content="${e(d.base || '')}/img/${site.hero_image_id}">` : ''}
 <meta name="theme-color" content="${theme.palette.bg}">
-${d.preview ? '<meta name="robots" content="noindex">' : ''}
-${site.logo_image_id ? `<link rel="icon" href="/img/${site.logo_image_id}">` : ''}
+${d.preview || site.is_demo ? '<meta name="robots" content="noindex">' : ''}
+${site.logo_image_id ? `<link rel="icon" href="/img/${site.logo_image_id}">` : '<link rel="icon" href="data:,">'}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${e(googleFontsHref(theme))}">
 ${css(theme, nonce)}
@@ -190,6 +196,7 @@ ${css(theme, nonce)}
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 ${d.preview ? '<div class="preview-bar">Pré-visualização — este site ainda não está publicado</div>' : ''}
+${site.is_demo ? `<div class="demo-bar">Site de demonstração · negócio e dados fictícios · criado pela <a href="https://instagram.com/${e(getSetting('agency_instagram'))}" target="_blank" rel="noopener">${e(getSetting('agency_name'))}</a> · <a href="/exemplos">ver outros exemplos</a></div>` : ''}
 <header class="top"><div class="wrap">
   <a class="brand" href="#inicio">${site.logo_image_id ? `<img src="/img/${site.logo_image_id}" alt="">` : ''}<span>${e(site.name)}</span></a>
   <nav class="links" aria-label="Seções">
@@ -226,11 +233,11 @@ ${site.booking_enabled && activeServices.length ? `<section id="agendar"><div cl
   <div class="contact"><h2>Contato</h2>
     ${addressLine ? `<p class="muted">${e(addressLine)}</p>` : ''}
     ${responsible ? `<p class="muted">${e(responsible)}</p>` : ''}
-    ${mapsUrl ? `<a href="${e(mapsUrl)}" target="_blank" rel="noopener">📍 Ver no mapa</a>` : ''}
-    ${site.whatsapp ? `<a href="https://wa.me/${e(site.whatsapp)}" target="_blank" rel="noopener">💬 WhatsApp ${e(formatPhone(site.whatsapp))}</a>` : ''}
-    ${site.phone ? `<a href="tel:+${e(site.phone)}">📞 ${e(formatPhone(site.phone))}</a>` : ''}
-    ${site.email ? `<a href="mailto:${e(site.email)}">✉️ ${e(site.email)}</a>` : ''}
-    ${site.instagram ? `<a href="https://instagram.com/${e(site.instagram)}" target="_blank" rel="noopener">📷 @${e(site.instagram)}</a>` : ''}
+    ${mapsUrl ? link(mapsUrl, '📍 Ver no mapa') : ''}
+    ${site.whatsapp ? link(`https://wa.me/${site.whatsapp}`, `💬 WhatsApp ${formatPhone(site.whatsapp)}`) : ''}
+    ${site.phone ? link(`tel:+${site.phone}`, `📞 ${formatPhone(site.phone)}`) : ''}
+    ${site.email ? link(`mailto:${site.email}`, `✉️ ${site.email}`) : ''}
+    ${site.instagram ? link(`https://instagram.com/${site.instagram}`, `📷 @${site.instagram}`) : ''}
   </div>
 </div></section>
 </main>
@@ -247,7 +254,7 @@ ${site.booking_enabled && activeServices.length ? `<a class="btn fab" href="#age
 function renderMessagePage({ title, body, site = null, nonce, theme = null, actionsHtml = '' }) {
   const p = theme?.palette || { bg: '#f6f0e6', surface: '#fffaf2', text: '#2a211b', muted: '#6f6257', primary: '#a8481f', on_primary: '#ffffff', accent: '#2f5d50' };
   return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>${e(title)}</title>
+<meta name="robots" content="noindex"><title>${e(title)}</title><link rel="icon" href="data:,">
 <style nonce="${nonce}">body{margin:0;min-height:100vh;display:grid;place-items:center;background:${p.bg};color:${p.text};font:17px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:20px}
 main{max-width:520px;width:100%;background:${p.surface};padding:32px;border-radius:14px;box-shadow:0 20px 50px -30px rgba(0,0,0,.4)}
 h1{font-size:1.6rem;margin:0 0 .5em;line-height:1.2}p{color:${p.muted}}a,button{display:inline-block;margin-top:12px;padding:12px 20px;border-radius:10px;background:${p.primary};color:${p.on_primary};text-decoration:none;border:0;font:inherit;font-weight:600;cursor:pointer}
@@ -256,3 +263,85 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:16px 0}dt{fon
 }
 
 module.exports = { renderSite, renderMessagePage, formatPhone, duration };
+
+/**
+ * Portfólio da agência: vitrine dos sites de demonstração publicados.
+ * @param {object} d { sites: Array<{site, theme}>, nonce }
+ */
+function renderPortfolio({ sites, nonce }) {
+  const agencyName = getSetting('agency_name');
+  const agencyIg = getSetting('agency_instagram');
+  const families = new Map();
+  for (const { theme } of sites) {
+    families.set(theme.fonts.heading, HEADING_FONTS[theme.fonts.heading].weight);
+    if (!families.has(theme.fonts.body)) families.set(theme.fonts.body, '400;600');
+  }
+  families.set('Fraunces', '600');
+  families.set('Figtree', families.get('Figtree') || '400;600');
+  const fontsHref = `https://fonts.googleapis.com/css2?${[...families].map(([f, w]) => `family=${f.replace(/ /g, '+')}:wght@${w}`).join('&')}&display=swap`;
+  let cardCss = '';
+  const cards = sites.map(({ site, theme }, i) => {
+    const p = theme.palette;
+    const hf = HEADING_FONTS[theme.fonts.heading];
+    cardCss += `.c${i}{background:${p.bg};color:${p.text}}.c${i} p,.c${i} .cat{color:${p.muted}}`
+      + `.h${i}{font-family:"${theme.fonts.heading}",${hf.fallback};font-weight:${hf.weight}}.b${i}{background:${p.primary};color:${p.on_primary}}`
+      + ['bg', 'surface', 'primary', 'accent', 'text'].map((k) => `.c${i}-${k}{background:${p[k]}}`).join('')
+      + `.g${i}{background:linear-gradient(135deg,${p.primary},${p.accent})}`;
+    return `<a class="demo" href="/s/${e(site.slug)}">
+      <div class="shot g${i}">${site.hero_image_id ? `<img src="/img/${site.hero_image_id}" alt="" loading="lazy">` : ''}
+        <span class="sw">${['bg', 'surface', 'primary', 'accent', 'text'].map((k) => `<i class="c${i}-${k}"></i>`).join('')}</span></div>
+      <div class="body c${i}">
+        <span class="cat">${e(CATEGORY_LABEL[site.category] || 'Negócio local')}${site.city ? ' · ' + e(site.city) : ''}</span>
+        <h2 class="h${i}">${e(site.name)}</h2>
+        ${site.tagline ? `<p>${e(site.tagline)}</p>` : ''}
+        <span class="go b${i}">Ver site de exemplo →</span>
+      </div>
+    </a>`;
+  }).join('');
+
+  return `<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exemplos de sites — ${e(agencyName)}</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Sites com agendamento online criados pela ${e(agencyName)} para barbearias, clínicas, salões, consultórios e outros negócios locais.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${e(fontsHref)}">
+<style nonce="${nonce}">
+*{box-sizing:border-box}body{margin:0;background:#16141b;color:#f3efe8;font:16px/1.6 "Figtree",system-ui,sans-serif}
+a{color:inherit}.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+header.wrap{padding:72px 20px 48px}header .brand{font:600 14px/1 "Figtree",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffb38a}
+h1{font:600 clamp(2.4rem,6vw,4.4rem)/1.05 "Fraunces",serif;margin:16px 0;max-width:16ch;letter-spacing:-.02em}
+header p{color:#bdb6c6;max-width:58ch;font-size:1.1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;padding-bottom:64px}
+.demo{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;text-decoration:none;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);transition:transform .2s ease}
+.demo:hover{transform:translateY(-4px)}.demo:focus-visible{outline:3px solid #ffb38a;outline-offset:4px}
+.shot{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#2a2731,#3a3540)}.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.sw{position:absolute;left:14px;bottom:14px;display:flex;gap:6px}.sw i{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.75)}
+.body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cat{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.body h2{margin:0;font-size:1.9rem;line-height:1.1}.body p{margin:0 0 10px}
+.go{margin-top:auto;align-self:flex-start;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.92rem}
+.note{color:#8f889a;font-size:.9rem;border-top:1px solid #2f2c36;padding:22px 0 40px}
+.cta{display:inline-block;margin-top:10px;background:#ffb38a;color:#16141b;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none}
+${cardCss}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="brand">${e(agencyName)}</div>
+  <h1>Sites que enchem a agenda de negócios locais.</h1>
+  <p>Exemplos de sites com agendamento online que criamos para diferentes tipos de negócio. Abra, navegue e teste o agendamento: tudo funciona como no site de verdade.</p>
+  <a class="cta" href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">Quero um site assim · @${e(agencyIg)}</a>
+</header>
+<main class="wrap">
+  <div class="grid">${cards || '<p>Nenhum exemplo publicado ainda.</p>'}</div>
+  <p class="note">Os negócios, pessoas e contatos destes exemplos são fictícios. Nos exemplos, o agendamento é simulado: nada é reservado e nenhum dado é guardado.</p>
+</main>
+</body>
+</html>`;
+}
+
+module.exports.renderPortfolio = renderPortfolio;

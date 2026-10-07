@@ -8,10 +8,10 @@ const { getDb } = require('../db');
 const { Checker, HttpError, isValidDate } = require('../validators');
 const { jwtSecret } = require('../auth');
 const { ah, baseUrl, escapeHtml: e, formatBRL, formatDateTimeBR } = require('../util');
-const { availability, addDays, nowLocal } = require('../services/slots');
+const { availability, addDays, addMinutes, nowLocal } = require('../services/slots');
 const { createBooking, findByCancelToken, cancelByClient, loadService } = require('../services/bookings');
 const { whatsappForNewBooking, whatsappForCancellation } = require('../services/notify');
-const { renderSite, renderMessagePage } = require('../render/site');
+const { renderSite, renderMessagePage, renderPortfolio } = require('../render/site');
 const { siteOut } = require('./sites');
 
 function siteCsp(nonce) {
@@ -79,6 +79,14 @@ module.exports = (limits) => {
     const { theme } = siteOut(site);
     const html = renderSite({ site, theme, ...siteData(site), nonce, preview, base: baseUrl(req) });
     sendHtml(res, 200, html, nonce);
+  });
+
+  // Portfólio da agência: sites de demonstração publicados
+  pages.get('/exemplos', (req, res) => {
+    const nonce = crypto.randomBytes(16).toString('base64');
+    const sites = getDb().prepare('SELECT * FROM sites WHERE is_demo = 1 AND published = 1 ORDER BY name').all()
+      .map((site) => ({ site, theme: siteOut(site).theme }));
+    sendHtml(res, 200, renderPortfolio({ sites, nonce }), nonce);
   });
 
   function cancelPage(req, res, { done = false, error = null } = {}) {
@@ -202,6 +210,23 @@ module.exports = (limits) => {
     const notes = c.str('notes', 'Observações', { max: 500 });
     c.done();
     if (!/\p{L}/u.test(client.name)) throw new HttpError(400, 'Informe um nome válido.', { fields: { client_name: 'Nome inválido.' } });
+
+    // Site de demonstração (portfólio): valida tudo como de verdade, mas não grava nem guarda dados do visitante
+    if (site.is_demo) {
+      const svc = loadService(site.id, serviceId);
+      const slot = availability(site, svc, date, professionalId || null).slots.find((x) => x.time === time);
+      if (!slot) throw new HttpError(409, 'Este horário acabou de ficar indisponível. Escolha outro.', { code: 'SLOT_TAKEN' });
+      const pid = professionalId || slot.professional_ids[0] || null;
+      const prof = pid ? getDb().prepare('SELECT name FROM professionals WHERE id = ?').get(pid) : null;
+      return res.status(201).json({
+        demo: true,
+        booking: {
+          id: null, service_name: svc.name, professional_name: prof?.name || null, starts_at: `${date} ${time}`,
+          ends_at: addMinutes(`${date} ${time}`, svc.duration_min), price_cents: site.hide_prices ? null : svc.price_cents, status: 'confirmed',
+        },
+        cancel_url: null,
+      });
+    }
 
     const { booking, cancelToken } = createBooking({
       site, serviceId, professionalId: professionalId || null, date, time, client, notes, source: 'site',

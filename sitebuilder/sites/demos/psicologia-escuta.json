@@ -1,0 +1,94 @@
+{
+  "_leia": "Site de DEMONSTRAÇÃO para o portfólio da agência: negócio, pessoas e contatos fictícios.",
+  "site": {
+    "name": "Espaço Escuta Psicologia",
+    "slug": "demo-espaco-escuta-psicologia",
+    "category": "psicologia",
+    "tagline": "Psicoterapia para adultos, presencial e online",
+    "description": "O Espaço Escuta é um consultório de psicologia clínica para adultos. O primeiro encontro serve para nos conhecermos, entender o que trouxe você até aqui e combinar como seguir.\n\nAs sessões têm 50 minutos e acontecem presencialmente no Moinhos de Vento ou online, com o mesmo cuidado com sigilo e horário.",
+    "whatsapp": "(51) 90000-0000",
+    "cep": "90570-000",
+    "address": "Rua Padre Chagas, 300, sala 702, Moinhos de Vento",
+    "city": "Porto Alegre",
+    "state": "RS",
+    "hide_prices": true,
+    "responsible_name": "Ana Beatriz Lemos, psicóloga",
+    "responsible_registration": "CRP 07/00000",
+    "is_demo": true,
+    "booking_enabled": true,
+    "slot_interval_min": 60,
+    "min_notice_min": 720,
+    "max_days_ahead": 30,
+    "notify_whatsapp": false,
+    "notify_client_whatsapp": false,
+    "published": true
+  },
+  "servicos": [
+    {
+      "name": "Primeira conversa",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Encontro inicial para entender sua demanda e combinar o acompanhamento."
+    },
+    {
+      "name": "Psicoterapia individual",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Sessão presencial para adultos."
+    },
+    {
+      "name": "Psicoterapia online",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Sessão por vídeo, com o mesmo sigilo do presencial."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Ana Beatriz Lemos",
+      "title": "Psicóloga clínica",
+      "registration": "CRP 07/00000",
+      "bio": "Atende adultos em psicoterapia individual, presencial e online."
+    }
+  ],
+  "horarios": {
+    "seg": "08:00-12:00, 14:00-20:00",
+    "ter": "14:00-20:00",
+    "qua": "08:00-12:00, 14:00-20:00",
+    "qui": "14:00-20:00",
+    "sex": "08:00-12:00",
+    "sab": null,
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": {
+      "bg": "#eef1ea",
+      "surface": "#f8faf5",
+      "text": "#1f2a22",
+      "muted": "#56645a",
+      "primary": "#3e6b4f",
+      "on_primary": "#ffffff",
+      "accent": "#a8673c"
+    },
+    "fonts": {
+      "heading": "Fraunces",
+      "body": "Nunito Sans"
+    },
+    "hero_layout": "editorial",
+    "radius": "soft",
+    "background": "plain",
+    "copy": {
+      "headline": "Um espaço para falar e ser escutado",
+      "subheadline": "Psicoterapia para adultos no Moinhos de Vento e online. Agende a primeira conversa.",
+      "about": "",
+      "cta": "Agendar primeira conversa",
+      "services_title": "Atendimentos",
+      "team_title": "Quem atende",
+      "booking_title": "Agende um horário"
+    }
+  },
+  "imagens": {
+    "capa": "img/psicologia-escuta.png"
+  }
+}

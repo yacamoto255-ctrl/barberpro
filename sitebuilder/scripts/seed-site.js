@@ -1,6 +1,7 @@
 // scripts/seed-site.js — cadastra (ou atualiza) um site completo a partir de um arquivo JSON.
 //   npm run seed-site -- sites/consultorio.json            cria o site
 //   npm run seed-site -- sites/consultorio.json --update   atualiza um site existente (mesmo "slug")
+//   npm run seed-demos                                     cria/atualiza os sites de demonstração (sites/demos)
 //
 // Passa pela própria API do app (mesmas validações do painel), autenticado como o
 // primeiro administrador ativo. Com --update nada é apagado: serviços e profissionais
@@ -149,7 +150,16 @@ if (require.main === module) {
     console.error('Uso: npm run seed-site -- caminho/do/site.json [--update]');
     process.exit(1);
   }
-  seed(file, { update: args.includes('--update') })
+  // Uma pasta cadastra todos os .json dela (ex.: npm run seed-demos)
+  const files = fs.statSync(file).isDirectory()
+    ? fs.readdirSync(file).filter((f) => f.endsWith('.json')).sort().map((f) => path.join(file, f))
+    : [file];
+  (async () => {
+    for (const f of files) {
+      console.log(`\n» ${path.basename(f)}`);
+      await seed(f, { update: args.includes('--update') });
+    }
+  })()
     .then(() => { closeDb(); process.exit(0); })
     .catch((e) => { console.error(`✘ ${e.message}`); closeDb(); process.exit(1); });
 }

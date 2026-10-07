@@ -1,76 +1,76 @@
 {
-  "data": "2026-10-07T13:55:47.326Z",
+  "data": "2026-10-07T14:06:03.639Z",
   "ok": true,
   "passos": [
     {
       "step": "1. Criar conta (primeiro acesso cria o administrador)",
       "ok": true,
-      "ms": 860
+      "ms": 683
     },
     {
       "step": "2. Logout e login",
       "ok": true,
-      "ms": 358
+      "ms": 342
     },
     {
       "step": "3. Criar site",
       "ok": true,
-      "ms": 274
+      "ms": 286
     },
     {
       "step": "4. Dados do negócio: máscaras, CNPJ inválido e válido",
       "ok": true,
-      "ms": 447
+      "ms": 404
     },
     {
       "step": "5. Serviços: criar, editar e excluir",
       "ok": true,
-      "ms": 3933
+      "ms": 3808
     },
     {
       "step": "6. Equipe: cadastrar profissional e foto",
       "ok": true,
-      "ms": 410
+      "ms": 347
     },
     {
       "step": "7. Horários: abrir domingo e salvar",
       "ok": true,
-      "ms": 325
+      "ms": 283
     },
     {
       "step": "8. Aparência: modelo pronto + prévia",
       "ok": true,
-      "ms": 564
+      "ms": 371
     },
     {
       "step": "9. Imagens: logo e galeria (inclui recusa de arquivo inválido)",
       "ok": true,
-      "ms": 261
+      "ms": 288
     },
     {
       "step": "10. Regras da agenda e publicação",
       "ok": true,
-      "ms": 491
+      "ms": 383
     },
     {
       "step": "11. Cliente agenda pelo site no celular (iPhone)",
       "ok": true,
-      "ms": 2043
+      "ms": 1687
     },
     {
       "step": "12. Painel recebe o alerta do novo agendamento",
       "ok": true,
-      "ms": 141
+      "ms": 107
     },
     {
       "step": "13. Agenda: alterar status e lançar agendamento manual",
       "ok": true,
-      "ms": 291
+      "ms": 303
     },
     {
       "step": "14. Dashboard mostra os números reais",
       "ok": true,
-      "ms": 47,
+      "ms": 57,
       "info": {
         "realizado_no_mes": "R$ 55,00"
       }
@@ -78,27 +78,27 @@
     {
       "step": "15. Relatórios: CSV, Excel e PDF baixados e conferidos",
       "ok": true,
-      "ms": 316,
+      "ms": 325,
       "info": {
         "csv": 513,
-        "xlsx": 8101,
-        "pdf": 2195
+        "xlsx": 8102,
+        "pdf": 2197
       }
     },
     {
       "step": "16. Criar operador; operador não acessa áreas de admin",
       "ok": true,
-      "ms": 3358
+      "ms": 3336
     },
     {
       "step": "17. Entrar de novo e validar persistência dos dados",
       "ok": true,
-      "ms": 275
+      "ms": 258
     },
     {
       "step": "18. Cliente cancela pelo link e a vaga volta",
       "ok": true,
-      "ms": 265,
+      "ms": 258,
       "info": {
         "cancelUrl_inicial_valido": true
       }
@@ -106,22 +106,22 @@
     {
       "step": "19. Trocar senha, sair e entrar com a nova",
       "ok": true,
-      "ms": 445
+      "ms": 480
     },
     {
       "step": "20. Backup manual pelo painel",
       "ok": true,
-      "ms": 119
+      "ms": 100
     },
     {
       "step": "21. Excluir site (com confirmação digitada)",
       "ok": true,
-      "ms": 378
+      "ms": 368
     },
     {
       "step": "22. Navegação: nenhum link interno quebrado",
       "ok": true,
-      "ms": 4586,
+      "ms": 4599,
       "info": {
         "links_painel": 9,
         "ancoras_site": 8,
@@ -131,12 +131,12 @@
     {
       "step": "23. Modo offline (PWA): painel abre sem internet e volta sozinho",
       "ok": true,
-      "ms": 458
+      "ms": 466
     },
     {
       "step": "24. Responsividade: painel e site em 9 telas, sem rolagem lateral",
       "ok": true,
-      "ms": 43474,
+      "ms": 43611,
       "info": {
         "telas": 9,
         "paginas_por_tela": 8

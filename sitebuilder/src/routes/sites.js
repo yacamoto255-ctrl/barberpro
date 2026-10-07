@@ -58,6 +58,7 @@ function readSiteFields(body, partial) {
     notify_client_whatsapp: c.bool('notify_client_whatsapp', 'Confirmar para o cliente por WhatsApp'),
     evolution_instance: c.str('evolution_instance', 'Instância Evolution', { max: 80 }),
     hide_prices: c.bool('hide_prices', 'Ocultar preços'),
+    is_demo: c.bool('is_demo', 'Site de demonstração'),
     responsible_name: c.str('responsible_name', 'Responsável técnico', { max: 120 }),
     responsible_registration: c.registration('responsible_registration', 'Registro do responsável'),
     company_registration: c.registration('company_registration', 'Registro da empresa no conselho'),

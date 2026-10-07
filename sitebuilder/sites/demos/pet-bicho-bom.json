@@ -1,0 +1,106 @@
+{
+  "_leia": "Site de DEMONSTRAÇÃO para o portfólio da agência: negócio, pessoas e contatos fictícios.",
+  "site": {
+    "name": "Bicho Bom Pet Care",
+    "slug": "demo-bicho-bom-pet-care",
+    "category": "pet",
+    "tagline": "Banho e tosa com hora marcada na Lagoa",
+    "description": "Banho e tosa com calma, em ambiente pequeno e sem gaiolas cheias. Cada pet é atendido por uma pessoa do começo ao fim.\n\nAgende pelo site escolhendo o porte e o serviço. Avisamos pelo WhatsApp quando estiver pronto para buscar.",
+    "whatsapp": "(48) 90000-0000",
+    "cep": "88062-000",
+    "address": "Rua das Rendeiras, 1200, Lagoa da Conceição",
+    "city": "Florianópolis",
+    "state": "SC",
+    "hide_prices": false,
+    "is_demo": true,
+    "booking_enabled": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 60,
+    "max_days_ahead": 21,
+    "notify_whatsapp": false,
+    "notify_client_whatsapp": false,
+    "published": true
+  },
+  "servicos": [
+    {
+      "name": "Banho — porte pequeno",
+      "duration_min": 60,
+      "price": "60"
+    },
+    {
+      "name": "Banho — porte médio",
+      "duration_min": 75,
+      "price": "80"
+    },
+    {
+      "name": "Banho e tosa — porte pequeno",
+      "duration_min": 90,
+      "price": "95"
+    },
+    {
+      "name": "Banho e tosa — porte médio",
+      "duration_min": 120,
+      "price": "130"
+    },
+    {
+      "name": "Tosa higiênica",
+      "duration_min": 40,
+      "price": "45"
+    },
+    {
+      "name": "Hidratação de pelagem",
+      "duration_min": 30,
+      "price": "40"
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Cris Medeiros",
+      "title": "Banho e tosa"
+    },
+    {
+      "name": "Leo Farias",
+      "title": "Tosador"
+    }
+  ],
+  "horarios": {
+    "seg": "09:00-18:00",
+    "ter": "09:00-18:00",
+    "qua": "09:00-18:00",
+    "qui": "09:00-18:00",
+    "sex": "09:00-18:00",
+    "sab": "09:00-14:00",
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": {
+      "bg": "#fff8ec",
+      "surface": "#ffffff",
+      "text": "#1d2a3a",
+      "muted": "#55606e",
+      "primary": "#c2461d",
+      "on_primary": "#ffffff",
+      "accent": "#2f7d6d"
+    },
+    "fonts": {
+      "heading": "Bricolage Grotesque",
+      "body": "Outfit"
+    },
+    "hero_layout": "split",
+    "radius": "round",
+    "background": "dots",
+    "copy": {
+      "headline": "Banho e tosa sem estresse para o seu pet",
+      "subheadline": "Atendimento com hora marcada na Lagoa da Conceição. Escolha o porte, o serviço e o horário.",
+      "about": "",
+      "cta": "Agendar banho",
+      "services_title": "Serviços",
+      "team_title": "Quem cuida",
+      "booking_title": "Agende o banho"
+    }
+  },
+  "imagens": {
+    "capa": "img/pet-bicho-bom.png"
+  }
+}

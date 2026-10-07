@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS sites (
   responsible_name      TEXT,
   responsible_registration TEXT,
   company_registration  TEXT,
+  is_demo               INTEGER NOT NULL DEFAULT 0,
   created_at            TEXT    NOT NULL DEFAULT (datetime('now')),
   updated_at            TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -213,6 +214,7 @@ const ADDED_COLUMNS = [
   ['sites', 'responsible_registration', 'TEXT'],
   ['sites', 'company_registration', 'TEXT'],
   ['professionals', 'registration', 'TEXT'],
+  ['sites', 'is_demo', 'INTEGER NOT NULL DEFAULT 0'],
 ];
 
 function migrate(db) {

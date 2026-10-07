@@ -125,8 +125,10 @@
     root.appendChild(el('div', { class: 'steps', role: 'status' }, [
       el('h3', { text: 'Agendamento confirmado! ✅' }),
       el('p', { text: b.service_name + (b.professional_name ? ' com ' + b.professional_name : '') + ' — ' + fmtDate(p[0]) + ' às ' + p[1] + (b.price_cents ? ' · ' + brl(b.price_cents) : '') }),
-      el('p', { class: 'muted', text: 'Guarde este link caso precise cancelar. Se o negócio usar WhatsApp, você também recebe a confirmação por lá.' }),
-      el('p', {}, [el('a', { href: cancelUrl, text: 'Link para cancelar' })]),
+      d.demo
+        ? el('p', { class: 'msg', text: 'Este é um site de demonstração: nenhum horário foi reservado e seus dados não foram guardados. Em um site real, o cliente recebe a confirmação e o negócio é avisado na hora.' })
+        : el('p', { class: 'muted', text: 'Guarde este link caso precise cancelar. Se o negócio usar WhatsApp, você também recebe a confirmação por lá.' }),
+      cancelUrl ? el('p', {}, [el('a', { href: cancelUrl, text: 'Link para cancelar' })]) : null,
       el('button', { type: 'button', class: 'btn ghost', on: { click: function () { start(); } } }, ['Fazer outro agendamento']),
     ]));
   }

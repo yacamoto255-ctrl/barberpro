@@ -1,0 +1,116 @@
+{
+  "_leia": "Site de DEMONSTRAÇÃO para o portfólio da agência: negócio, pessoas e contatos fictícios.",
+  "site": {
+    "name": "Navalha & Prosa Barbearia",
+    "slug": "demo-navalha-e-prosa",
+    "category": "barbearia",
+    "tagline": "Corte, barba e café passado na hora",
+    "description": "Barbearia de bairro com cadeira antiga, toalha quente e navalha. Aqui o corte não tem pressa e a conversa também não.\n\nTrabalhamos com hora marcada para você não esperar: escolha o serviço, o barbeiro e o horário direto pelo site.",
+    "whatsapp": "(11) 90000-0000",
+    "phone": "(11) 3000-0000",
+    "cep": "05433-000",
+    "address": "Rua dos Pinheiros, 870, Vila Madalena",
+    "city": "São Paulo",
+    "state": "SP",
+    "hide_prices": false,
+    "is_demo": true,
+    "booking_enabled": true,
+    "slot_interval_min": 30,
+    "min_notice_min": 30,
+    "max_days_ahead": 21,
+    "notify_whatsapp": false,
+    "notify_client_whatsapp": false,
+    "published": true
+  },
+  "servicos": [
+    {
+      "name": "Corte",
+      "duration_min": 40,
+      "price": "70",
+      "description": "Tesoura ou máquina, com lavagem e finalização."
+    },
+    {
+      "name": "Barba",
+      "duration_min": 30,
+      "price": "50",
+      "description": "Toalha quente, navalha e balm."
+    },
+    {
+      "name": "Corte + barba",
+      "duration_min": 70,
+      "price": "110"
+    },
+    {
+      "name": "Pezinho",
+      "duration_min": 15,
+      "price": "25"
+    },
+    {
+      "name": "Sobrancelha",
+      "duration_min": 15,
+      "price": "25"
+    },
+    {
+      "name": "Hidratação capilar",
+      "duration_min": 30,
+      "price": "45"
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Téo Barros",
+      "title": "Barbeiro",
+      "bio": "Cortes clássicos e degradê."
+    },
+    {
+      "name": "Juca Ramos",
+      "title": "Barbeiro",
+      "bio": "Especialista em barba e navalha."
+    },
+    {
+      "name": "Marina Teles",
+      "title": "Barbeira",
+      "bio": "Cortes texturizados e visagismo."
+    }
+  ],
+  "horarios": {
+    "ter": "10:00-20:00",
+    "qua": "10:00-20:00",
+    "qui": "10:00-21:00",
+    "sex": "10:00-21:00",
+    "sab": "09:00-18:00",
+    "seg": null,
+    "dom": null
+  },
+  "tema": {
+    "preset": "custom",
+    "palette": {
+      "bg": "#15110f",
+      "surface": "#211a16",
+      "text": "#f2e9dc",
+      "muted": "#b9ab99",
+      "primary": "#c9a227",
+      "on_primary": "#15110f",
+      "accent": "#d0603f"
+    },
+    "fonts": {
+      "heading": "Bebas Neue",
+      "body": "Work Sans"
+    },
+    "hero_layout": "banner",
+    "radius": "sharp",
+    "background": "grain",
+    "copy": {
+      "headline": "Navalha afiada, conversa boa",
+      "subheadline": "Barbearia na Vila Madalena com hora marcada. Escolha o barbeiro e o horário em menos de um minuto.",
+      "about": "",
+      "cta": "Marcar horário",
+      "services_title": "Serviços e valores",
+      "team_title": "Os barbeiros",
+      "booking_title": "Marque seu horário"
+    }
+  },
+  "imagens": {
+    "capa": "img/barbearia-navalha.png"
+  }
+}

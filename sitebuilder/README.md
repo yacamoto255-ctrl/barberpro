@@ -42,6 +42,32 @@ Também ficam ativos o *fallback* do lado do servidor (`fallbacks: "default"`, b
 - **Ocultar preços** no site público, na API pública, na confirmação e na página de cancelamento. Os preços continuam no painel e nos relatórios. Em sites de **odontologia** a opção já começa ligada: pelo que sei, o Código de Ética Odontológica (CFO) veda anunciar preços. Confirme as regras atuais com o CRO do seu estado.
 - **Textos da IA** sem preços, promessas de resultado, superlativos ou "antes e depois" para as categorias de saúde.
 
+## Sites de demonstração e portfólio
+
+Para mostrar a clientes o que a agência faz, marque um site como **demonstração** (aba Dados → Portfólio) ou use os exemplos prontos:
+
+```bash
+npm run seed-demos     # cria/atualiza os 5 exemplos de sites/demos e publica
+```
+
+| Exemplo | Nicho | Destaques |
+|---|---|---|
+| Clínica Aurora Odontologia | Dentista (Curitiba) | Sem preços e com CRO (regras do CFO), 3 dentistas |
+| Navalha & Prosa Barbearia | Barbearia (São Paulo) | Tema escuro, preços, 3 barbeiros |
+| Atelier Flor de Lis | Salão de beleza (Belo Horizonte) | Serviços por profissional |
+| Espaço Escuta Psicologia | Psicóloga (Porto Alegre) | Sem preços e com CRP, sessões de 50 min |
+| Bicho Bom Pet Care | Pet shop (Florianópolis) | Serviços por porte |
+
+Num site de demonstração:
+- aparece a faixa "Site de demonstração · negócio e dados fictícios · criado pela Versal Estúdio";
+- telefone, WhatsApp, e-mail, mapa e Instagram aparecem, mas **não viram links**, para não levar a ninguém real;
+- o **agendamento funciona na tela, mas é simulado**: valida tudo, mas não grava nada, não guarda dados do visitante e não envia WhatsApp;
+- a página fica fora do Google (`noindex`).
+
+A página **`/exemplos`** lista todas as demonstrações publicadas, com o botão "Quero um site assim" para o Instagram da agência. É o link para mandar a clientes.
+
+As capas dos exemplos são ilustrações próprias (`sites/demos/img`). Negócios, pessoas, registros profissionais e contatos são fictícios: os números `CRO-PR 0000x` e `(xx) 90000-0000` são marcadores, não registros reais.
+
 ## Cadastrar um site completo por arquivo
 
 Para montar um site de uma vez (dados, serviços, equipe, horários, tema e imagens), copie `sites/modelo-dentista.json`, preencha e rode:
@@ -93,7 +119,7 @@ Veja `.env.example`. As principais em produção:
 ## Testes
 
 ```bash
-npm test               # 144 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
+npm test               # 148 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
 npm run test:coverage  # cobertura (último resultado: 92% das linhas)
 npm run test:e2e       # simulação completa no Chromium (25 passos, 9 telas)
 npm run loadtest       # carga com 10, 100, 1.000 e 10.000 conexões (ou: npm run loadtest -- 100)

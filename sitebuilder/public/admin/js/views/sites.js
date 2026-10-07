@@ -24,14 +24,15 @@ export async function sitesView(root) {
   const cards = sites.map((s) => h('div', { class: 'card site-card' },
     h('div', { class: 'top' },
       h('div', {}, h('h2', { text: s.name }), h('div', { class: 'small muted', text: CATEGORY_LABEL[s.category] || s.category })),
-      h('span', { class: `pill ${s.published ? 'on' : 'off'}`, text: s.published ? 'Publicado' : 'Rascunho' })),
+      h('div', {}, s.is_demo ? h('span', { class: 'pill pending', text: 'Demonstração' }) : null, ' ',
+        h('span', { class: `pill ${s.published ? 'on' : 'off'}`, text: s.published ? 'Publicado' : 'Rascunho' }))),
     h('div', { class: 'swatches', 'aria-hidden': 'true' }, ['bg', 'surface', 'primary', 'accent', 'text'].map((k) => h('span', { style: { background: s.theme.palette[k] } }))),
     h('div', { class: 'url' }, s.published ? h('a', { href: publicUrl(s.slug), target: '_blank', rel: 'noopener', text: publicUrl(s.slug) }) : h('span', { class: 'muted', text: `/s/${s.slug}` })),
     h('div', { class: 'small muted', text: `${s.services_count} serviço(s) ativo(s) · ${s.upcoming_count} agendamento(s) futuro(s)` }),
     h('div', { class: 'form-actions' }, h('a', { class: 'btn', href: `#/sites/${s.id}` }, 'Editar'),
       h('a', { class: 'btn ghost', href: `#/agenda?site=${s.id}` }, 'Agenda'))));
   clear(root).append(
-    pageHead('Sites', { actions: [h('a', { class: 'btn primary', href: '#/sites/novo' }, '+ Novo site')], subtitle: 'Cada negócio ganha um site com agendamento online.' }),
+    pageHead('Sites', { actions: [h('a', { class: 'btn ghost', href: '/exemplos', target: '_blank', rel: 'noopener' }, 'Ver portfólio ↗'), h('a', { class: 'btn primary', href: '#/sites/novo' }, '+ Novo site')], subtitle: 'Cada negócio ganha um site com agendamento online.' }),
     sites.length ? h('div', { class: 'grid g3' }, cards)
       : h('div', { class: 'card' }, emptyState('Nenhum site ainda', 'Crie o primeiro site para um cliente da agência.', h('a', { class: 'btn primary', href: '#/sites/novo' }, 'Criar site'))),
   );
@@ -131,6 +132,9 @@ function tabDados(root, data, meta, reload) {
       field({ label: 'Registro do responsável', name: 'responsible_registration', value: s.responsible_registration || '', maxlength: 40, placeholder: 'CRO-PR 12345' }),
       field({ label: 'Registro da clínica no conselho', name: 'company_registration', value: s.company_registration || '', maxlength: 40, placeholder: 'CRO-PR EPAO 1234', hint: 'Opcional.' })),
     field({ label: 'Ocultar preços no site (continuam no painel e nos relatórios)', name: 'hide_prices', type: 'checkbox', value: !!s.hide_prices }),
+    h('h2', { text: 'Portfólio' }),
+    field({ label: 'Site de demonstração (negócio fictício para mostrar a clientes)', name: 'is_demo', type: 'checkbox', value: !!s.is_demo,
+      hint: 'Mostra a faixa "Site de demonstração", deixa os contatos sem link, simula o agendamento sem gravar nada, tira o site do Google e o lista em /exemplos quando publicado.' }),
     h('div', { class: 'form-actions' }, h('button', { class: 'btn primary', type: 'submit' }, 'Salvar dados')));
 
   // CEP: busca endereço no ViaCEP quando o campo fica completo (se falhar, segue manual)
