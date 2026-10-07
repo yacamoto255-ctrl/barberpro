@@ -19,25 +19,9 @@ try { process.loadEnvFile?.(); } catch (_) { /* sem .env */ }
 const { createApp } = require('../src/app');
 const { getDb, closeDb } = require('../src/db');
 const { signToken } = require('../src/auth');
+const { parseHours } = require('../src/util');
 
-const DAYS = { dom: 0, seg: 1, ter: 2, qua: 3, qui: 4, sex: 5, sab: 6, 'sáb': 6 };
 const off = (req, res, next) => next();
-
-/** {"seg": "08:00-12:00, 13:30-18:00", "dom": null} -> [{weekday, open_time, close_time}] */
-function parseHours(hours) {
-  const out = [];
-  for (const [day, value] of Object.entries(hours || {})) {
-    const wd = DAYS[day.toLowerCase()];
-    if (wd === undefined) throw new Error(`Dia inválido em "horarios": ${day} (use dom, seg, ter, qua, qui, sex, sab)`);
-    if (!value) continue;
-    for (const range of String(value).split(',').map((r) => r.trim()).filter(Boolean)) {
-      const m = range.match(/^(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})$/);
-      if (!m) throw new Error(`Faixa inválida em "horarios.${day}": "${range}" (use 08:00-12:00)`);
-      out.push({ weekday: wd, open_time: m[1], close_time: m[2] });
-    }
-  }
-  return out;
-}
 
 async function seed(file, { update = false, log = console.log } = {}) {
   const spec = JSON.parse(fs.readFileSync(file, 'utf8'));

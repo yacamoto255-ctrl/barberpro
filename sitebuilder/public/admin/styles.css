@@ -116,6 +116,14 @@ td .cell-actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap
 .preset[aria-pressed="true"] { border-color: var(--accent); }
 .preset .sw { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 6px; }
 .preset .sw span { flex: 1; }
+.model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 12px; }
+.model-card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+.model-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: var(--line); display: block; }
+.model-card .info { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.model-card .info strong { font-size: 1rem; }
+.model-card .acts { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; flex-wrap: wrap; }
+.model-pick { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.model-pick .field { min-width: 220px; margin: 0; }
 .preview-frame { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
 .hours-day { display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .hours-day .ranges { display: flex; flex-direction: column; gap: 6px; }

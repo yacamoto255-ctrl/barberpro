@@ -17,7 +17,9 @@
     "reset-password": "node scripts/reset-password.js",
     "seed-site": "node scripts/seed-site.js",
     "seed-demos": "node scripts/seed-site.js sites/demos --update",
-    "export-demos": "node scripts/export-demos.js"
+    "export-demos": "node scripts/export-demos.js",
+    "build-model-art": "node scripts/build-model-art.js",
+    "build-posts": "node scripts/build-posts.js"
   },
   "jest": {
     "testEnvironment": "node",

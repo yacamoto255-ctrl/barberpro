@@ -65,6 +65,7 @@ function createApp({ limits = defaultLimits(), logger = null } = {}) {
   app.use('/api/settings', st.settings);
   app.use('/api/audit', st.audit);
   app.use('/api/themes', st.themes);
+  app.use('/api/models', require('./routes/models')());
   app.use('/api/backups', require('./routes/backups')());
 
   app.get('/api/health', (req, res) => {

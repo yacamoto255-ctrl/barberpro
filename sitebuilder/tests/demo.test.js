@@ -57,7 +57,7 @@ describe('sites de demonstração (portfólio)', () => {
   test('saúde em demonstração mantém as regras: sem preço e com registro', async () => {
     const page = await request(app).get('/s/demo-clinica-aurora-odontologia');
     expect(page.text).not.toMatch(/R\$/);
-    expect(page.text).toContain('CRO-PR 00001');
+    expect(page.text).toContain('CRO-PR 00000');
     const psi = await request(app).get('/s/demo-espaco-escuta-psicologia');
     expect(psi.text).toContain('CRP 07/00000');
     expect(psi.text).not.toMatch(/R\$/);

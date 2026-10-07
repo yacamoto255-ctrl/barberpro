@@ -9,6 +9,7 @@ const { audit } = require('../audit');
 const { ah, idParam } = require('../util');
 const { validateTheme, defaultThemeFor, generateTheme } = require('../services/theme');
 const { nowLocal } = require('../services/slots');
+const models = require('../services/models');
 
 const CATEGORIES = [
   'barbearia', 'salao', 'estetica', 'clinica', 'odontologia', 'psicologia', 'nutricao',
@@ -208,6 +209,41 @@ module.exports = (limits) => {
     audit(req, 'site.theme_ai', 'site', site.id, { model, hint: hint || null });
     res.json({ site: siteOut(getSite(site.id)), previous_theme: previous, warnings, model });
   }));
+
+  // Aplica um modelo do catálogo (sites/modelos): visual sempre; textos e capa ilustrada se pedidos
+  router.post('/:id/apply-model', (req, res) => {
+    const site = getSite(idParam(req));
+    const c = new Checker(req.body || {});
+    const modelId = c.str('model_id', 'Modelo', { required: true, max: 40 });
+    const withCopy = c.bool('copy', 'Usar os textos do modelo');
+    const withCover = c.bool('cover', 'Usar a capa do modelo');
+    c.done();
+    const model = models.getModel(modelId);
+    if (!model) throw new HttpError(404, 'Modelo não encontrado.', { fields: { model_id: 'Modelo não encontrado.' } });
+    const previous = siteOut(site).theme;
+    const theme = structuredClone(model.theme);
+    theme.preset = 'custom';
+    const useCopy = withCopy !== 0 && withCopy !== false;
+    const useCover = withCover !== 0 && withCover !== false;
+    if (!useCopy) theme.copy = previous.copy;
+    const warnings = [];
+    if (useCopy && model.category !== site.category) {
+      warnings.push(`Os textos deste modelo foram escritos para ${model.category_label.toLowerCase()}. Revise-os em "Ajuste fino".`);
+    }
+    const coverFile = useCover ? models.imagePath(model.id, 'cover') : null;
+    if (useCover && !coverFile) warnings.push('Este modelo não tem capa ilustrada; a imagem de capa atual foi mantida.');
+    transaction((tx) => {
+      tx.prepare(`UPDATE sites SET theme_json = ?, updated_at = datetime('now') WHERE id = ?`).run(JSON.stringify(theme), site.id);
+      if (coverFile) {
+        const buf = require('fs').readFileSync(coverFile);
+        const info = tx.prepare('INSERT INTO images (site_id, kind, mime, size, data) VALUES (?, ?, ?, ?, ?)').run(site.id, 'hero', 'image/png', buf.length, buf);
+        if (site.hero_image_id) tx.prepare('DELETE FROM images WHERE id = ?').run(site.hero_image_id);
+        tx.prepare('UPDATE sites SET hero_image_id = ? WHERE id = ?').run(Number(info.lastInsertRowid), site.id);
+      }
+    });
+    audit(req, 'site.apply_model', 'site', site.id, { model_id: model.id, copy: useCopy, cover: !!coverFile });
+    res.json({ site: siteOut(getSite(site.id)), previous_theme: previous, warnings, model: models.summary(model) });
+  });
 
   router.get('/:id/preview-link', (req, res) => {
     const site = getSite(idParam(req));

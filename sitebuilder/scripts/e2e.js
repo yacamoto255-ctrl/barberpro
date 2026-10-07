@@ -187,8 +187,24 @@ async function overflowX(page) {
       await page.locator('.hours-day').first().locator('input[type=time]').first().waitFor();
     });
 
-    await step('8. Aparência: modelo pronto + prévia', async () => {
+    await step('8. Aparência: aplicar modelo da Versal, desfazer, paleta rápida e prévia', async () => {
       await tab('Aparência').click();
+      assert(await page.inputValue('#model-niche') === 'barbearia', 'nicho do site pré-selecionado');
+      assert(await page.locator('.model-card').count() === 10, '10 modelos de barbearia no painel');
+      await page.locator('.model-card').filter({ hasText: 'Couro & Whisky' }).getByRole('button', { name: 'Aplicar' }).click();
+      await dlg().getByRole('button', { name: 'Aplicar modelo' }).click();
+      await toastOk(/Couro & Whisky.*aplicado/);
+      assert(await page.inputValue('#s-heading') === 'DM Serif Display', 'fonte do modelo no editor');
+      await page.frameLocator('iframe.preview-frame').locator('h1', { hasText: 'Barba feita como ritual' }).waitFor();
+      await page.getByRole('button', { name: 'Desfazer modelo' }).click();
+      await toastOk(/Tema anterior restaurado/);
+      assert(await page.inputValue('#s-heading') !== 'DM Serif Display', 'desfazer volta o tema anterior');
+      await page.locator('.model-card').filter({ hasText: 'Couro & Whisky' }).getByRole('button', { name: 'Aplicar' }).click();
+      await dlg().getByRole('button', { name: 'Aplicar modelo' }).click();
+      await toastOk(/Couro & Whisky.*aplicado/);
+      await page.locator('.model-grid').scrollIntoViewIfNeeded();
+      await page.locator('.model-grid img').first().evaluate((i) => i.decode());
+      await page.screenshot({ path: path.join(DOCS_SHOTS, 'painel-modelos-desktop.png') });
       await page.locator('button.preset').filter({ hasText: 'Marinho' }).click();
       await page.getByRole('button', { name: 'Salvar aparência' }).click();
       await toastOk(/Aparência salva/);
@@ -244,7 +260,26 @@ async function overflowX(page) {
       await cli.screenshot({ path: path.join(DOCS_SHOTS, 'site-agendado-iphone.png'), fullPage: false });
     });
 
-    await step('12. Painel recebe o alerta do novo agendamento', async () => {
+    await step('12. Modelos públicos: galeria e agenda simulada no celular (nada chega ao servidor)', async () => {
+      const apiCalls = [];
+      cli.on('request', (r) => { if (r.url().includes('/api/public/sites/modelo-')) apiCalls.push(r.url()); });
+      await cli.goto(`${BASE}/modelos`);
+      assert(await cli.locator('a.model').count() === 50, '50 modelos na galeria');
+      assert((await overflowX(cli)) <= 1, 'galeria com rolagem horizontal no celular');
+      await cli.locator('a.model[href="/modelos/odontologia-03"]').click();
+      await cli.locator('h1', { hasText: 'Consultório para todas as idades' }).waitFor();
+      assert(!(await cli.content()).includes('R$'), 'modelo de dentista sem preço');
+      assert((await overflowX(cli)) <= 1, 'modelo com rolagem horizontal no celular');
+      await cli.locator('.slots:not(.days) .slot').first().click();
+      await cli.fill('#bk-name', 'Visitante Teste');
+      await cli.fill('#bk-phone', '11987650000');
+      await cli.getByRole('button', { name: 'Confirmar agendamento' }).click();
+      await cli.getByText('nenhum horário foi reservado').waitFor();
+      assert(!apiCalls.length, `a prévia chamou o servidor: ${apiCalls.join(', ')}`);
+      await cli.screenshot({ path: path.join(DOCS_SHOTS, 'modelo-agenda-simulada-iphone.png') });
+    });
+
+    await step('13. Painel recebe o alerta do novo agendamento', async () => {
       await page.goto(`${BASE}/admin/#/notificacoes`);
       await page.locator('.list-item.unread').filter({ hasText: 'Joana Cliente' }).waitFor();
       const badge = await page.locator('#nav-badge').textContent();
@@ -253,7 +288,7 @@ async function overflowX(page) {
       await page.locator('#nav-badge').waitFor({ state: 'hidden' });
     });
 
-    await step('13. Agenda: alterar status e lançar agendamento manual', async () => {
+    await step('14. Agenda: alterar status e lançar agendamento manual', async () => {
       await page.goto(`${BASE}/admin/#/agenda`);
       const row = page.locator('tr').filter({ hasText: 'Joana Cliente' });
       await row.waitFor();
@@ -267,7 +302,7 @@ async function overflowX(page) {
       await page.locator('tr').filter({ hasText: 'Marcos Balcão' }).waitFor();
     });
 
-    await step('14. Dashboard mostra os números reais', async () => {
+    await step('15. Dashboard mostra os números reais', async () => {
       await page.goto(`${BASE}/admin/#/`);
       await page.locator('.kpi').first().waitFor();
       const realizado = await page.locator('.kpi').filter({ hasText: 'Realizado no mês' }).locator('.value').textContent();
@@ -276,7 +311,7 @@ async function overflowX(page) {
       return { realizado_no_mes: realizado.replace(/\s/g, ' ') };
     });
 
-    await step('15. Relatórios: CSV, Excel e PDF baixados e conferidos', async () => {
+    await step('16. Relatórios: CSV, Excel e PDF baixados e conferidos', async () => {
       await page.goto(`${BASE}/admin/#/relatorios`);
       await page.locator('.kpi').first().waitFor();
       const files = {};
@@ -293,7 +328,7 @@ async function overflowX(page) {
       return files;
     });
 
-    await step('16. Criar operador; operador não acessa áreas de admin', async () => {
+    await step('17. Criar operador; operador não acessa áreas de admin', async () => {
       await page.goto(`${BASE}/admin/#/usuarios`);
       await page.getByRole('button', { name: '+ Novo usuário' }).click();
       await dlg().locator('input[name=name]').fill(OPER.name);
@@ -314,7 +349,7 @@ async function overflowX(page) {
       await page.getByRole('button', { name: 'Sair' }).click();
     });
 
-    await step('17. Entrar de novo e validar persistência dos dados', async () => {
+    await step('18. Entrar de novo e validar persistência dos dados', async () => {
       await page.fill('input[name=email]', ADMIN.email);
       await page.fill('input[name=password]', ADMIN.password);
       await page.getByRole('button', { name: 'Entrar' }).click();
@@ -326,7 +361,7 @@ async function overflowX(page) {
       await page.locator('.site-card').filter({ hasText: 'Barbearia Versal Teste' }).filter({ hasText: 'Publicado' }).waitFor();
     });
 
-    await step('18. Cliente cancela pelo link e a vaga volta', async () => {
+    await step('19. Cliente cancela pelo link e a vaga volta', async () => {
       // Lança um agendamento futuro pela API pública e cancela pelo link recebido
       const pub = await (await fetch(`${siteUrl.replace('/s/', '/api/public/sites/')}`)).json();
       const svc = pub.services[0];
@@ -347,7 +382,7 @@ async function overflowX(page) {
       return { cancelUrl_inicial_valido: !!cancelUrl };
     });
 
-    await step('19. Trocar senha, sair e entrar com a nova', async () => {
+    await step('20. Trocar senha, sair e entrar com a nova', async () => {
       await page.goto(`${BASE}/admin/#/conta`);
       await page.fill('input[name=current_password]', ADMIN.password);
       await page.fill('input[name=new_password]', 'NovaSenha2026');
@@ -365,18 +400,23 @@ async function overflowX(page) {
       ADMIN.password = 'NovaSenha2026';
     });
 
-    await step('20. Backup manual pelo painel', async () => {
+    await step('21. Backup manual pelo painel', async () => {
       await page.goto(`${BASE}/admin/#/configuracoes`);
       await page.getByRole('button', { name: 'Fazer backup agora' }).click();
       await toastOk(/Backup manual-/);
       await page.locator('td').filter({ hasText: 'Manual' }).first().waitFor();
     });
 
-    await step('21. Excluir site (com confirmação digitada)', async () => {
+    await step('22. Novo site já com modelo escolhido; depois excluir (com confirmação digitada)', async () => {
       await page.goto(`${BASE}/admin/#/sites/novo`);
       await page.fill('input[name=name]', 'Site Temporário');
+      await page.selectOption('select[name=category]', 'pet');
+      await page.selectOption('#new-model', 'pet-03');
       await page.getByRole('button', { name: 'Criar site' }).click();
       await page.waitForURL(/#\/sites\/\d+\/servicos/);
+      await toastOk(/com o modelo escolhido/);
+      await tab('Aparência').click();
+      assert(await page.inputValue('#s-heading') === 'Archivo Black', 'modelo aplicado na criação');
       await tab('Dados').click();
       await page.getByRole('button', { name: 'Excluir site' }).click();
       await dlg().locator('input').fill('site-temporario');
@@ -386,7 +426,7 @@ async function overflowX(page) {
       assert(await page.locator('.site-card').filter({ hasText: 'Site Temporário' }).count() === 0, 'site não foi excluído');
     });
 
-    await step('22. Navegação: nenhum link interno quebrado', async () => {
+    await step('23. Navegação: nenhum link interno quebrado', async () => {
       const links = new Set();
       await page.goto(`${BASE}/admin/#/`);
       await page.locator('.kpi').first().waitFor();
@@ -409,7 +449,7 @@ async function overflowX(page) {
       return { links_painel: links.size, ancoras_site: anchors.length, imagens: imgs.length };
     });
 
-    await step('23. Modo offline (PWA): painel abre sem internet e volta sozinho', async () => {
+    await step('24. Modo offline (PWA): painel abre sem internet e volta sozinho', async () => {
       await page.goto(`${BASE}/admin/`);
       await page.evaluate(() => navigator.serviceWorker.ready);
       await page.reload();
@@ -424,7 +464,7 @@ async function overflowX(page) {
       await page.locator('.kpi').first().waitFor();
     });
 
-    await step('24. Responsividade: painel e site em 9 telas, sem rolagem lateral', async () => {
+    await step('25. Responsividade: painel e site em 9 telas, sem rolagem lateral', async () => {
       const screens = [
         ['desktop-1920', { viewport: { width: 1920, height: 1080 } }],
         ['desktop-1600', { viewport: { width: 1600, height: 900 } }],
@@ -462,6 +502,12 @@ async function overflowX(page) {
         await p.goto(`${BASE}/admin/#/`);
         await p.locator('.kpi').first().waitFor();
         await p.screenshot({ path: path.join(OUT, `painel-${name}.png`), fullPage: true });
+        for (const u of ['/modelos', '/modelos/salao-04', '/modelos/barbearia-06']) {
+          await p.goto(BASE + u);
+          await p.locator('h1').first().waitFor();
+          const ovm = await overflowX(p);
+          if (ovm > 1) problems.push(`${name} ${u} +${ovm}px`);
+        }
         await p.goto(siteUrl);
         await p.locator('#bk-service').waitFor();
         const ovs = await overflowX(p);
@@ -474,10 +520,10 @@ async function overflowX(page) {
         await c.close();
       }
       assert(!problems.length, `rolagem horizontal: ${problems.join('; ')}`);
-      return { telas: screens.length, paginas_por_tela: pages.length + 1 };
+      return { telas: screens.length, paginas_por_tela: pages.length + 4 };
     });
 
-    await step('25. Nenhum erro de JavaScript nem erro 5xx do servidor', async () => {
+    await step('26. Nenhum erro de JavaScript nem erro 5xx do servidor', async () => {
       assert(!consoleErrors.length, consoleErrors.join('\n'));
       return { respostas_4xx_esperadas: expected4xx, servicos_externos_indisponiveis: [...new Set(externalFailures)] };
     });

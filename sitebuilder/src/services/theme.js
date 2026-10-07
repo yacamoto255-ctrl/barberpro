@@ -28,14 +28,25 @@ const HEADING_FONTS = {
   'Oswald': { weight: 600, fallback: 'sans-serif' },
   'Bebas Neue': { weight: 400, fallback: 'sans-serif' },
   'Archivo Black': { weight: 400, fallback: 'sans-serif' },
+  'Anton': { weight: 400, fallback: 'sans-serif' },
+  'Alfa Slab One': { weight: 400, fallback: 'serif' },
+  'Shrikhand': { weight: 400, fallback: 'serif' },
+  'Bodoni Moda': { weight: 700, fallback: 'serif' },
+  'Italiana': { weight: 400, fallback: 'serif' },
+  'Young Serif': { weight: 400, fallback: 'serif' },
+  'Gloock': { weight: 400, fallback: 'serif' },
+  'Zilla Slab': { weight: 700, fallback: 'serif' },
+  'Newsreader': { weight: 600, fallback: 'serif' },
 };
 const BODY_FONTS = {
   'Manrope': 'sans-serif', 'DM Sans': 'sans-serif', 'Work Sans': 'sans-serif', 'Karla': 'sans-serif',
   'Outfit': 'sans-serif', 'Figtree': 'sans-serif', 'IBM Plex Sans': 'sans-serif', 'Source Sans 3': 'sans-serif',
   'Nunito Sans': 'sans-serif', 'Libre Franklin': 'sans-serif', 'Rubik': 'sans-serif', 'Public Sans': 'sans-serif',
-  'Lora': 'serif', 'Crimson Pro': 'serif',
+  'Instrument Sans': 'sans-serif', 'Hanken Grotesk': 'sans-serif', 'Plus Jakarta Sans': 'sans-serif', 'Lexend': 'sans-serif',
+  'Albert Sans': 'sans-serif', 'Lora': 'serif', 'Crimson Pro': 'serif',
 };
-const HERO_LAYOUTS = ['centered', 'split', 'editorial', 'banner'];
+// split_left: imagem à esquerda; stacked: texto centralizado com imagem larga embaixo
+const HERO_LAYOUTS = ['centered', 'split', 'split_left', 'stacked', 'editorial', 'banner'];
 const HEALTH_CATEGORIES = ['odontologia', 'clinica', 'psicologia', 'nutricao'];
 const RADII = ['sharp', 'soft', 'round'];
 const BACKGROUNDS = ['plain', 'gradient', 'grain', 'grid', 'dots'];
@@ -312,6 +323,6 @@ async function generateTheme(site, services, hint = '') {
 
 module.exports = {
   PRESETS, HEADING_FONTS, BODY_FONTS, HERO_LAYOUTS, RADII, BACKGROUNDS, COPY_LIMITS, THEME_SCHEMA, SYSTEM_PROMPT,
-  presetTheme, defaultThemeFor, validateTheme, googleFontsHref, generateTheme, contrast, apiKey, buildUserPrompt,
+  presetTheme, defaultThemeFor, validateTheme, googleFontsHref, generateTheme, contrast, ensureContrast, mix, luminance, apiKey, buildUserPrompt,
   _setClientFactory, MODEL,
 };

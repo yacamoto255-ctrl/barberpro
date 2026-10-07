@@ -32,7 +32,7 @@ export async function sitesView(root) {
     h('div', { class: 'form-actions' }, h('a', { class: 'btn', href: `#/sites/${s.id}` }, 'Editar'),
       h('a', { class: 'btn ghost', href: `#/agenda?site=${s.id}` }, 'Agenda'))));
   clear(root).append(
-    pageHead('Sites', { actions: [h('a', { class: 'btn ghost', href: '/exemplos', target: '_blank', rel: 'noopener' }, 'Ver portfólio ↗'), h('a', { class: 'btn primary', href: '#/sites/novo' }, '+ Novo site')], subtitle: 'Cada negócio ganha um site com agendamento online.' }),
+    pageHead('Sites', { actions: [h('a', { class: 'btn ghost', href: '/modelos', target: '_blank', rel: 'noopener' }, 'Ver modelos ↗'), h('a', { class: 'btn ghost', href: '/exemplos', target: '_blank', rel: 'noopener' }, 'Ver portfólio ↗'), h('a', { class: 'btn primary', href: '#/sites/novo' }, '+ Novo site')], subtitle: 'Cada negócio ganha um site com agendamento online.' }),
     sites.length ? h('div', { class: 'grid g3' }, cards)
       : h('div', { class: 'card' }, emptyState('Nenhum site ainda', 'Crie o primeiro site para um cliente da agência.', h('a', { class: 'btn primary', href: '#/sites/novo' }, 'Criar site'))),
   );
@@ -41,6 +41,17 @@ export async function sitesView(root) {
 /* ── Novo ──────────────────────────────────────────────── */
 export async function siteNewView(root) {
   const { categories, ufs } = await get('/sites');
+  const catalog = await get('/models').catch(() => ({ models: [] }));
+  const modelSelect = h('select', { id: 'new-model', name: 'model_id' });
+  const modelHint = h('div', { class: 'hint' });
+  const fillModels = (category) => {
+    const list = catalog.models.filter((m) => m.category === category);
+    modelSelect.replaceChildren(h('option', { value: '' }, list.length ? 'Sem modelo (tema padrão)' : 'Sem modelos para esta categoria'),
+      ...list.map((m) => h('option', { value: m.id }, `${String(m.number).padStart(2, '0')} · ${m.name}`)));
+    modelSelect.disabled = !list.length;
+    modelHint.replaceChildren(list.length ? 'Aplica cores, fontes, textos e capa do modelo. Dá para trocar depois na aba Aparência. ' : '',
+      list.length ? h('a', { href: `/modelos#${category}`, target: '_blank', rel: 'noopener' }, 'Ver os modelos ↗') : '');
+  };
   const form = h('form', { class: 'form card', novalidate: true },
     field({ label: 'Nome do negócio', name: 'name', required: true, maxlength: 120 }),
     h('div', { class: 'row' },
@@ -50,11 +61,25 @@ export async function siteNewView(root) {
       field({ label: 'WhatsApp do negócio', name: 'whatsapp', type: 'tel', placeholder: '(11) 98765-4321' }),
       field({ label: 'Cidade', name: 'city', maxlength: 80 }),
       field({ label: 'UF', name: 'state', type: 'select', options: [['', '—'], ...ufs.map((u) => [u, u])] })),
+    h('div', { class: 'field' }, h('label', { for: 'new-model', text: 'Modelo de site (opcional)' }), modelSelect, modelHint),
     h('div', { class: 'form-actions' }, h('button', { class: 'btn primary', type: 'submit' }, 'Criar site'), h('a', { class: 'btn ghost', href: '#/sites' }, 'Cancelar')));
+  const catSelect = form.querySelector('[name="category"]');
+  catSelect.addEventListener('change', () => fillModels(catSelect.value));
+  fillModels(catSelect.value);
   onSubmit(form, async (v) => {
-    const body = Object.fromEntries(Object.entries(v).filter(([, x]) => x !== ''));
+    const { model_id: modelId, ...rest } = v;
+    const body = Object.fromEntries(Object.entries(rest).filter(([, x]) => x !== ''));
     const { site } = await post('/sites', body);
-    toast('Site criado. Agora cadastre serviços e horários.', 'ok');
+    if (modelId) {
+      try {
+        await post(`/sites/${site.id}/apply-model`, { model_id: modelId });
+      } catch (e) {
+        toast(`Site criado, mas o modelo não foi aplicado: ${e.message} Aplique na aba Aparência.`, 'err');
+        go(`/sites/${site.id}/aparencia`);
+        return;
+      }
+    }
+    toast(modelId ? 'Site criado com o modelo escolhido. Agora cadastre serviços e horários.' : 'Site criado. Agora cadastre serviços e horários.', 'ok');
     go(`/sites/${site.id}/servicos`);
   });
   clear(root).append(pageHead('Novo site', { crumbs: h('a', { href: '#/sites' }, 'Sites') }), form);
@@ -357,6 +382,49 @@ async function tabAparencia(root, data, meta, reload) {
   }, h('div', { class: 'sw' }, ['bg', 'surface', 'primary', 'accent', 'text'].map((k) => h('span', { style: { background: p.theme.palette[k] } }))),
   h('strong', { text: p.label }), h('div', { class: 'small muted', text: `${p.theme.fonts.heading} + ${p.theme.fonts.body}` }))));
 
+  // Modelos da Versal (catálogo): escolha por nicho, prévia e aplicação
+  const catalog = await get('/models').catch(() => ({ categories: [], models: [] }));
+  const nicheSelect = h('select', { id: 'model-niche' }, catalog.categories.map((cat) => h('option', { value: cat.category }, `${cat.label} (${cat.count})`)));
+  nicheSelect.value = catalog.categories.some((cat) => cat.category === data.site.category) ? data.site.category : (catalog.categories[0]?.category || '');
+  const modelGrid = h('div', { class: 'model-grid' });
+  const modelUndo = h('button', { type: 'button', class: 'btn ghost', hidden: true, onclick: () => undoBtn.click() }, 'Desfazer modelo');
+  async function applyModel(m) {
+    const copyBox = h('input', { type: 'checkbox', checked: true });
+    const coverBox = h('input', { type: 'checkbox', checked: !!m.cover_url, disabled: m.cover_url ? null : true });
+    const body = h('div', { class: 'form' },
+      h('p', { class: 'muted', text: `Cores, fontes e layout do modelo "${m.name}" substituem os atuais.` }),
+      h('label', { class: 'check' }, copyBox, 'Usar também os textos do modelo (título, subtítulo, sobre…)'),
+      h('label', { class: 'check' }, coverBox, 'Usar a ilustração de capa do modelo (substitui a capa atual; o "Desfazer" não traz a capa antiga de volta)'));
+    await dialog({
+      title: `Aplicar modelo ${String(m.number).padStart(2, '0')} · ${m.name}`, body,
+      actions: [{ label: 'Cancelar', value: false }, { label: 'Aplicar modelo', class: 'primary', handler: async () => {
+        try {
+          const r = await post(`/sites/${id}/apply-model`, { model_id: m.id, copy: copyBox.checked, cover: coverBox.checked });
+          undo = r.previous_theme; undoBtn.hidden = false; modelUndo.hidden = false;
+          theme = r.site.theme; drawEditor();
+          clear(warnBox).append(r.warnings.length ? h('div', { class: 'alert warn', text: r.warnings.join(' ') }) : null);
+          toast(`Modelo "${m.name}" aplicado.`, 'ok'); refreshPreview();
+          return true;
+        } catch (e) { toast(e.message, 'err'); return false; }
+      } }],
+    });
+  }
+  function drawModels() {
+    const list = catalog.models.filter((m) => m.category === nicheSelect.value);
+    clear(modelGrid).append(...list.map((m) => h('article', { class: 'model-card' },
+      m.thumb_url ? h('img', { src: m.thumb_url, alt: '', loading: 'lazy' }) : null,
+      h('div', { class: 'info' },
+        h('span', { class: 'small muted', text: `Modelo ${String(m.number).padStart(2, '0')} · ${m.fonts.heading} + ${m.fonts.body}` }),
+        h('strong', { text: m.name }),
+        h('div', { class: 'swatches', 'aria-hidden': 'true' }, ['bg', 'surface', 'primary', 'accent', 'text'].map((k) => h('span', { style: { background: m.palette[k] } }))),
+        h('span', { class: 'small muted', text: m.style }),
+        h('div', { class: 'acts' },
+          h('a', { class: 'btn sm ghost', href: m.preview_url, target: '_blank', rel: 'noopener' }, 'Prévia ↗'),
+          h('button', { class: 'btn sm primary', type: 'button', onclick: () => applyModel(m) }, 'Aplicar'))))));
+  }
+  nicheSelect.addEventListener('change', drawModels);
+  drawModels();
+
   const editor = h('div', { class: 'form' });
   const LABELS = { bg: 'Fundo', surface: 'Cartões', text: 'Texto', muted: 'Texto secundário', primary: 'Cor principal (botões)', on_primary: 'Texto dos botões', accent: 'Destaque' };
   const COPY = { headline: 'Título principal', subheadline: 'Subtítulo', about: 'Texto "Sobre"', cta: 'Texto do botão', services_title: 'Título de serviços', team_title: 'Título da equipe', booking_title: 'Título do agendamento' };
@@ -403,7 +471,7 @@ async function tabAparencia(root, data, meta, reload) {
   aiBtn.textContent = '✨ Gerar com IA';
   const undoBtn = h('button', { type: 'button', class: 'btn ghost', hidden: true, onclick: async () => {
     if (!undo) return;
-    try { await put(`/sites/${id}/theme`, { theme: undo }); theme = undo; undo = null; undoBtn.hidden = true; drawEditor(); toast('Tema anterior restaurado.', 'ok'); refreshPreview(); } catch (e) { toast(e.message, 'err'); }
+    try { await put(`/sites/${id}/theme`, { theme: undo }); theme = undo; undo = null; undoBtn.hidden = true; modelUndo.hidden = true; drawEditor(); toast('Tema anterior restaurado.', 'ok'); refreshPreview(); } catch (e) { toast(e.message, 'err'); }
   } }, 'Desfazer');
   aiBtn.addEventListener('click', async () => {
     aiBtn.disabled = true;
@@ -424,7 +492,12 @@ async function tabAparencia(root, data, meta, reload) {
         : h('div', { class: 'alert info' }, 'Para gerar com IA, um administrador precisa cadastrar a chave da Anthropic em ', h('a', { href: '#/configuracoes' }, 'Configurações'), '. Enquanto isso, use os modelos prontos abaixo.'),
       h('div', { class: 'field' }, h('label', { for: 'ai-hint', text: 'Orientação de estilo' }), hint),
       h('div', { class: 'form-actions' }, aiBtn, undoBtn)),
-    h('div', { class: 'card' }, h('h2', { text: 'Modelos prontos' }), presets),
+    catalog.models.length ? h('div', { class: 'card' }, h('h2', { text: 'Modelos da Versal' }),
+      h('p', { class: 'muted small', text: 'Sites completos por nicho: cores, fontes, layout, textos e capa ilustrada. Abra a prévia para ver o modelo funcionando; ao aplicar, você pode desfazer.' }),
+      h('div', { class: 'model-pick' }, h('div', { class: 'field' }, h('label', { for: 'model-niche', text: 'Nicho' }), nicheSelect),
+        h('a', { class: 'btn ghost', href: '/modelos', target: '_blank', rel: 'noopener' }, 'Ver todos os modelos ↗'), modelUndo),
+      modelGrid) : null,
+    h('div', { class: 'card' }, h('h2', { text: 'Paletas rápidas' }), presets),
     h('div', { class: 'card' }, h('h2', { text: 'Ajuste fino' }), warnBox, editor, h('div', { class: 'form-actions', style: { marginTop: '14px' } }, save)),
     h('div', { class: 'card' }, h('div', { class: 'page-head' }, h('h2', { text: 'Pré-visualização' }), h('button', { type: 'button', class: 'btn sm ghost', onclick: refreshPreview }, 'Atualizar')), frame),
   );
@@ -450,7 +523,7 @@ function tabImagens(root, data, meta, reload) {
     h('div', { class: 'alert info', text: 'Formatos: PNG, JPG ou WebP, até 2 MB cada.' }),
     h('div', { class: 'grid g2' },
       single('Logo', 'logo', s.logo_image_id, 'Aparece no topo e como ícone da aba. Ideal: quadrado ou horizontal, fundo transparente.'),
-      single('Imagem de capa', 'hero', s.hero_image_id, 'Usada no topo dos layouts "banner" e "split". Ideal: 1600×1000 px.')),
+      single('Imagem de capa', 'hero', s.hero_image_id, 'Usada no topo dos layouts "banner", "split", "split_left" e "stacked". Ideal: 1600×1000 px.')),
     h('div', { class: 'card' }, h('h2', { text: `Galeria (${gallery.length}/12)` }),
       gallery.length ? h('div', { class: 'img-grid' }, gallery.map((g) => h('figure', {}, h('img', { src: `/img/${g.id}`, alt: '', loading: 'lazy' }),
         h('figcaption', {}, h('span', { text: `${Math.round(g.size / 1024)} KB` }), h('button', { class: 'link', type: 'button', onclick: () => remove(g.id) }, 'Remover'))))) : emptyState('Galeria vazia', 'Fotos do espaço e de trabalhos feitos aumentam a confiança.'),

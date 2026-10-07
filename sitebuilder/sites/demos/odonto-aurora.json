@@ -14,7 +14,7 @@
     "state": "PR",
     "hide_prices": true,
     "responsible_name": "Dra. Helena Duarte",
-    "responsible_registration": "CRO-PR 00001",
+    "responsible_registration": "CRO-PR 00000",
     "is_demo": true,
     "booking_enabled": true,
     "slot_interval_min": 30,
@@ -66,7 +66,7 @@
     {
       "name": "Dra. Helena Duarte",
       "title": "Clínica geral e estética",
-      "registration": "CRO-PR 00001",
+      "registration": "CRO-PR 00000",
       "bio": "Responsável técnica da clínica. Atende avaliações, limpezas, restaurações e clareamento.",
       "servicos": [
         "Avaliação odontológica",
@@ -78,7 +78,7 @@
     {
       "name": "Dr. Rafael Moreira",
       "title": "Endodontia",
-      "registration": "CRO-PR 00002",
+      "registration": "CRO-PR 00000",
       "bio": "Especialista em tratamento de canal.",
       "servicos": [
         "Avaliação odontológica",
@@ -88,7 +88,7 @@
     {
       "name": "Dra. Lívia Campos",
       "title": "Ortodontia",
-      "registration": "CRO-PR 00003",
+      "registration": "CRO-PR 00000",
       "bio": "Aparelhos fixos e alinhadores para adolescentes e adultos.",
       "servicos": [
         "Consulta de ortodontia"

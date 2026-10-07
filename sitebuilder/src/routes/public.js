@@ -11,7 +11,8 @@ const { ah, baseUrl, escapeHtml: e, formatBRL, formatDateTimeBR } = require('../
 const { availability, addDays, addMinutes, nowLocal } = require('../services/slots');
 const { createBooking, findByCancelToken, cancelByClient, loadService } = require('../services/bookings');
 const { whatsappForNewBooking, whatsappForCancellation } = require('../services/notify');
-const { renderSite, renderMessagePage, renderPortfolio } = require('../render/site');
+const { renderSite, renderMessagePage, renderPortfolio, renderModelGallery } = require('../render/site');
+const models = require('../services/models');
 const { siteOut } = require('./sites');
 
 function siteCsp(nonce) {
@@ -87,6 +88,38 @@ module.exports = (limits) => {
     const sites = getDb().prepare('SELECT * FROM sites WHERE is_demo = 1 AND published = 1 ORDER BY name').all()
       .map((site) => ({ site, theme: siteOut(site).theme }));
     sendHtml(res, 200, renderPortfolio({ sites, nonce }), nonce);
+  });
+
+  // Modelos de site da agência: galeria, prévia de cada modelo (negócio fictício) e imagens
+  pages.get('/modelos', (req, res) => {
+    const nonce = crypto.randomBytes(16).toString('base64');
+    const niches = models.load().niches.map((n) => ({ category: n.category, label: n.label, models: n.models.map(models.summary) }));
+    sendHtml(res, 200, renderModelGallery({ niches, nonce }), nonce);
+  });
+
+  pages.get('/modelos/:id', (req, res) => {
+    const nonce = crypto.randomBytes(16).toString('base64');
+    const model = models.getModel(String(req.params.id || '').toLowerCase());
+    if (!model) {
+      return sendHtml(res, 404, renderMessagePage({ title: 'Modelo não encontrado', body: '<p><a href="/modelos">Ver todos os modelos</a></p>', nonce }), nonce);
+    }
+    sendHtml(res, 200, renderSite({ ...models.previewData(model), nonce, base: baseUrl(req) }), nonce);
+  });
+
+  function sendModelImage(res, file, type) {
+    if (!file) return res.status(404).end();
+    res.set('Content-Type', type)
+      .set('Cache-Control', 'public, max-age=86400')
+      .set('Content-Security-Policy', "default-src 'none'")
+      .sendFile(file);
+  }
+  pages.get('/modelos/img/:file', (req, res) => {
+    const m = /^([a-z_]+-\d{2})\.png$/.exec(req.params.file);
+    sendModelImage(res, m && models.imagePath(m[1], 'cover'), 'image/png');
+  });
+  pages.get('/modelos/img/thumbs/:file', (req, res) => {
+    const m = /^([a-z_]+-\d{2})\.jpg$/.exec(req.params.file);
+    sendModelImage(res, m && models.imagePath(m[1], 'thumb'), 'image/jpeg');
   });
 
   function cancelPage(req, res, { done = false, error = null } = {}) {

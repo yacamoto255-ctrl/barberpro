@@ -1,0 +1,528 @@
+{
+  "_leia": "Catálogo de MODELOS da Versal Estúdio. Cada modelo é um tema (cores, fontes, layout e textos) com um negócio fictício para a prévia em /modelos/<id>. Nomes, pessoas, contatos e registros são fictícios (registros terminam em 00000; \"{REGISTRO}\" na equipe vira o registro do responsável de cada modelo). No painel, \"Aplicar modelo\" copia só o visual, os textos e a capa para um site real. Capas em img/<id>.png (scripts/build-model-art.js, a partir do bloco \"arte\") e miniaturas em img/thumbs/<id>.jpg (scripts/build-posts.js).",
+  "categoria": "psicologia",
+  "rotulo": "Psicologia",
+  "site": {
+    "hide_prices": true,
+    "slot_interval_min": 60,
+    "min_notice_min": 720,
+    "max_days_ahead": 30
+  },
+  "servicos": [
+    {
+      "name": "Primeira conversa",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Encontro inicial para entender sua demanda e combinar o acompanhamento."
+    },
+    {
+      "name": "Psicoterapia individual",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Sessões semanais para adultos."
+    },
+    {
+      "name": "Psicoterapia de casal",
+      "duration_min": 80,
+      "price": "0",
+      "description": "Sessões com o casal."
+    },
+    {
+      "name": "Atendimento a adolescentes",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Sessões para jovens de 12 a 17 anos."
+    },
+    {
+      "name": "Orientação a pais",
+      "duration_min": 50,
+      "price": "0",
+      "description": "Encontros com pais e responsáveis."
+    }
+  ],
+  "profissionais": [
+    {
+      "name": "Marina Alencar",
+      "title": "Psicóloga clínica",
+      "registration": "{REGISTRO}",
+      "bio": "Atendimento de adultos e casais."
+    },
+    {
+      "name": "Tiago Serrano",
+      "title": "Psicólogo clínico",
+      "registration": "{REGISTRO}",
+      "bio": "Atendimento de adolescentes e orientação a pais."
+    }
+  ],
+  "horarios": {
+    "seg": "08:00-12:00, 14:00-20:00",
+    "ter": "08:00-12:00, 14:00-20:00",
+    "qua": "08:00-12:00, 14:00-20:00",
+    "qui": "08:00-12:00, 14:00-20:00",
+    "sex": "08:00-12:00",
+    "sab": null,
+    "dom": null
+  },
+  "modelos": [
+    {
+      "id": "psicologia-01",
+      "nome": "Acolhimento",
+      "estilo": "Bege, cacau e verde-oliva, com serifa delicada",
+      "negocio": {
+        "name": "Acolher Psicologia",
+        "tagline": "Psicoterapia para adultos",
+        "city": "São Paulo",
+        "state": "SP",
+        "address": "Perdizes",
+        "whatsapp": "(11) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 06/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f4efe8",
+          "surface": "#fcf9f4",
+          "text": "#2a2420",
+          "muted": "#675d55",
+          "primary": "#7b4b3a",
+          "on_primary": "#ffffff",
+          "accent": "#5d7a64"
+        },
+        "fonts": {
+          "heading": "Instrument Serif",
+          "body": "Figtree"
+        },
+        "hero_layout": "split",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Um espaço para falar e ser ouvido",
+          "subheadline": "Psicoterapia para adultos com horário marcado. Agende uma primeira conversa pelo site.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar primeira conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "blobs",
+        "icone": "circles"
+      }
+    },
+    {
+      "id": "psicologia-02",
+      "nome": "Céu Aberto",
+      "estilo": "Azul-céu, branco e areia",
+      "negocio": {
+        "name": "Céu Aberto Psicologia",
+        "tagline": "Psicoterapia individual",
+        "city": "Curitiba",
+        "state": "PR",
+        "address": "Bigorrilho",
+        "whatsapp": "(41) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 08/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#eef3f8",
+          "surface": "#fbfdff",
+          "text": "#172433",
+          "muted": "#4f6073",
+          "primary": "#3a5f8f",
+          "on_primary": "#ffffff",
+          "accent": "#b9773f"
+        },
+        "fonts": {
+          "heading": "Newsreader",
+          "body": "Source Sans 3"
+        },
+        "hero_layout": "stacked",
+        "radius": "soft",
+        "background": "gradient",
+        "copy": {
+          "headline": "Cuidar da mente também é rotina",
+          "subheadline": "Psicoterapia individual com sessões semanais e agenda organizada pelo site.",
+          "about": "O acompanhamento psicológico ajuda a olhar com mais clareza para o que você sente e vive.\n\nAs sessões são semanais, com horário fixo combinado na primeira conversa.",
+          "cta": "Agendar sessão",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "waves",
+        "icone": "sprout"
+      }
+    },
+    {
+      "id": "psicologia-03",
+      "nome": "Terracota",
+      "estilo": "Terracota e verde-petróleo, quente e acolhedor",
+      "negocio": {
+        "name": "Raiz Psicologia",
+        "tagline": "Escuta atenta, no seu tempo",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "address": "Lourdes",
+        "whatsapp": "(31) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 04/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f3e6dc",
+          "surface": "#fbf4ee",
+          "text": "#2b1a12",
+          "muted": "#6b5244",
+          "primary": "#a4472b",
+          "on_primary": "#ffffff",
+          "accent": "#2f5e5a"
+        },
+        "fonts": {
+          "heading": "DM Serif Display",
+          "body": "Nunito Sans"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "grain",
+        "copy": {
+          "headline": "Escuta atenta, no seu tempo",
+          "subheadline": "Psicoterapia individual e de casal em consultório reservado. Marque a primeira conversa online.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Marcar primeira conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Quem atende",
+          "booking_title": "Marque sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "arch",
+        "icone": "chair"
+      }
+    },
+    {
+      "id": "psicologia-04",
+      "nome": "Noite Serena",
+      "estilo": "Azul-noite, areia e verde-claro",
+      "negocio": {
+        "name": "Serena Psicologia",
+        "tagline": "Sessões também no início da noite",
+        "city": "Rio de Janeiro",
+        "state": "RJ",
+        "address": "Laranjeiras",
+        "whatsapp": "(21) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 05/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#14181f",
+          "surface": "#1c222c",
+          "text": "#eef0f3",
+          "muted": "#a7aeb9",
+          "primary": "#c9b48a",
+          "on_primary": "#14181f",
+          "accent": "#8fb5a3"
+        },
+        "fonts": {
+          "heading": "Cormorant Garamond",
+          "body": "Manrope"
+        },
+        "hero_layout": "banner",
+        "radius": "soft",
+        "background": "grain",
+        "copy": {
+          "headline": "Uma pausa para você",
+          "subheadline": "Sessões de psicoterapia em ambiente reservado, com horários também no início da noite.",
+          "about": "Sabemos que a rotina aperta. Por isso há horários no começo da manhã e no início da noite.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar sessão",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Escolha seu horário"
+        }
+      },
+      "arte": {
+        "composicao": "halftone",
+        "icone": "moon"
+      }
+    },
+    {
+      "id": "psicologia-05",
+      "nome": "Folha",
+      "estilo": "Verde-folha, creme e caramelo",
+      "negocio": {
+        "name": "Folha Psicologia",
+        "tagline": "Conversa, escuta e cuidado",
+        "city": "Florianópolis",
+        "state": "SC",
+        "address": "Trindade",
+        "whatsapp": "(48) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 12/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#eef2e9",
+          "surface": "#fafcf7",
+          "text": "#1d2a1c",
+          "muted": "#546352",
+          "primary": "#3f6b45",
+          "on_primary": "#ffffff",
+          "accent": "#a8692f"
+        },
+        "fonts": {
+          "heading": "Bricolage Grotesque",
+          "body": "Karla"
+        },
+        "hero_layout": "centered",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Conversa, escuta e cuidado",
+          "subheadline": "Psicoterapia para adultos e adolescentes. Agende a primeira conversa em poucos cliques.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "collage",
+        "icone": "leaf"
+      }
+    },
+    {
+      "id": "psicologia-06",
+      "nome": "Editorial Sóbrio",
+      "estilo": "Branco, preto e tijolo, com tipografia de livro",
+      "negocio": {
+        "name": "Ágora Psicologia",
+        "tagline": "Psicoterapia com escuta e ética",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "address": "Bom Fim",
+        "whatsapp": "(51) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 07/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#faf9f6",
+          "surface": "#ffffff",
+          "text": "#1a1a1a",
+          "muted": "#5a5a5a",
+          "primary": "#1a1a1a",
+          "on_primary": "#faf9f6",
+          "accent": "#b5543c"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Libre Franklin"
+        },
+        "hero_layout": "editorial",
+        "radius": "sharp",
+        "background": "plain",
+        "copy": {
+          "headline": "Psicoterapia com escuta e ética",
+          "subheadline": "Atendimento individual e de casal, com sigilo e horário marcado.",
+          "about": "O consultório é um lugar de escuta, com sigilo, como determina o Código de Ética do Psicólogo.\n\nNa primeira conversa entendemos sua demanda e combinamos frequência e horários.",
+          "cta": "Marcar conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Marque sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "frame",
+        "icone": "bubbles"
+      }
+    },
+    {
+      "id": "psicologia-07",
+      "nome": "Lilás Suave",
+      "estilo": "Lilás acinzentado com pêssego",
+      "negocio": {
+        "name": "Lilás Psicologia",
+        "tagline": "Acolher para compreender",
+        "city": "Campinas",
+        "state": "SP",
+        "address": "Taquaral",
+        "whatsapp": "(19) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 06/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f3f0f7",
+          "surface": "#fdfcff",
+          "text": "#2a2236",
+          "muted": "#615873",
+          "primary": "#5e4b8b",
+          "on_primary": "#ffffff",
+          "accent": "#b97a4c"
+        },
+        "fonts": {
+          "heading": "Sora",
+          "body": "Hanken Grotesk"
+        },
+        "hero_layout": "split",
+        "radius": "soft",
+        "background": "plain",
+        "copy": {
+          "headline": "Acolher para compreender",
+          "subheadline": "Psicoterapia para adultos e adolescentes com agenda online e confirmação na hora.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar sessão",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "grid",
+        "icone": "circles"
+      }
+    },
+    {
+      "id": "psicologia-08",
+      "nome": "Areia & Oceano",
+      "estilo": "Areia, azul-petróleo e cobre, com texto serifado",
+      "negocio": {
+        "name": "Maré Psicologia",
+        "tagline": "Comece pela primeira conversa",
+        "city": "Salvador",
+        "state": "BA",
+        "address": "Barra",
+        "whatsapp": "(71) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 03/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#f2ede4",
+          "surface": "#fbf8f2",
+          "text": "#1b2b31",
+          "muted": "#52626a",
+          "primary": "#24596b",
+          "on_primary": "#ffffff",
+          "accent": "#b56a3c"
+        },
+        "fonts": {
+          "heading": "Josefin Sans",
+          "body": "Crimson Pro"
+        },
+        "hero_layout": "stacked",
+        "radius": "round",
+        "background": "plain",
+        "copy": {
+          "headline": "Respire. Comece pela primeira conversa.",
+          "subheadline": "Psicoterapia individual em consultório tranquilo, com agenda online.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua conversa"
+        }
+      },
+      "arte": {
+        "composicao": "sun",
+        "icone": "sprout"
+      }
+    },
+    {
+      "id": "psicologia-09",
+      "nome": "Ciranda",
+      "estilo": "Creme, verde e laranja, leve e lúdico",
+      "negocio": {
+        "name": "Ciranda Psicologia",
+        "tagline": "Crianças, adolescentes e famílias",
+        "city": "Goiânia",
+        "state": "GO",
+        "address": "Setor Marista",
+        "whatsapp": "(62) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 09/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#fff8ec",
+          "surface": "#fffdf7",
+          "text": "#2a2016",
+          "muted": "#6a5b49",
+          "primary": "#2f7a6b",
+          "on_primary": "#ffffff",
+          "accent": "#d77a3a"
+        },
+        "fonts": {
+          "heading": "Young Serif",
+          "body": "Rubik"
+        },
+        "hero_layout": "split_left",
+        "radius": "round",
+        "background": "dots",
+        "copy": {
+          "headline": "Psicologia para crianças, jovens e famílias",
+          "subheadline": "Atendimento infantil, de adolescentes e orientação a pais, com horários marcados pelo site.",
+          "about": "Com as crianças, o brincar faz parte da sessão. Com os adolescentes, a conversa respeita o tempo de cada um.\n\nOs pais e responsáveis participam com encontros de orientação combinados na primeira conversa.",
+          "cta": "Agendar primeira conversa",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende a conversa"
+        }
+      },
+      "arte": {
+        "composicao": "checker",
+        "icone": "bubbles"
+      }
+    },
+    {
+      "id": "psicologia-10",
+      "nome": "Contemporâneo",
+      "estilo": "Verde-escuro, champanhe e azul-claro",
+      "negocio": {
+        "name": "Ponte Psicologia",
+        "tagline": "Psicoterapia para adultos e casais",
+        "city": "Brasília",
+        "state": "DF",
+        "address": "Asa Norte",
+        "whatsapp": "(61) 90000-0000",
+        "responsible_name": "Marina Alencar, psicóloga",
+        "responsible_registration": "CRP 01/00000"
+      },
+      "tema": {
+        "palette": {
+          "bg": "#10241f",
+          "surface": "#173129",
+          "text": "#eef4ef",
+          "muted": "#a9bdb2",
+          "primary": "#e7c08a",
+          "on_primary": "#10241f",
+          "accent": "#9ec1d9"
+        },
+        "fonts": {
+          "heading": "Syne",
+          "body": "Public Sans"
+        },
+        "hero_layout": "banner",
+        "radius": "soft",
+        "background": "plain",
+        "copy": {
+          "headline": "Terapia para o dia a dia",
+          "subheadline": "Psicoterapia para adultos e casais, com agenda online e horários flexíveis.",
+          "about": "A psicoterapia é um espaço de escuta, sem julgamentos, para falar sobre o que você está vivendo.\n\nA primeira conversa serve para entender sua demanda e combinar como será o acompanhamento.",
+          "cta": "Agendar sessão",
+          "services_title": "Atendimentos",
+          "team_title": "Profissionais",
+          "booking_title": "Agende sua sessão"
+        }
+      },
+      "arte": {
+        "composicao": "stripes",
+        "icone": "circles"
+      }
+    }
+  ]
+}

@@ -16,7 +16,7 @@ A geração de aparência segue a receita [`coding/prompting_for_frontend_aesthe
 2. O servidor **valida tudo**: cores em hex, fontes de uma lista conferida no Google Fonts, opções fechadas, limite de tamanho dos textos e contraste mínimo WCAG (corrigido automaticamente).
 3. O HTML é montado pelo **template do servidor**, com os dados ao vivo e todo texto escapado. Nada gerado pela IA vira código na página. Preço ou horário alterado no painel aparece na hora, sem gerar de novo.
 
-Também ficam ativos o *fallback* do lado do servidor (`fallbacks: "default"`, beta `server-side-fallback-2026-07-01`) e mensagens claras para chave inválida, limite de uso, recusa e resposta cortada. Sem chave da Anthropic o app funciona normalmente com **6 modelos prontos** e ajuste fino manual.
+Também ficam ativos o *fallback* do lado do servidor (`fallbacks: "default"`, beta `server-side-fallback-2026-07-01`) e mensagens claras para chave inválida, limite de uso, recusa e resposta cortada. Sem chave da Anthropic o app funciona normalmente com os **50 modelos da Versal** (abaixo), 6 paletas rápidas e ajuste fino manual.
 
 > Cada geração consome créditos da conta Anthropic de quem cadastrar a chave (em Configurações ou na variável `ANTHROPIC_API_KEY`).
 
@@ -68,7 +68,52 @@ A página **`/exemplos`** lista todas as demonstrações publicadas, com o botã
 
 **Publicar o portfólio sem servidor:** `npm run export-demos -- pasta` gera páginas estáticas (portfólio + exemplos), com imagens embutidas e o agendamento simulado no próprio navegador. A pasta pode ir para Netlify, GitHub Pages ou qualquer hospedagem de arquivos.
 
-As capas dos exemplos são ilustrações próprias (`sites/demos/img`). Negócios, pessoas, registros profissionais e contatos são fictícios: os números `CRO-PR 0000x` e `(xx) 90000-0000` são marcadores, não registros reais.
+As capas dos exemplos são ilustrações próprias (`sites/demos/img`). Negócios, pessoas, registros profissionais e contatos são fictícios: os números `CRO-PR 00000`, `CRP 07/00000` e `(xx) 90000-0000` são marcadores, não registros reais.
+
+## Modelos de site (50) e posts para o Instagram
+
+São **10 modelos para cada um de 5 nichos**: barbearia, dentista, pet shop, psicologia e salão de beleza. Ficam em `sites/modelos/<nicho>.json`. Cada modelo tem:
+- paleta, par de fontes, layout do topo, cantos e textura;
+- textos de exemplo;
+- uma capa ilustrada (`sites/modelos/img/<id>.png`);
+- um negócio fictício, que aparece só na prévia.
+
+O visual segue a mesma receita de estética do cookbook usada pela IA:
+- fontes com personalidade: 23 fontes de título no total e nenhuma repetida dentro do mesmo nicho;
+- paletas com uma cor dominante e um destaque, com temas claros e escuros;
+- 6 layouts de topo;
+- texturas de fundo.
+
+Todos passam na checagem de contraste sem nenhum ajuste.
+
+| Onde | O que faz |
+|---|---|
+| **`/modelos`** | Galeria pública dos 50 modelos por nicho, com o botão para o Instagram da agência. Bom link para mandar a clientes |
+| **`/modelos/<id>`** (ex.: `/modelos/pet-03`) | Prévia do modelo funcionando. A agenda é simulada no navegador e nada chega ao servidor. Mostra a faixa "negócio fictício" e fica fora do Google |
+| **Painel → Novo site** | Campo "Modelo de site (opcional)", filtrado pela categoria: o site já nasce com o visual, os textos e a capa do modelo |
+| **Painel → site → Aparência → Modelos da Versal** | Escolha por nicho, prévia e "Aplicar", com opção de usar ou não os textos e a capa. "Desfazer modelo" volta cores, fontes e textos. A capa antiga é substituída e não volta |
+
+Regras de saúde nos modelos de dentista e psicologia:
+- preços ocultos;
+- nome e registro do responsável (CRO ou CRP fictício, terminado em 00000);
+- textos sem promessa de resultado, superlativo, preço ou promoção. Um teste automático confere isso.
+
+Modelos de outro nicho podem ser aplicados, e o painel avisa para revisar os textos.
+
+**Ferramentas** (só em desenvolvimento; precisam do Chromium e de internet para as fontes):
+
+```bash
+node scripts/build-model-art.js          # redesenha as 50 capas a partir do bloco "arte" de cada modelo
+node scripts/build-posts.js data/posts   # posts 4:5 (1080×1350) com notebook + celular, capas de carrossel,
+                                          # slide final e legendas.txt; também atualiza as miniaturas da galeria
+```
+
+Cada nicho sai com 12 imagens:
+- `00-capa.png`: capa do carrossel;
+- `01` a `10`: um post por modelo;
+- `11-cta.png`: slide final.
+
+O arquivo `legendas.txt` traz sugestões de texto. A ferramenta para com aviso se uma fonte não carregar, se aparecer rolagem lateral ou se a agenda simulada não abrir.
 
 ## Cadastrar um site completo por arquivo
 
@@ -121,9 +166,9 @@ Veja `.env.example`. As principais em produção:
 ## Testes
 
 ```bash
-npm test               # 149 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
+npm test               # 166 testes de API/unidade (Jest + Supertest), banco temporário por arquivo
 npm run test:coverage  # cobertura (último resultado: 92% das linhas)
-npm run test:e2e       # simulação completa no Chromium (25 passos, 9 telas)
+npm run test:e2e       # simulação completa no Chromium (26 passos, 9 telas)
 npm run loadtest       # carga com 10, 100, 1.000 e 10.000 conexões (ou: npm run loadtest -- 100)
 ```
 
@@ -148,7 +193,7 @@ O E2E usa `playwright-core`. Aponte `CHROMIUM_PATH` para um Chromium/Chrome inst
   - Sigilo: chaves mascaradas, sem vazamento de dados de clientes na API pública e nomes de backup protegidos contra *path traversal*.
   - CSRF não se aplica: a API usa token no cabeçalho, sem cookie.
 - **Notificações:** alerta interno; WhatsApp com reenvio e registro testados com servidor simulado.
-- **E2E:** criar conta, login, cadastrar tudo, agendar pelo iPhone, alerta, status, relatórios, operador sem acesso, sair e entrar com os dados persistidos, cancelamento pelo cliente, troca de senha, backup, exclusão, links, modo offline e responsividade.
+- **E2E:** criar conta, login, cadastrar tudo, aplicar e desfazer modelo, criar site já com modelo, agendar pelo iPhone, agenda simulada de modelo sem chamada ao servidor, alerta, status, relatórios, operador sem acesso, sair e entrar com os dados persistidos, cancelamento pelo cliente, troca de senha, backup, exclusão, links, modo offline e responsividade (painel, site, galeria e modelos).
 - **Telas testadas:** 1920, 1600 e 1366 px; iPad retrato e paisagem; tablet Android; Android (2 tamanhos); iPhone. Sem rolagem lateral e menu móvel funcionando.
 
 **Carga** (servidor e gerador na mesma máquina de 4 CPUs; o Node usa 1 núcleo):

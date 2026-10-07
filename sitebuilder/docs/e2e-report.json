@@ -1,127 +1,132 @@
 {
-  "data": "2026-10-07T14:06:03.639Z",
+  "data": "2026-10-07T22:04:14.132Z",
   "ok": true,
   "passos": [
     {
       "step": "1. Criar conta (primeiro acesso cria o administrador)",
       "ok": true,
-      "ms": 683
+      "ms": 637
     },
     {
       "step": "2. Logout e login",
       "ok": true,
-      "ms": 342
+      "ms": 307
     },
     {
       "step": "3. Criar site",
       "ok": true,
-      "ms": 286
+      "ms": 266
     },
     {
       "step": "4. Dados do negócio: máscaras, CNPJ inválido e válido",
       "ok": true,
-      "ms": 404
+      "ms": 406
     },
     {
       "step": "5. Serviços: criar, editar e excluir",
       "ok": true,
-      "ms": 3808
+      "ms": 4190
     },
     {
       "step": "6. Equipe: cadastrar profissional e foto",
       "ok": true,
-      "ms": 347
+      "ms": 350
     },
     {
       "step": "7. Horários: abrir domingo e salvar",
       "ok": true,
-      "ms": 283
+      "ms": 271
     },
     {
-      "step": "8. Aparência: modelo pronto + prévia",
+      "step": "8. Aparência: aplicar modelo da Versal, desfazer, paleta rápida e prévia",
       "ok": true,
-      "ms": 371
+      "ms": 1399
     },
     {
       "step": "9. Imagens: logo e galeria (inclui recusa de arquivo inválido)",
       "ok": true,
-      "ms": 288
+      "ms": 277
     },
     {
       "step": "10. Regras da agenda e publicação",
       "ok": true,
-      "ms": 383
+      "ms": 376
     },
     {
       "step": "11. Cliente agenda pelo site no celular (iPhone)",
       "ok": true,
-      "ms": 1687
+      "ms": 1728
     },
     {
-      "step": "12. Painel recebe o alerta do novo agendamento",
+      "step": "12. Modelos públicos: galeria e agenda simulada no celular (nada chega ao servidor)",
       "ok": true,
-      "ms": 107
+      "ms": 2152
     },
     {
-      "step": "13. Agenda: alterar status e lançar agendamento manual",
+      "step": "13. Painel recebe o alerta do novo agendamento",
       "ok": true,
-      "ms": 303
+      "ms": 98
     },
     {
-      "step": "14. Dashboard mostra os números reais",
+      "step": "14. Agenda: alterar status e lançar agendamento manual",
       "ok": true,
-      "ms": 57,
+      "ms": 318
+    },
+    {
+      "step": "15. Dashboard mostra os números reais",
+      "ok": true,
+      "ms": 49,
       "info": {
         "realizado_no_mes": "R$ 55,00"
       }
     },
     {
-      "step": "15. Relatórios: CSV, Excel e PDF baixados e conferidos",
+      "step": "16. Relatórios: CSV, Excel e PDF baixados e conferidos",
       "ok": true,
-      "ms": 325,
+      "ms": 289,
       "info": {
         "csv": 513,
         "xlsx": 8102,
-        "pdf": 2197
+        "pdf": 2206
       }
     },
     {
-      "step": "16. Criar operador; operador não acessa áreas de admin",
+      "step": "17. Criar operador; operador não acessa áreas de admin",
       "ok": true,
-      "ms": 3336
+      "ms": 3435
     },
     {
-      "step": "17. Entrar de novo e validar persistência dos dados",
+      "step": "18. Entrar de novo e validar persistência dos dados",
       "ok": true,
-      "ms": 258
+      "ms": 344
     },
     {
-      "step": "18. Cliente cancela pelo link e a vaga volta",
+      "step": "19. Cliente cancela pelo link e a vaga volta",
       "ok": true,
-      "ms": 258,
+      "ms": 336,
       "info": {
         "cancelUrl_inicial_valido": true
       }
     },
     {
-      "step": "19. Trocar senha, sair e entrar com a nova",
+      "step": "20. Trocar senha, sair e entrar com a nova",
       "ok": true,
-      "ms": 480
+      "ms": 511
     },
     {
-      "step": "20. Backup manual pelo painel",
+      "step": "21. Backup manual pelo painel",
       "ok": true,
-      "ms": 100
+      "ms": 107
     },
     {
-      "step": "21. Excluir site (com confirmação digitada)",
+      "step": "22. Novo site já com modelo escolhido; depois excluir (com confirmação digitada)",
       "ok": true,
-      "ms": 368
+      "ms": 601
     },
     {
-      "step": "22. Navegação: nenhum link interno quebrado",
+      "step": "23. Navegação: nenhum link interno quebrado",
       "ok": true,
-      "ms": 4599,
+      "ms": 4108,
       "info": {
         "links_painel": 9,
         "ancoras_site": 8,
@@ -129,21 +134,21 @@
       }
     },
     {
-      "step": "23. Modo offline (PWA): painel abre sem internet e volta sozinho",
+      "step": "24. Modo offline (PWA): painel abre sem internet e volta sozinho",
       "ok": true,
-      "ms": 466
+      "ms": 449
     },
     {
-      "step": "24. Responsividade: painel e site em 9 telas, sem rolagem lateral",
+      "step": "25. Responsividade: painel e site em 9 telas, sem rolagem lateral",
       "ok": true,
-      "ms": 43611,
+      "ms": 45320,
       "info": {
         "telas": 9,
-        "paginas_por_tela": 8
+        "paginas_por_tela": 11
       }
     },
     {
-      "step": "25. Nenhum erro de JavaScript nem erro 5xx do servidor",
+      "step": "26. Nenhum erro de JavaScript nem erro 5xx do servidor",
       "ok": true,
       "ms": 0,
       "info": {
@@ -152,11 +157,15 @@
           "400 POST /api/auth/setup",
           "401 POST /api/auth/login",
           "400 PATCH /api/sites/1",
+          "404 GET /api/public/sites/barbearia-versal-teste",
+          "404 GET /api/public/sites/barbearia-versal-teste",
+          "404 GET /api/public/sites/barbearia-versal-teste",
           "415 POST /api/sites/1/images"
         ],
         "servicos_externos_indisponiveis": [
           "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
-          "fonts.googleapis.com net::ERR_ABORTED"
+          "fonts.googleapis.com net::ERR_ABORTED",
+          "fonts.gstatic.com net::ERR_ABORTED"
         ]
       }
     }
@@ -164,6 +173,7 @@
   "erros": [],
   "servicos_externos_indisponiveis": [
     "viacep.com.br net::ERR_TUNNEL_CONNECTION_FAILED",
-    "fonts.googleapis.com net::ERR_ABORTED"
+    "fonts.googleapis.com net::ERR_ABORTED",
+    "fonts.gstatic.com net::ERR_ABORTED"
   ]
 }

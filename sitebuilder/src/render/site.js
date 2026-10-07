@@ -3,7 +3,7 @@
 'use strict';
 
 const { escapeHtml: e, formatBRL } = require('../util');
-const { googleFontsHref, HEADING_FONTS, BODY_FONTS } = require('../services/theme');
+const { googleFontsHref, HEADING_FONTS, BODY_FONTS, ensureContrast } = require('../services/theme');
 const { getSetting } = require('../settings');
 
 const WEEKDAYS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
@@ -54,10 +54,10 @@ function css(theme, nonce) {
   const p = theme.palette;
   const hf = HEADING_FONTS[theme.fonts.heading];
   const bodyFallback = BODY_FONTS[theme.fonts.body];
-  const upper = ['Bebas Neue', 'Oswald', 'Archivo Black', 'Unbounded'].includes(theme.fonts.heading);
+  const upper = ['Bebas Neue', 'Oswald', 'Archivo Black', 'Unbounded', 'Anton'].includes(theme.fonts.heading);
   return `<style nonce="${nonce}">
 :root{--bg:${p.bg};--surface:${p.surface};--text:${p.text};--muted:${p.muted};--primary:${p.primary};--on-primary:${p.on_primary};--accent:${p.accent};
---radius:${RADIUS[theme.radius]};--hf:"${theme.fonts.heading}",${hf.fallback};--bf:"${theme.fonts.body}",${bodyFallback};--hw:${hf.weight}}
+--accent-text:${ensureContrast(p.accent, p.bg, 4.5)};--radius:${RADIUS[theme.radius]};--hf:"${theme.fonts.heading}",${hf.fallback};--bf:"${theme.fonts.body}",${bodyFallback};--hw:${hf.weight}}
 *{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;${backgroundCss(theme.background, p)}color:var(--text);font-family:var(--bf);font-size:17px;line-height:1.6;overflow-x:hidden}
 img{max-width:100%;display:block}a{color:inherit}
@@ -74,11 +74,14 @@ nav.links{display:flex;gap:22px;font-size:.95rem}nav.links a{text-decoration:non
 .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}.btn:focus-visible,a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .btn.ghost{background:transparent;color:var(--text);border-color:color-mix(in srgb,var(--text) 35%,transparent)}
 .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
-.hero{padding:72px 0 64px}.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+.hero{padding:72px 0 64px}.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);font-weight:600;margin-bottom:14px}
 .hero p.lead{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:44ch}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .hero.centered{text-align:center}.hero.centered p.lead{margin-inline:auto}.hero.centered .actions{justify-content:center}
-.hero.split .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero.split .wrap,.hero.split_left .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero.split_left .wrap{grid-template-columns:.9fr 1.1fr}.hero.split_left .hero-media{order:-1}
+.hero.stacked{text-align:center;padding-bottom:24px}.hero.stacked p.lead{margin-inline:auto}.hero.stacked .actions{justify-content:center}
+.hero-wide{margin-top:48px;aspect-ratio:21/9;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--accent))}.hero-wide img{width:100%;height:100%;object-fit:cover}
 .hero-media{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 30px 60px -30px color-mix(in srgb,var(--text) 45%,transparent)}
 .hero-media img{width:100%;height:100%;object-fit:cover}
 .hero.editorial h1{font-size:clamp(2.8rem,9vw,6.5rem);max-width:12ch}.hero.editorial .wrap{border-bottom:1px solid color-mix(in srgb,var(--text) 18%,transparent);padding-bottom:48px}
@@ -116,7 +119,7 @@ section{padding:72px 0}section.alt{background:color-mix(in srgb,var(--surface) 7
 footer{padding:36px 0 96px;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);font-size:.9rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}footer a{color:var(--text)}
 .fab{position:fixed;right:16px;bottom:16px;z-index:6;box-shadow:0 12px 30px -10px rgba(0,0,0,.45)}
-@media (max-width:860px){nav.links{display:none}.hero.split .wrap,.about,.info{grid-template-columns:1fr}.hero{padding:48px 0}.hero-media{aspect-ratio:16/10}section{padding:56px 0}}
+@media (max-width:860px){nav.links{display:none}.hero.split .wrap,.hero.split_left .wrap,.about,.info{grid-template-columns:1fr}.hero.split_left .hero-media{order:0}.hero-wide{aspect-ratio:4/3;margin-top:32px}.hero{padding:48px 0}.hero-media{aspect-ratio:16/10}section{padding:56px 0}}
 @media (max-width:520px){body{font-size:16px}.row2{grid-template-columns:1fr}.booking{padding:20px}.top .btn{display:none}}
 @media (min-width:861px){.fab{display:none}}
 </style>`;
@@ -136,15 +139,21 @@ function heroHtml(site, theme, copy, heroImg) {
   if (theme.hero_layout === 'banner') {
     return `<section class="hero banner" aria-label="Apresentação"><div class="cover">${heroImg ? `<img src="${heroImg}" alt="">` : ''}<div class="wrap">${text}</div></div></section>`;
   }
-  if (theme.hero_layout === 'split') {
-    return `<section class="hero split" aria-label="Apresentação"><div class="wrap"><div>${text}</div>
-      <div class="hero-media">${heroImg ? `<img src="${heroImg}" alt="Foto de ${e(site.name)}">` : ''}</div></div></section>`;
+  const media = (cls) => `<div class="${cls}">${heroImg ? `<img src="${heroImg}" alt="Foto de ${e(site.name)}">` : ''}</div>`;
+  if (theme.hero_layout === 'split' || theme.hero_layout === 'split_left') {
+    return `<section class="hero ${theme.hero_layout}" aria-label="Apresentação"><div class="wrap"><div>${text}</div>
+      ${media('hero-media')}</div></section>`;
+  }
+  if (theme.hero_layout === 'stacked') {
+    return `<section class="hero stacked" aria-label="Apresentação"><div class="wrap">${text}${media('hero-wide')}</div></section>`;
   }
   return `<section class="hero ${theme.hero_layout}" aria-label="Apresentação"><div class="wrap">${text}</div></section>`;
 }
 
 /**
  * @param {object} d { site, theme, services, professionals, hours, gallery, nonce, preview }
+ *   Modelos do catálogo (src/services/models.js) também passam:
+ *   heroSrc (URL da capa), model { name, category_label } e demoData (agenda simulada no navegador)
  */
 function renderSite(d) {
   const { site, theme, services, professionals, hours, gallery, nonce } = d;
@@ -159,6 +168,7 @@ function renderSite(d) {
     booking_title: c.booking_title || 'Agende seu horário',
   };
   const img = (id) => (id ? `/img/${id}` : null);
+  const heroSrc = d.heroSrc !== undefined ? d.heroSrc : img(site.hero_image_id);
   const agencyName = getSetting('agency_name');
   const agencyIg = getSetting('agency_instagram');
   const addressLine = [site.address, site.city && site.state ? `${site.city} - ${site.state}` : site.city, site.cep].filter(Boolean).join(', ');
@@ -196,7 +206,8 @@ ${css(theme, nonce)}
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 ${d.preview ? '<div class="preview-bar">Pré-visualização — este site ainda não está publicado</div>' : ''}
-${site.is_demo ? `<div class="demo-bar">Site de demonstração · negócio e dados fictícios · criado pela <a href="https://instagram.com/${e(getSetting('agency_instagram'))}" target="_blank" rel="noopener">${e(getSetting('agency_name'))}</a> · <a href="/exemplos">ver outros exemplos</a></div>` : ''}
+${d.model ? `<div class="demo-bar">Modelo “${e(d.model.name)}” · ${e(d.model.category_label)} · negócio e dados fictícios · <a href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">${e(agencyName)}</a> · <a href="/modelos">ver todos os modelos</a></div>`
+    : site.is_demo ? `<div class="demo-bar">Site de demonstração · negócio e dados fictícios · criado pela <a href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">${e(agencyName)}</a> · <a href="/exemplos">ver outros exemplos</a></div>` : ''}
 <header class="top"><div class="wrap">
   <a class="brand" href="#inicio">${site.logo_image_id ? `<img src="/img/${site.logo_image_id}" alt="">` : ''}<span>${e(site.name)}</span></a>
   <nav class="links" aria-label="Seções">
@@ -208,7 +219,7 @@ ${site.is_demo ? `<div class="demo-bar">Site de demonstração · negócio e dad
 </div></header>
 <main id="conteudo">
 <div id="inicio"></div>
-${heroHtml(site, theme, copy, img(site.hero_image_id))}
+${heroHtml(site, theme, copy, heroSrc)}
 ${copy.about ? `<section id="sobre"><div class="wrap about"><h2>Sobre</h2><div>${paragraphs(copy.about)}</div></div></section>` : ''}
 ${activeServices.length ? `<section id="servicos" class="alt"><div class="wrap">
   <div class="section-head"><h2>${e(copy.services_title)}</h2></div>
@@ -246,7 +257,8 @@ ${site.booking_enabled && activeServices.length ? `<section id="agendar"><div cl
   <span>Site por <a href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">${e(agencyName)}</a></span>
 </div></footer>
 ${site.booking_enabled && activeServices.length ? `<a class="btn fab" href="#agendar">${e(copy.cta)}</a>
-<script src="/assets/booking.js" defer></script>` : ''}
+${d.demoData ? `<script type="application/json" id="demo-data">${JSON.stringify(d.demoData).replace(/</g, '\\u003c')}</script>
+<script src="/assets/demo-shim.js"></script>` : ''}<script src="/assets/booking.js" defer></script>` : ''}
 </body>
 </html>`;
 }
@@ -345,3 +357,87 @@ ${cardCss}
 }
 
 module.exports.renderPortfolio = renderPortfolio;
+
+/**
+ * Galeria pública dos modelos de site (/modelos), agrupada por nicho.
+ * @param {object} d { niches: Array<{category, label, models: summary[]}>, nonce }
+ */
+function renderModelGallery({ niches, nonce }) {
+  const agencyName = getSetting('agency_name');
+  const agencyIg = getSetting('agency_instagram');
+  const all = niches.flatMap((n) => n.models);
+  const families = new Map([['Fraunces', '600'], ['Figtree', '400;600']]);
+  for (const m of all) if (!families.has(m.fonts.heading)) families.set(m.fonts.heading, HEADING_FONTS[m.fonts.heading].weight);
+  const fontsHref = `https://fonts.googleapis.com/css2?${[...families].map(([f, w]) => `family=${f.replace(/ /g, '+')}:wght@${w}`).join('&')}&display=swap`;
+  let cardCss = '';
+  const sections = niches.map((n) => `<section id="${e(n.category)}" aria-labelledby="t-${e(n.category)}">
+    <div class="sec-head"><h2 id="t-${e(n.category)}">${e(n.label)}</h2><span>${n.models.length} modelos</span></div>
+    <div class="grid">${n.models.map((m) => {
+    const p = m.palette;
+    const k = m.id.replace(/[^a-z0-9]/g, '');
+    const hf = HEADING_FONTS[m.fonts.heading];
+    cardCss += `.c-${k}{background:${p.bg};color:${p.text}}.c-${k} .st{color:${p.muted}}.h-${k}{font-family:"${m.fonts.heading}",${hf.fallback};font-weight:${hf.weight}}`
+      + `.b-${k}{background:${p.primary};color:${p.on_primary}}`
+      + ['bg', 'surface', 'primary', 'accent', 'text'].map((x) => `.s-${k}-${x}{background:${p[x]}}`).join('');
+    return `<a class="model" href="${e(m.preview_url)}">
+        <div class="shot">${m.thumb_url ? `<img src="${e(m.thumb_url)}" alt="" loading="lazy">` : ''}
+          <span class="sw">${['bg', 'surface', 'primary', 'accent', 'text'].map((x) => `<i class="s-${k}-${x}"></i>`).join('')}</span></div>
+        <div class="body c-${k}">
+          <span class="num">Modelo ${String(m.number).padStart(2, '0')}</span>
+          <h3 class="h-${k}">${e(m.name)}</h3>
+          <p class="st">${e(m.style)}</p>
+          <span class="go b-${k}">Ver modelo →</span>
+        </div></a>`;
+  }).join('')}</div></section>`).join('');
+
+  return `<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelos de site — ${e(agencyName)}</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="${all.length} modelos de site com agendamento online da ${e(agencyName)} para ${e(niches.map((n) => n.label.toLowerCase()).join(', '))}.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${e(fontsHref)}">
+<style nonce="${nonce}">
+*{box-sizing:border-box}body{margin:0;background:#16141b;color:#f3efe8;font:16px/1.6 "Figtree",system-ui,sans-serif}
+a{color:inherit}.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+header.wrap{padding:72px 20px 32px}header .brand{font:600 14px/1 "Figtree",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffb38a}
+h1{font:600 clamp(2.4rem,6vw,4.4rem)/1.05 "Fraunces",serif;margin:16px 0;max-width:18ch;letter-spacing:-.02em}
+header p{color:#bdb6c6;max-width:60ch;font-size:1.1rem}
+nav.niches{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}nav.niches a{padding:8px 14px;border:1px solid #3a3642;border-radius:999px;text-decoration:none;font-weight:600;font-size:.92rem}
+nav.niches a:hover{border-color:#ffb38a}
+.cta{display:inline-block;margin-top:18px;background:#ffb38a;color:#16141b;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none}
+section{padding:28px 0 36px}.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid #2f2c36;margin-bottom:20px;padding-bottom:10px}
+.sec-head h2{font:600 clamp(1.6rem,3.6vw,2.4rem)/1.1 "Fraunces",serif;margin:0}.sec-head span{color:#8f889a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.model{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;text-decoration:none;box-shadow:0 24px 48px -28px rgba(0,0,0,.7);transition:transform .2s ease}
+.model:hover{transform:translateY(-4px)}.model:focus-visible{outline:3px solid #ffb38a;outline-offset:4px}
+.shot{position:relative;aspect-ratio:16/10;background:#2a2731}.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.sw{position:absolute;left:12px;bottom:12px;display:flex;gap:5px}.sw i{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.num{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.75}
+.body h3{margin:0;font-size:1.6rem;line-height:1.1}.st{margin:0 0 10px;font-size:.92rem}
+.go{margin-top:auto;align-self:flex-start;padding:8px 14px;border-radius:999px;font-weight:600;font-size:.88rem}
+.note{color:#8f889a;font-size:.9rem;border-top:1px solid #2f2c36;padding:22px 0 40px}
+${cardCss}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="brand">${e(agencyName)}</div>
+  <h1>${all.length} modelos de site com agendamento online.</h1>
+  <p>Escolha um ponto de partida para o seu negócio. Todo modelo é adaptado com a sua marca, seus serviços, sua equipe e seus horários.</p>
+  <nav class="niches" aria-label="Nichos">${niches.map((n) => `<a href="#${e(n.category)}">${e(n.label)}</a>`).join('')}</nav>
+  <a class="cta" href="https://instagram.com/${e(agencyIg)}" target="_blank" rel="noopener">Quero o meu · @${e(agencyIg)}</a>
+</header>
+<main class="wrap">
+  ${sections || '<p>Nenhum modelo disponível.</p>'}
+  <p class="note">Os negócios, pessoas, contatos e registros profissionais destes modelos são fictícios. Na prévia, o agendamento é simulado: nada é reservado e nenhum dado é guardado.</p>
+</main>
+</body>
+</html>`;
+}
+
+module.exports.renderModelGallery = renderModelGallery;
