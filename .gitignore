@@ -29,5 +29,6 @@ Thumbs.db
 *.njsproj
 *.sln
 
-# Claude
-.claude/
+# Claude (configs locais ignoradas; skills do projeto versionadas)
+.claude/*
+!.claude/skills/
