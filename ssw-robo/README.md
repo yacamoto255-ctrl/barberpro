@@ -15,7 +15,12 @@ O robô confere cada linha de medida (A×L×C×vezes) contra o TOTAL exibido pel
 
 ## Instalação (no seu computador, Windows)
 
-Requer Node.js 18+.
+Requer Node.js 18+ (https://nodejs.org, versão LTS).
+
+**Jeito fácil:** dê duplo clique em `instalar.bat` (só na primeira vez) e depois em `consultar.bat`.
+O `consultar.bat` pergunta um NR por vez e grava tudo em `saida\fretes.csv`.
+
+Pelo terminal:
 
 ```bash
 cd ssw-robo
