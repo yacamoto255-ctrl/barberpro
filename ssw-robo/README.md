@@ -9,7 +9,7 @@ Abre a opção **101** do SSW, preenche o campo **NR1, NR2 ou NR**, lê o CTRC e
 | Cubagem (m³) / Cub Orig | `Cubagem/Cub Orig (m³)` da tela 101 |
 | Peso real / Peso cálculo (Kg) | tela 101 |
 | Medidas (altura × largura × comprimento × vezes = total) | popup aberto ao clicar em Cubagem |
-| Peso cubado **estimado** | **calculado pelo robô**: m³ × fator (padrão 300 kg/m³). **Não vem do SSW.** Confirme o fator da sua operação e use `--fator=` |
+| Peso cubado (Kg) | calculado pelo robô: cubagem m³ × 300 kg/m³ (fator da operação; altere com `--fator=`) |
 
 O robô confere cada linha de medida (A×L×C×vezes) contra o TOTAL exibido pelo SSW e avisa se divergir.
 

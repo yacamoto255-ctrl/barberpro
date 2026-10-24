@@ -134,7 +134,7 @@ async function consultar(context, nr, opts = {}) {
     const m3 = resultado.cubagemM3 ?? resultado.cubagemTotalMedidasM3;
     if (m3 != null) {
       resultado.fatorCubagem = fatorCubagem;
-      resultado.pesoCubadoEstimadoKg = Math.round(m3 * fatorCubagem * 1000) / 1000;
+      resultado.pesoCubadoKg = Math.round(m3 * fatorCubagem * 1000) / 1000;
     }
     resultado.ok = resultado.frete != null;
     if (debug) resultado.debugDir = await dump(context, valor, 'debug solicitado');

@@ -15,7 +15,7 @@ if (flag('ajuda') || flag('help')) {
   Sem NR: modo interativo (digite um NR por linha, linha vazia encerra).
   --json            saída em JSON
   --csv=arquivo     grava CSV (ex.: --csv=saida/fretes.csv)
-  --fator=300       fator kg/m³ p/ peso cubado estimado (padrão 300 — CONFIRME o da sua operação)
+  --fator=300       fator de cubagem kg/m³ (padrão 300)
   --debug           salva HTML/print/texto de cada consulta em ./debug
   --headless        sem janela (só funciona com sessão já logada)`);
   process.exit(0);
@@ -31,7 +31,7 @@ function imprimir(r) {
   console.log(`Cubagem (m³):          ${fmt(r.cubagemM3, 4)}  (orig: ${fmt(r.cubagemOrigM3, 4)})`);
   console.log(`Peso real (Kg):        ${fmt(r.pesoRealKg, 3)}`);
   console.log(`Peso cálculo SSW (Kg): ${fmt(r.pesoCalculoKg, 3)}`);
-  console.log(`Peso cubado estimado:  ${fmt(r.pesoCubadoEstimadoKg, 3)} Kg  (= m³ × ${r.fatorCubagem} kg/m³ — estimativa, não vem do SSW)`);
+  console.log(`Peso cubado (Kg):      ${fmt(r.pesoCubadoKg, 3)}  (= m³ × ${r.fatorCubagem} kg/m³)`);
   if (r.medidas && r.medidas.length) {
     console.log('Medidas (metros):');
     console.log('  #   Altura  Largura  Comprim.  Vezes   Total m³');
@@ -44,11 +44,11 @@ function imprimir(r) {
 }
 
 function csv(resultados) {
-  const cab = ['nr', 'ctrc', 'frete', 'cubagem_m3', 'cubagem_orig_m3', 'peso_real_kg', 'peso_calculo_kg', 'peso_cubado_estimado_kg', 'medidas', 'erro'];
+  const cab = ['nr', 'ctrc', 'frete', 'cubagem_m3', 'cubagem_orig_m3', 'peso_real_kg', 'peso_calculo_kg', 'peso_cubado_kg', 'medidas', 'erro'];
   // números com vírgula decimal para o Excel pt-BR
   const esc = (v) => `"${String(typeof v === 'number' ? String(v).replace('.', ',') : v ?? '').replace(/"/g, '""')}"`;
   const linhas = resultados.map((r) => [
-    r.nr, r.ctrc, r.frete, r.cubagemM3, r.cubagemOrigM3, r.pesoRealKg, r.pesoCalculoKg, r.pesoCubadoEstimadoKg,
+    r.nr, r.ctrc, r.frete, r.cubagemM3, r.cubagemOrigM3, r.pesoRealKg, r.pesoCalculoKg, r.pesoCubadoKg,
     (r.medidas || []).map((m) => `${fmt(m.alturaM, 3)} x ${fmt(m.larguraM, 3)} x ${fmt(m.comprimentoM, 3)} x ${fmt(m.vezes)} = ${fmt(m.totalM3, 4)}`).join(' | '), r.erro,
   ].map(esc).join(';'));
   return [cab.join(';'), ...linhas].join('\n') + '\n';

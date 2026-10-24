@@ -72,7 +72,7 @@ test('fluxo completo: preenche NR, lê frete/cubagem e medidas do popup', async 
     assert.equal(r.pesoCalculoKg, 93);
     assert.equal(r.medidas.length, 1);
     assert.deepEqual([r.medidas[0].alturaM, r.medidas[0].larguraM, r.medidas[0].comprimentoM, r.medidas[0].vezes], [0.45, 0.27, 0.22, 3]);
-    assert.equal(r.pesoCubadoEstimadoKg, 24.06); // 0,0802 × 300
+    assert.equal(r.pesoCubadoKg, 24.06); // 0,0802 × 300
     assert.deepEqual(r.avisos, []);
   });
 });
